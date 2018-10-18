@@ -14,9 +14,9 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splashscreen);
+        setContentView(R.layout.activity_splashscreen);
 
-        SPLASH_TIME_OUT = 4000;
+        SPLASH_TIME_OUT = 4000; 
 
         ImageView imageView= findViewById(R.id.plantImage);
         imageView.setBackgroundResource(R.drawable.splashscreen_animation);
