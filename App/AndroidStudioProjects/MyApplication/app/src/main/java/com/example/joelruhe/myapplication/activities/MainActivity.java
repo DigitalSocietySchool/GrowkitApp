@@ -1,4 +1,4 @@
-package com.example.joelruhe.myapplication;
+package com.example.joelruhe.myapplication.activities;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import com.example.joelruhe.myapplication.R;
+import com.example.joelruhe.myapplication.SlidingTabsBasicFragment;
 
 import butterknife.BindView;
 

@@ -1,4 +1,4 @@
-package com.example.joelruhe.myapplication;
+package com.example.joelruhe.myapplication.activities;
 
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+
+import com.example.joelruhe.myapplication.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
     AnimationDrawable plantAnimation;

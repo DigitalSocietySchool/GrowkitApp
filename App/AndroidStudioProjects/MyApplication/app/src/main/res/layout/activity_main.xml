@@ -7,7 +7,7 @@
 
     <include
         android:id="@+id/mainScreenToolbar"
-        layout="@layout/start_screen_toolbar" />
+        layout="@layout/main_screen_toolbar" />
 
     <View
           android:layout_width="match_parent"
