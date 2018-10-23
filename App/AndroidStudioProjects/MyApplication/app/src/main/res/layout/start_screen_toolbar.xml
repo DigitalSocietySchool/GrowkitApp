@@ -3,6 +3,33 @@
     android:layout_width="match_parent"
     android:layout_height="56dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
     app:popupTheme="@style/CustomToolbarStyle">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="51dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="197dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:text="@string/garden_ville"
+            android:textSize="30sp"
+            android:layout_toRightOf="@+id/imageView"
+            android:textColor="@color/colorWhite"
+            android:layout_toEndOf="@+id/imageView" />
+
+    </RelativeLayout>
 
 </android.support.v7.widget.Toolbar>

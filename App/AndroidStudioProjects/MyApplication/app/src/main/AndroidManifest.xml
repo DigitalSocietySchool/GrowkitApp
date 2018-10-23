@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/CustomToolbarStyle">
 
-
         <activity android:name=".SplashScreenActivity" >
 
             <intent-filter>
@@ -21,8 +20,6 @@
 
         <activity android:name=".MainActivity">
         </activity>
-
-
 
     </application>
 

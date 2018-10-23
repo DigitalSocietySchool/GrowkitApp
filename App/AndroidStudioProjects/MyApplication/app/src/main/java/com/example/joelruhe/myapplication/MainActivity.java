@@ -22,20 +22,10 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.mainScreenToolbar)
     Toolbar mainToolbar;
 
-    /*int i = 0;
-    ImageView image;
-
-    int [] images = new int[] {R.drawable.plant1, R.drawable.plant2, R.drawable.plants,
-            R.drawable.cactus, R.drawable.potplant, R.drawable.longgrass};*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);*/
-
-
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -43,39 +33,6 @@ public class MainActivity extends AppCompatActivity {
             transaction.replace(R.id.sample_content_fragment, fragment);
             transaction.commit();
         }
-    }
-
-    /*void next_plant(View v){
-        i++;
-        if(i > 5){
-            i=0;
-        }
-        image.setImageResource(images[i]);
-
-    }
-
-    void previous_plant(View v){
-        i--;
-        if(i < 0){
-            i=5;
-        }
-        image.setImageResource(images[i]);
-    }*/
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
     }
 }
 
