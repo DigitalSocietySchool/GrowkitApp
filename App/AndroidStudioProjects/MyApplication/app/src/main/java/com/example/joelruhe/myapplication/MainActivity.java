@@ -19,7 +19,7 @@ import butterknife.BindView;
 public class MainActivity extends AppCompatActivity {
 
     @Nullable
-    @BindView(R.id.mainScreenToolbar)
+    //@BindView(R.id.mainScreenToolbar)
     Toolbar mainToolbar;
 
     /*int i = 0;
@@ -62,20 +62,7 @@ public class MainActivity extends AppCompatActivity {
         image.setImageResource(images[i]);
     }*/
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        return super.onPrepareOptionsMenu(menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
 }
 
