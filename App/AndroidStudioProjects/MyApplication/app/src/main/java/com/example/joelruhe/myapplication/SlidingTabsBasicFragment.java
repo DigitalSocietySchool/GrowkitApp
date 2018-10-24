@@ -16,7 +16,11 @@
 
 package com.example.joelruhe.myapplication;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -25,39 +29,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.joelruhe.myapplication.activities.CactusActivity;
 import com.example.joelruhe.myapplication.common.view.SlidingTabLayout;
+
+import java.util.Objects;
 
 public class SlidingTabsBasicFragment extends Fragment {
 
-    static final String LOG_TAG = "SlidingTabsBasicFragment";
-
-    private SlidingTabLayout mSlidingTabLayout;
-
-    private ViewPager mViewPager;
+    protected SlidingTabLayout mSlidingTabLayout;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_sample, container, false);
     }
 
-    // BEGIN_INCLUDE (fragment_onviewcreated)
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        // BEGIN_INCLUDE (setup_viewpager)
-        // Get the ViewPager and set it's PagerAdapter so that it can display items
-        mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        ViewPager mViewPager;
+        mViewPager = view.findViewById(R.id.viewpager);
         mViewPager.setAdapter(new SamplePagerAdapter());
-        // END_INCLUDE (setup_viewpager)
 
-        // BEGIN_INCLUDE (setup_slidingtablayout)
-        // Give the SlidingTabLayout the ViewPager, this must be done AFTER the ViewPager has had
-        // it's PagerAdapter set.
-        mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
+        mSlidingTabLayout = view.findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setViewPager(mViewPager);
-        // END_INCLUDE (setup_slidingtablayout)
     }
-    // END_INCLUDE (fragment_onviewcreated)
 
     class SamplePagerAdapter extends PagerAdapter {
 
@@ -86,20 +82,21 @@ public class SlidingTabsBasicFragment extends Fragment {
         }
 
         @Override
-        public boolean isViewFromObject(View view, Object o) {
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
             return o == view;
         }
 
-        // BEGIN_INCLUDE (pageradapter_getpagetitle)
         @Override
         public CharSequence getPageTitle(int position) {
             return "Plant " + (position + 1);
         }
-        // END_INCLUDE (pageradapter_getpagetitle)
+
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+        @NonNull
         @Override
-        public Object instantiateItem(ViewGroup container, final int position) {
+        public Object instantiateItem(@NonNull ViewGroup container, final int position) {
             // Inflate a new layout from our resources
-            View view = getActivity().getLayoutInflater().inflate(R.layout.pager_item,
+            View view = Objects.requireNonNull(getActivity()).getLayoutInflater().inflate(R.layout.pager_item,
                     container, false);
             // Add the newly created View to the ViewPager
             container.addView(view);
@@ -114,14 +111,24 @@ public class SlidingTabsBasicFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     if (position == 0) {
+                        Intent intent = new Intent(getActivity(), CactusActivity.class);
+                        startActivity(intent);
                     }
                     if (position == 1) {
+                        Intent intent = new Intent(getActivity(), CactusActivity.class);
+                        startActivity(intent);
                     }
                     if (position == 2) {
+                        Intent intent = new Intent(getActivity(), CactusActivity.class);
+                        startActivity(intent);
                     }
                     if (position == 3) {
+                        Intent intent = new Intent(getActivity(), CactusActivity.class);
+                        startActivity(intent);
                     }
                     if (position == 4) {
+                        Intent intent = new Intent(getActivity(), CactusActivity.class);
+                        startActivity(intent);
                     }
                 }
             });
@@ -131,7 +138,7 @@ public class SlidingTabsBasicFragment extends Fragment {
         }
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             container.removeView((View) object);
         }
     }

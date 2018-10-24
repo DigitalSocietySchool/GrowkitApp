@@ -17,7 +17,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/happy_veggie"
+        android:text="@string/app_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="#FFFF"
         android:textSize="24sp"

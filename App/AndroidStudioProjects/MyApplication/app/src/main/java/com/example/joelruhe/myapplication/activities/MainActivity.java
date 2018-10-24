@@ -1,4 +1,4 @@
-package com.example.joelruhe.myapplication;
+package com.example.joelruhe.myapplication.activities;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -14,28 +14,21 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.example.joelruhe.myapplication.R;
+import com.example.joelruhe.myapplication.SlidingTabsBasicFragment;
+
 import butterknife.BindView;
 
 public class MainActivity extends AppCompatActivity {
 
     @Nullable
-    //@BindView(R.id.mainScreenToolbar)
+    @BindView(R.id.mainScreenToolbar)
     Toolbar mainToolbar;
 
-    /*int i = 0;
-    ImageView image;
-
-    int [] images = new int[] {R.drawable.plant1, R.drawable.plant2, R.drawable.plants,
-            R.drawable.cactus, R.drawable.potplant, R.drawable.longgrass};*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);*/
-
-
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -44,25 +37,5 @@ public class MainActivity extends AppCompatActivity {
             transaction.commit();
         }
     }
-
-    /*void next_plant(View v){
-        i++;
-        if(i > 5){
-            i=0;
-        }
-        image.setImageResource(images[i]);
-
-    }
-
-    void previous_plant(View v){
-        i--;
-        if(i < 0){
-            i=5;
-        }
-        image.setImageResource(images[i]);
-    }*/
-
-
-
 }
 
