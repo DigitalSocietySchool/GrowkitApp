@@ -27,6 +27,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -70,10 +71,10 @@ public class SlidingTabsBasicFragment extends Fragment {
         private String[] slide_headings = {
 
                 "CACTUS",
-                "PLANT1",
-                "PLANT2",
-                "PLANTS",
-                "POTPLANT"
+                "TOMATOES",
+                "SPINACH",
+                "BASIL",
+                "SPIDER PLANT"
         };
 
         @Override
@@ -94,20 +95,20 @@ public class SlidingTabsBasicFragment extends Fragment {
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @NonNull
         @Override
-        public Object instantiateItem(@NonNull ViewGroup container, final int position) {
+        public Object instantiateItem(@NonNull final ViewGroup container, final int position) {
             // Inflate a new layout from our resources
             View view = Objects.requireNonNull(getActivity()).getLayoutInflater().inflate(R.layout.pager_item,
                     container, false);
             // Add the newly created View to the ViewPager
             container.addView(view);
 
-            ImageView slideImageView = view.findViewById(R.id.slide_image);
+            ImageButton btn = view.findViewById(R.id.slide_image);
             TextView slideHeading = view.findViewById(R.id.slide_heading);
 
-            slideImageView.setImageResource(slide_images[position]);
+            btn.setImageResource(slide_images[position]);
             slideHeading.setText(slide_headings[position]);
 
-            view.setOnClickListener(new View.OnClickListener() {
+            btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (position == 0) {
