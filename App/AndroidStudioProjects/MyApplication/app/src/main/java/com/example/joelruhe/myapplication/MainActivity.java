@@ -1,5 +1,6 @@
 package com.example.joelruhe.myapplication;
 
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
 
     int [] images = new int[] {R.drawable.plant1, R.drawable.plant2, R.drawable.plants,
             R.drawable.cactus, R.drawable.potplant, R.drawable.longgrass};
+
+
+    Bitmap newBitmap = Bitmap.createBitmap(Bitmap., START_X, START_Y, WIDTH_PX, HEIGHT_PX, null, false);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //plant1 = 1;
@@ -50,9 +55,7 @@ public class MainActivity extends AppCompatActivity {
         icondrop = (ImageView)findViewById(R.id.iconDrop);
 
         waterlevel.setText(imageValue[y][0] + "%");
-        //icondrop.getLayoutParams().height = imageValue[y][0];
-
-        int height = icondrop.getHeight();
+        icondrop.getLayoutParams().height = imageValue[y][0];
 
 
     }
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         }
         image.setImageResource(images[y]);
         waterlevel.setText(imageValue[y][0] +"%");
-        //icondrop.getLayoutParams().height = imageValue[y][0];
+        icondrop.getLayoutParams().height = imageValue[y][0];
 
 
     }
@@ -76,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         }
         image.setImageResource(images[y]);
         waterlevel.setText(imageValue[y][0] +"%");
-        //icondrop.getLayoutParams().height = imageValue[y][0];
+        icondrop.getLayoutParams().height = imageValue[y][0];
 
 
     }
