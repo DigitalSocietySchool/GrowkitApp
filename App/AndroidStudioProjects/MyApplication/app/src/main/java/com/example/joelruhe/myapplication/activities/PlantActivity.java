@@ -8,18 +8,31 @@ import android.view.View;
 import android.widget.ImageView;
 import com.example.joelruhe.myapplication.R;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class CactusActivity extends AppCompatActivity {
+public class PlantActivity extends AppCompatActivity {
 
     @Nullable
     @BindView(R.id.plant_screen_toolbar)
     Toolbar plantScreenToolbar;
-    @Nullable
+    @BindView(R.id.btn_back)
     ImageView btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cactus);
+        ButterKnife.bind(PlantActivity.this);
+
+        // get access to the custom title view
+        assert plantScreenToolbar != null;
+        btnBack = plantScreenToolbar.findViewById(R.id.btn_back);
+        assert btnBack != null;
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 }
