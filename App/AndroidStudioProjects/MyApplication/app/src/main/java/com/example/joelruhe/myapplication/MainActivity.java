@@ -1,6 +1,7 @@
 package com.example.joelruhe.myapplication;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     int [][] imageValue =  {
             {water, soil, temperature},
-            {75, soil, temperature},
+            {100, soil, temperature},
             {30, soil, temperature},
             {45, soil, temperature},
             {67, soil, temperature},
@@ -37,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
     int [] images = new int[] {R.drawable.plant1, R.drawable.plant2, R.drawable.plants,
             R.drawable.cactus, R.drawable.potplant, R.drawable.longgrass};
 
+    //Bitmap newBitmap = Bitmap.createBitmap(Bitmap., START_X, START_Y, WIDTH_PX, HEIGHT_PX, null, false);
+    //Bitmap bmp=BitmapFactory.decodeResource(getResources(), R.drawable.iconDrop);
 
-    Bitmap newBitmap = Bitmap.createBitmap(Bitmap., START_X, START_Y, WIDTH_PX, HEIGHT_PX, null, false);
+    //Bitmap src = BitmapFactory.decodeResource(getResources(), R.drawable.iconDrop);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         icondrop = (ImageView)findViewById(R.id.iconDrop);
 
         waterlevel.setText(imageValue[y][0] + "%");
-        icondrop.getLayoutParams().height = imageValue[y][0];
+        //icondrop.getLayoutParams().height = 50;
 
 
     }
@@ -67,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
         }
         image.setImageResource(images[y]);
         waterlevel.setText(imageValue[y][0] +"%");
-        icondrop.getLayoutParams().height = imageValue[y][0];
+        //icondrop.getLayoutParams().height = 100;
+        //icondrop.requestLayout();
+
 
 
     }
@@ -79,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
         }
         image.setImageResource(images[y]);
         waterlevel.setText(imageValue[y][0] +"%");
-        icondrop.getLayoutParams().height = imageValue[y][0];
-
+       // icondrop.getLayoutParams().height = 20;
+        //icondrop.requestLayout();
 
     }
 }
