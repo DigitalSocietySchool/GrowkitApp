@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import com.example.joelruhe.myapplication.R;
 import butterknife.BindView;
 
-public class CactusActivity extends AppCompatActivity {
+public class PlantActivity extends AppCompatActivity {
 
     @Nullable
     @BindView(R.id.plant_screen_toolbar)

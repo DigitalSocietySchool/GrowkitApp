@@ -28,10 +28,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.joelruhe.myapplication.activities.CactusActivity;
+import com.example.joelruhe.myapplication.activities.PlantActivity;
 import com.example.joelruhe.myapplication.common.view.SlidingTabLayout;
 
 import java.util.Objects;
@@ -112,23 +111,23 @@ public class SlidingTabsBasicFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     if (position == 0) {
-                        Intent intent = new Intent(getActivity(), CactusActivity.class);
+                        Intent intent = new Intent(getActivity(), PlantActivity.class);
                         startActivity(intent);
                     }
                     if (position == 1) {
-                        Intent intent = new Intent(getActivity(), CactusActivity.class);
+                        Intent intent = new Intent(getActivity(), PlantActivity.class);
                         startActivity(intent);
                     }
                     if (position == 2) {
-                        Intent intent = new Intent(getActivity(), CactusActivity.class);
+                        Intent intent = new Intent(getActivity(), PlantActivity.class);
                         startActivity(intent);
                     }
                     if (position == 3) {
-                        Intent intent = new Intent(getActivity(), CactusActivity.class);
+                        Intent intent = new Intent(getActivity(), PlantActivity.class);
                         startActivity(intent);
                     }
                     if (position == 4) {
-                        Intent intent = new Intent(getActivity(), CactusActivity.class);
+                        Intent intent = new Intent(getActivity(), PlantActivity.class);
                         startActivity(intent);
                     }
                 }
