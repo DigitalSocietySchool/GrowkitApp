@@ -28,6 +28,8 @@ public class PlantActivity extends AppCompatActivity {
     TextView tv;
     @BindView(R.id.textViewId)
     TextView plantid;
+    @BindView(R.id.textWaterValue)
+    TextView waterValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,22 +57,34 @@ public class PlantActivity extends AppCompatActivity {
         plantid.setText(idString);
 
         showIcons(id, getPlantData());
+        showValues(id, getPlantData());
     }
 
     void showIcons(int id, int plantarray[][]) {
+        int [] dropIcons = new int[] {R.drawable.drop, R.drawable.drop1, R.drawable.drop2};
+
         int water = plantarray[id][0];
         if (water >= 66) {
-            drop.setImageResource(R.drawable.drop);
+            drop.setImageResource(dropIcons[0]);
         }
         if (water < 66 && water > 33) {
-         //   drop.setImageResource(R.drawable d);
+            drop.setImageResource(dropIcons[1]);
         }
+        if (water <= 33) {
+            drop.setImageResource(dropIcons[2]);
+        }
+    }
+
+    void showValues(int id, int plantarray[][]){
+        int water = plantarray[id][0];
+        waterValue.setText(water + "%");
+
     }
 
     int [][] getPlantData(){
         //These values will be pulled from the database!
         int plantarray[][] = {
-                {22,60,78},
+                {44,60,78},
                 {98,88,92},
                 {5,22,11},
                 {66,28,55},
