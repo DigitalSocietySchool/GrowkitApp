@@ -39,9 +39,17 @@ public class SlidingTabsBasicFragment extends Fragment {
 
     protected SlidingTabLayout mSlidingTabLayout;
 
+    String descriptionCactus = "Cactus Data Example";
+    String descriptionTomatoes = "Tomatoes Data Example";
+    String descriptionSpinach = "Spinach Data Example";
+    String descriptionBasil = "Basil Data Example";
+    String descriptionSpiderPlant = "SpiderPlant Data Example";
+
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_sample, container, false);
     }
 
@@ -112,22 +120,27 @@ public class SlidingTabsBasicFragment extends Fragment {
                 public void onClick(View view) {
                     if (position == 0) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
+                        intent.putExtra("DESCRIPTION", descriptionCactus);
                         startActivity(intent);
                     }
                     if (position == 1) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
+                        intent.putExtra("DESCRIPTION", descriptionTomatoes);
                         startActivity(intent);
                     }
                     if (position == 2) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
+                        intent.putExtra("DESCRIPTION", descriptionSpinach);
                         startActivity(intent);
                     }
                     if (position == 3) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
+                        intent.putExtra("DESCRIPTION", descriptionBasil);
                         startActivity(intent);
                     }
                     if (position == 4) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
+                        intent.putExtra("DESCRIPTION", descriptionSpiderPlant);
                         startActivity(intent);
                     }
                 }
