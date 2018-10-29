@@ -37,6 +37,18 @@ import java.util.Objects;
 
 public class SlidingTabsBasicFragment extends Fragment {
 
+    int water = 100;
+    int soil = 100;
+    int temperature = 100;
+
+    int [][] imageValue =  {
+            {water, soil, temperature}, // ID 0
+            {100, soil, temperature},   // ID 1...
+            {30, soil, temperature},
+            {45, soil, temperature},
+            {67, soil, temperature},
+            {12, soil, temperature},
+    };
     protected SlidingTabLayout mSlidingTabLayout;
 
     String descriptionCactus = "Cactus Data Example";
@@ -121,26 +133,32 @@ public class SlidingTabsBasicFragment extends Fragment {
                     if (position == 0) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
                         intent.putExtra("DESCRIPTION", descriptionCactus);
+                        intent.putExtra("ID", position);
                         startActivity(intent);
                     }
                     if (position == 1) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
                         intent.putExtra("DESCRIPTION", descriptionTomatoes);
+                        intent.putExtra("ID", position);
                         startActivity(intent);
                     }
                     if (position == 2) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
                         intent.putExtra("DESCRIPTION", descriptionSpinach);
+                        intent.putExtra("ID", position);
                         startActivity(intent);
                     }
                     if (position == 3) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
                         intent.putExtra("DESCRIPTION", descriptionBasil);
+                        intent.putExtra("ID", position);
+
                         startActivity(intent);
                     }
                     if (position == 4) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
                         intent.putExtra("DESCRIPTION", descriptionSpiderPlant);
+                        intent.putExtra("ID", position);
                         startActivity(intent);
                     }
                 }
