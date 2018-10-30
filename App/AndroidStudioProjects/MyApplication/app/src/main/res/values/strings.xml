@@ -9,4 +9,6 @@
     <string name="title_activity_cactus">CactusActivity</string>
     <string name="plant_health">Plant Health:</string>
     <string name="name_plant">Name Plant</string>
+    <string name="percent">%</string>
+    <string name="finish_harvest_time">Finished</string>
 </resources>

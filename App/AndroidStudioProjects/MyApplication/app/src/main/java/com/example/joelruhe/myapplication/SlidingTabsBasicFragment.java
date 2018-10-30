@@ -45,14 +45,14 @@ public class SlidingTabsBasicFragment extends Fragment {
     int [][] plantarray =  {
 
     };
+
     protected SlidingTabLayout mSlidingTabLayout;
 
     String descriptionCactus = "Cactus Data Example";
     String descriptionTomatoes = "Tomatoes Data Example";
     String descriptionSpinach = "Spinach Data Example";
     String descriptionBasil = "Basil Data Example";
-    String descriptionSpiderPlant = "SpiderPlant Data Example";
-
+    String descriptionSpiderPlant = "Spider Plant Data Example";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
