@@ -47,6 +47,9 @@ public class PlantActivity extends AppCompatActivity {
     TextView textCounter;
     MyCountDownTimer myCountDownTimer;
 
+    long totalSeconds = 30;
+    long intervalSeconds = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +60,7 @@ public class PlantActivity extends AppCompatActivity {
         textCounter = findViewById(R.id.counter);
 
         progressBar.setProgress(100);
-        myCountDownTimer = new MyCountDownTimer(10000, 500);
+        myCountDownTimer = new MyCountDownTimer(totalSeconds * 1000, intervalSeconds * 500);
         myCountDownTimer.start();
 
         String idString;
@@ -89,8 +92,7 @@ public class PlantActivity extends AppCompatActivity {
 
         @Override
         public void onTick(long millisUntilFinished) {
-            textCounter.setText(String.valueOf(millisUntilFinished));
-            int progress = (int) (millisUntilFinished / 100);
+            int progress = (int) (totalSeconds * 1000 - millisUntilFinished) / 1000;
             progressBar.setProgress(progress);
         }
 
@@ -166,11 +168,10 @@ public class PlantActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     void showIconValue(int water, int temperature, int light) {
-        waterValue.setText(water + getString(R.string.percent));
-        lightValue.setText(light + getString(R.string.percent));
-        temperatureValue.setText(temperature + getString(R.string.percent));
+        waterValue.setText(water + percent);
+        lightValue.setText(light + percent);
+        temperatureValue.setText(temperature + percent);
     }
-
 
     int[][] getPlantData() {
         //These values will be pulled from the database!
