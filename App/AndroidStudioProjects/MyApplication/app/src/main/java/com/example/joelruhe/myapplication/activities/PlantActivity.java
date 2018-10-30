@@ -83,7 +83,7 @@ public class PlantActivity extends AppCompatActivity {
 
     public class MyCountDownTimer extends CountDownTimer {
 
-        public MyCountDownTimer(long millisInFuture, long countDownInterval) {
+        private MyCountDownTimer(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
         }
 
@@ -108,10 +108,10 @@ public class PlantActivity extends AppCompatActivity {
 
         showIcons(id, plantarray);
         showHealth(id, water, temperature, light);
-        showIconValue(id, water, temperature, light);
+        showIconValue(water, temperature, light);
     }
 
-    int calculateHealth(int id, int water, int temperature, int soil) {
+    int calculateHealth(int water, int temperature, int soil) {
         int health = 0;
 
         if (water < soil && water < temperature) {
@@ -129,8 +129,8 @@ public class PlantActivity extends AppCompatActivity {
         return health;
     }
 
-    void showHealth(int id, int water, int temperature, int soil) {
-        plantHealth.setText("health:" + calculateHealth(id, water, temperature, soil));
+    void showHealth(int id, int water, int temperature, int light) {
+        plantHealth.setText("health:" + calculateHealth(water, temperature, light));
     }
 
     void showIcons(int id, int plantarray[][]) {
@@ -164,7 +164,8 @@ public class PlantActivity extends AppCompatActivity {
         }
     }
 
-    void showIconValue(int id, int water, int temperature, int light) {
+    @SuppressLint("SetTextI18n")
+    void showIconValue(int water, int temperature, int light) {
         waterValue.setText(water + getString(R.string.percent));
         lightValue.setText(light + getString(R.string.percent));
         temperatureValue.setText(temperature + getString(R.string.percent));
