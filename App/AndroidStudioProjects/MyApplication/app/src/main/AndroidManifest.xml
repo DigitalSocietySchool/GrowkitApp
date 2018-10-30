@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.PlantActivity" />
-        <activity android:name=".activities.AddPlantActivity"></activity>
+        <activity android:name=".activities.AddPlantActivity" />
+        <activity android:name=".activities.AddPlantMenuActivity"></activity>
     </application>
 
 </manifest>

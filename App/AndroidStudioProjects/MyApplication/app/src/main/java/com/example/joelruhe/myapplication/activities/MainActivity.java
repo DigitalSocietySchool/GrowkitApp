@@ -9,7 +9,9 @@ import com.example.joelruhe.myapplication.SlidingTabsBasicFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    int empty_array[][] = {};
+    int empty_array[][] = {
+            {2,3}
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

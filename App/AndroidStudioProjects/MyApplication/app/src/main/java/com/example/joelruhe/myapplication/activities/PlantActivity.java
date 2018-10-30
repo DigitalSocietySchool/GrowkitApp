@@ -30,6 +30,8 @@ public class PlantActivity extends AppCompatActivity {
     TextView plantid;
     @BindView(R.id.textWaterValue)
     TextView waterValue;
+    @BindView(R.id.textViewHealth)
+    TextView plantHealth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +58,39 @@ public class PlantActivity extends AppCompatActivity {
         idString = Integer.toString(getIntent().getIntExtra("ID", 0));
         plantid.setText(idString);
 
-        showIcons(id, getPlantData());
         showValues(id, getPlantData());
+    }
+
+    void showValues(int id, int plantarray[][]){
+        int water = plantarray[id][0];
+        int temperature = plantarray[id][1];
+        int soil = plantarray[id][2];
+
+        showIcons(id, plantarray);
+        showHealth(id, water, temperature, soil);
+        showIconValue(id,water,temperature,soil);
+    }
+
+    int calculateHealth(int id, int water, int temperature, int soil){
+        int health = 0;
+
+        if(water < soil && water < temperature){
+            health = water;
+        }
+
+        if(temperature < water && temperature < soil){
+            health = temperature;
+        }
+
+        if(soil < water && soil < temperature){
+            health = soil;
+        }
+
+        return health;
+    }
+
+    void showHealth(int id, int water, int temperature, int soil){
+        plantHealth.setText("health:" + calculateHealth(id, water, temperature, soil));
     }
 
     void showIcons(int id, int plantarray[][]) {
@@ -75,8 +108,7 @@ public class PlantActivity extends AppCompatActivity {
         }
     }
 
-    void showValues(int id, int plantarray[][]){
-        int water = plantarray[id][0];
+    void showIconValue(int id, int water, int temperatur, int soil){
         waterValue.setText(water + "%");
 
     }
