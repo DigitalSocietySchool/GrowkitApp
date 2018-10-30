@@ -24,6 +24,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,13 +42,8 @@ public class SlidingTabsBasicFragment extends Fragment {
     int soil = 100;
     int temperature = 100;
 
-    int [][] imageValue =  {
-            {water, soil, temperature}, // ID 0
-            {100, soil, temperature},   // ID 1...
-            {30, soil, temperature},
-            {45, soil, temperature},
-            {67, soil, temperature},
-            {12, soil, temperature},
+    int [][] plantarray =  {
+
     };
     protected SlidingTabLayout mSlidingTabLayout;
 
@@ -61,6 +57,8 @@ public class SlidingTabsBasicFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
 
         return inflater.inflate(R.layout.fragment_sample, container, false);
     }
@@ -79,7 +77,6 @@ public class SlidingTabsBasicFragment extends Fragment {
 
         //Arrays
         private int[] slide_images = {
-
                 R.drawable.cactus,
                 R.drawable.plant1,
                 R.drawable.plant2,
@@ -95,6 +92,7 @@ public class SlidingTabsBasicFragment extends Fragment {
                 "BASIL",
                 "SPIDER PLANT"
         };
+
 
         @Override
         public int getCount() {
@@ -152,7 +150,6 @@ public class SlidingTabsBasicFragment extends Fragment {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
                         intent.putExtra("DESCRIPTION", descriptionBasil);
                         intent.putExtra("ID", position);
-
                         startActivity(intent);
                     }
                     if (position == 4) {
