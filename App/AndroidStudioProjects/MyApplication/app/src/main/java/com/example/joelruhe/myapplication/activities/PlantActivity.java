@@ -34,10 +34,8 @@ public class PlantActivity extends AppCompatActivity {
     TextView plantId;
     @BindView(R.id.water_value)
     TextView waterValue;
-<<<<<<< HEAD
     @BindView(R.id.textViewHealth)
     TextView plantHealth;
-=======
     @BindView(R.id.temperature_value)
     TextView temperatureValue;
     @BindView(R.id.light_value)
@@ -48,7 +46,6 @@ public class PlantActivity extends AppCompatActivity {
     ProgressBar progressBar;
     TextView textCounter;
     MyCountDownTimer myCountDownTimer;
->>>>>>> d8a03d2402193d8ee9bf6cf6053395c20909f346
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +57,7 @@ public class PlantActivity extends AppCompatActivity {
         textCounter = findViewById(R.id.counter);
 
         progressBar.setProgress(100);
-        myCountDownTimer =  new MyCountDownTimer(10000, 500);
+        myCountDownTimer = new MyCountDownTimer(10000, 500);
         myCountDownTimer.start();
 
         String idString;
@@ -84,38 +81,6 @@ public class PlantActivity extends AppCompatActivity {
         showValues(id, getPlantData());
     }
 
-<<<<<<< HEAD
-    void showValues(int id, int plantarray[][]){
-        int water = plantarray[id][0];
-        int temperature = plantarray[id][1];
-        int soil = plantarray[id][2];
-
-        showIcons(id, plantarray);
-        showHealth(id, water, temperature, soil);
-        showIconValue(id,water,temperature,soil);
-    }
-
-    int calculateHealth(int id, int water, int temperature, int soil){
-        int health = 0;
-
-        if(water < soil && water < temperature){
-            health = water;
-        }
-
-        if(temperature < water && temperature < soil){
-            health = temperature;
-        }
-
-        if(soil < water && soil < temperature){
-            health = soil;
-        }
-
-        return health;
-    }
-
-    void showHealth(int id, int water, int temperature, int soil){
-        plantHealth.setText("health:" + calculateHealth(id, water, temperature, soil));
-=======
     public class MyCountDownTimer extends CountDownTimer {
 
         public MyCountDownTimer(long millisInFuture, long countDownInterval) {
@@ -125,7 +90,7 @@ public class PlantActivity extends AppCompatActivity {
         @Override
         public void onTick(long millisUntilFinished) {
             textCounter.setText(String.valueOf(millisUntilFinished));
-            int progress = (int) (millisUntilFinished/100);
+            int progress = (int) (millisUntilFinished / 100);
             progressBar.setProgress(progress);
         }
 
@@ -134,11 +99,42 @@ public class PlantActivity extends AppCompatActivity {
             textCounter.setText(R.string.finish_harvest_time);
             progressBar.setProgress(0);
         }
->>>>>>> d8a03d2402193d8ee9bf6cf6053395c20909f346
+    }
+
+    void showValues(int id, int plantarray[][]) {
+        int water = plantarray[id][0];
+        int temperature = plantarray[id][1];
+        int light = plantarray[id][2];
+
+        showIcons(id, plantarray);
+        showHealth(id, water, temperature, light);
+        showIconValue(id, water, temperature, light);
+    }
+
+    int calculateHealth(int id, int water, int temperature, int soil) {
+        int health = 0;
+
+        if (water < soil && water < temperature) {
+            health = water;
+        }
+
+        if (temperature < water && temperature < soil) {
+            health = temperature;
+        }
+
+        if (soil < water && soil < temperature) {
+            health = soil;
+        }
+
+        return health;
+    }
+
+    void showHealth(int id, int water, int temperature, int soil) {
+        plantHealth.setText("health:" + calculateHealth(id, water, temperature, soil));
     }
 
     void showIcons(int id, int plantarray[][]) {
-        int [] dropIcons = new int[] {R.drawable.drop, R.drawable.drop1, R.drawable.drop2};
+        int[] dropIcons = new int[]{R.drawable.drop, R.drawable.drop1, R.drawable.drop2};
 
         int water = plantarray[id][0];
         if (water >= 66) {
@@ -168,30 +164,21 @@ public class PlantActivity extends AppCompatActivity {
         }
     }
 
-<<<<<<< HEAD
-    void showIconValue(int id, int water, int temperatur, int soil){
-        waterValue.setText(water + "%");
-
-=======
-    @SuppressLint("SetTextI18n")
-    void showValues(int id, int plantarray[][]){
-        int water = plantarray[id][0];
-        int light = plantarray[id][1];
-        int temperature = plantarray[id][2];
-        waterValue.setText(water + percent);
-        lightValue.setText(light + percent);
-        temperatureValue.setText(temperature + percent);
->>>>>>> d8a03d2402193d8ee9bf6cf6053395c20909f346
+    void showIconValue(int id, int water, int temperature, int light) {
+        waterValue.setText(water + getString(R.string.percent));
+        lightValue.setText(light + getString(R.string.percent));
+        temperatureValue.setText(temperature + getString(R.string.percent));
     }
 
-    int [][] getPlantData(){
+
+    int[][] getPlantData() {
         //These values will be pulled from the database!
         int plantarray[][] = {
-                {44,60,78},
-                {98,88,92},
-                {5,22,11},
-                {66,28,55},
-                {44,7,29}
+                {44, 60, 78},
+                {98, 88, 92},
+                {5, 22, 11},
+                {66, 28, 55},
+                {44, 7, 29}
         };
 
         return plantarray;
