@@ -50,4 +50,12 @@
         app:layout_constraintTop_toBottomOf="@+id/slide_image"
         app:layout_constraintVertical_bias="0.065" />
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="75dp"
+        android:layout_height="80dp"
+        app:srcCompat="@drawable/alert"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="73dp" />
+
 </android.support.constraint.ConstraintLayout>
