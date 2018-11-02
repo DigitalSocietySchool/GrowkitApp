@@ -37,6 +37,7 @@ import java.util.Objects;
 
 public class SlidingTabsBasicFragment extends Fragment {
 
+
     int water = 100;
     int soil = 100;
     int temperature = 100;
@@ -52,6 +53,12 @@ public class SlidingTabsBasicFragment extends Fragment {
     String descriptionSpinach = "Spinach Data Example";
     String descriptionBasil = "Basil Data Example";
     String descriptionSpiderPlant = "Spider Plant Data Example";
+
+    int totalDaysCactus = 10;
+    int totalDaysTomatoes = 20;
+    int totalDaysSpinach = 30;
+    int totalDaysBasil = 15;
+    int totalDaysSpiderPlant= 10;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -131,30 +138,35 @@ public class SlidingTabsBasicFragment extends Fragment {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
                         intent.putExtra("DESCRIPTION", descriptionCactus);
                         intent.putExtra("ID", position);
+                        intent.putExtra("HARVEST_TIME", totalDaysCactus);
                         startActivity(intent);
                     }
                     if (position == 1) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
                         intent.putExtra("DESCRIPTION", descriptionTomatoes);
                         intent.putExtra("ID", position);
+                        intent.putExtra("HARVEST_TIME", totalDaysTomatoes);
                         startActivity(intent);
                     }
                     if (position == 2) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
                         intent.putExtra("DESCRIPTION", descriptionSpinach);
                         intent.putExtra("ID", position);
+                        intent.putExtra("HARVEST_TIME", totalDaysSpinach);
                         startActivity(intent);
                     }
                     if (position == 3) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
                         intent.putExtra("DESCRIPTION", descriptionBasil);
                         intent.putExtra("ID", position);
+                        intent.putExtra("HARVEST_TIME", totalDaysBasil);
                         startActivity(intent);
                     }
                     if (position == 4) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
                         intent.putExtra("DESCRIPTION", descriptionSpiderPlant);
                         intent.putExtra("ID", position);
+                        intent.putExtra("HARVEST_TIME", totalDaysSpiderPlant);
                         startActivity(intent);
                     }
                 }
