@@ -47,7 +47,9 @@ public class PlantActivity extends AppCompatActivity {
     TextView textCounter;
     MyCountDownTimer myCountDownTimer;
 
-    long totalSeconds = 30;
+    int oneMin= 1 * 60 * 1000;
+
+    long totalSeconds = 10;
     long intervalSeconds = 1;
 
     @Override
@@ -103,12 +105,12 @@ public class PlantActivity extends AppCompatActivity {
         }
     }
 
-    void showValues(int id, int plantarray[][]) {
-        int water = plantarray[id][0];
-        int temperature = plantarray[id][1];
-        int light = plantarray[id][2];
+    void showValues(int id, int plantArray[][]) {
+        int water = plantArray[id][0];
+        int temperature = plantArray[id][1];
+        int light = plantArray[id][2];
 
-        showIcons(id, plantarray);
+        showIcons(id, plantArray);
         showHealth(id, water, temperature, light);
         showIconValue(water, temperature, light);
     }
@@ -135,10 +137,10 @@ public class PlantActivity extends AppCompatActivity {
         plantHealth.setText("health:" + calculateHealth(water, temperature, light));
     }
 
-    void showIcons(int id, int plantarray[][]) {
+    void showIcons(int id, int plantArray[][]) {
         int[] dropIcons = new int[]{R.drawable.drop, R.drawable.drop1, R.drawable.drop2};
 
-        int water = plantarray[id][0];
+        int water = plantArray[id][0];
         if (water >= 66) {
             drop.setImageResource(dropIcons[0]);
         }
@@ -149,7 +151,7 @@ public class PlantActivity extends AppCompatActivity {
             drop.setImageResource(dropIcons[2]);
         }
 
-        int light = plantarray[id][0];
+        int light = plantArray[id][0];
         if (light >= 66) {
         }
         if (light < 66 && light > 33) {
@@ -157,7 +159,7 @@ public class PlantActivity extends AppCompatActivity {
         if (light <= 33) {
         }
 
-        int temperature = plantarray[id][0];
+        int temperature = plantArray[id][0];
         if (temperature >= 66) {
         }
         if (temperature < 66 && temperature > 33) {
@@ -175,7 +177,7 @@ public class PlantActivity extends AppCompatActivity {
 
     int[][] getPlantData() {
         //These values will be pulled from the database!
-        int plantarray[][] = {
+        int plantArray[][] = {
                 {44, 60, 78},
                 {98, 88, 92},
                 {5, 22, 11},
@@ -183,6 +185,6 @@ public class PlantActivity extends AppCompatActivity {
                 {44, 7, 29}
         };
 
-        return plantarray;
+        return plantArray;
     }
 }
