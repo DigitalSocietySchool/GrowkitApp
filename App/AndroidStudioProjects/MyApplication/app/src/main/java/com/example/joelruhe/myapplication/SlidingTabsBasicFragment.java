@@ -36,8 +36,6 @@ import com.example.joelruhe.myapplication.common.view.SlidingTabLayout;
 
 import java.util.Objects;
 
-import butterknife.BindView;
-
 public class SlidingTabsBasicFragment extends Fragment {
     protected SlidingTabLayout mSlidingTabLayout;
 
