@@ -11,9 +11,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import com.example.joelruhe.myapplication.R;
-
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,8 +24,10 @@ public class PlantActivity extends AppCompatActivity {
     Toolbar plantScreenToolbar;
     @BindView(R.id.btn_back)
     ImageButton btnBack;
-    @BindView(R.id.imageDrop)
+    @BindView(R.id.image_drop)
     ImageView drop;
+    @BindView(R.id.alert_plant)
+    ImageView alertPlant;
 
     @BindView(R.id.text_plant_data)
     TextView txtPlantData;
@@ -47,7 +48,6 @@ public class PlantActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
     int counter;
-    int totalSeconds;
     CountDownTimer mCounterTimer;
 
     @Override
@@ -58,6 +58,8 @@ public class PlantActivity extends AppCompatActivity {
 
         String idString;
         int id;
+
+        alertPlant.setVisibility(View.GONE);
 
         // get access to the custom title view
         assert plantScreenToolbar != null;
@@ -76,7 +78,6 @@ public class PlantActivity extends AppCompatActivity {
         plantId.setText(idString);
 
         showValues(id, getPlantData());
-
     }
 
     void showValues(int id, int plantArray[][]) {
@@ -133,8 +134,6 @@ public class PlantActivity extends AppCompatActivity {
     void showIcons(int id, int plantArray[][]) {
         int[] dropIcons = new int[]{R.drawable.drop, R.drawable.drop1, R.drawable.drop2};
 
-        int totalSeconds = plantArray[id][0];
-
         int water = plantArray[id][1];
         if (water >= 66) {
             drop.setImageResource(dropIcons[0]);
@@ -144,6 +143,8 @@ public class PlantActivity extends AppCompatActivity {
         }
         if (water <= 33) {
             drop.setImageResource(dropIcons[2]);
+            alertPlant.setVisibility(View.VISIBLE);
+            Toast.makeText(this, "Water your plants", Toast.LENGTH_LONG).show();
         }
 
         int light = plantArray[id][2];
