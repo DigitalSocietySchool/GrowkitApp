@@ -23,7 +23,8 @@
         <activity android:name=".activities.AddPlantActivity" />
         <activity android:name=".activities.AddPlantMenuActivity" />
         <activity android:name=".activities.DatabaseActivity" />
-        <activity android:name=".activities.LoginActivity"></activity>
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.RegisterActivity"></activity>
     </application>
 
 </manifest>
