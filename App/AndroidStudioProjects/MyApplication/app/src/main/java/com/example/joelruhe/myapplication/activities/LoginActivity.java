@@ -18,13 +18,13 @@ import com.example.joelruhe.myapplication.R;
 import static java.util.Calendar.getInstance;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText UsernameEt, PasswordEt;
+    EditText EmailEt, PasswordEt;
     TextView Register;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        UsernameEt = (EditText)findViewById(R.id.textEmail);
+        EmailEt = (EditText)findViewById(R.id.textEmail);
         PasswordEt = (EditText)findViewById(R.id.textPassword);
         Register = (TextView)findViewById((R.id.register));
 
@@ -45,10 +45,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void OnLogin(View view){
-        String username = UsernameEt.getText().toString();
+        String email = EmailEt.getText().toString();
         String password = PasswordEt.getText().toString();
         String type = "login";
         DatabaseActivity databaseActivity = new DatabaseActivity(this);
-        databaseActivity.execute(type, username, password);
+        databaseActivity.execute(type, email, password);
     }
 }
