@@ -87,14 +87,6 @@ public class SlidingTabsBasicFragment extends Fragment {
                 "SPIDER PLANT"
         };
 
-        int plantarray[][] = {
-                {44, 60, 78},
-                {98, 88, 92},
-                {5, 22, 11},
-                {66, 28, 55},
-                {44, 7, 29}
-        };
-
         @Override
         public int getCount() {
             return slide_headings.length;
@@ -125,10 +117,6 @@ public class SlidingTabsBasicFragment extends Fragment {
 
             btn.setImageResource(slide_images[position]);
             slideHeading.setText(slide_headings[position]);
-
-            int water = plantarray[position][0];
-            int temperature = plantarray[position][1];
-            int light = plantarray[position][2];
 
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override

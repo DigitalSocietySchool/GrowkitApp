@@ -1,6 +1,7 @@
 package com.example.joelruhe.myapplication.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import com.example.joelruhe.myapplication.R;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class PlantActivity extends AppCompatActivity {
 
@@ -46,18 +48,23 @@ public class PlantActivity extends AppCompatActivity {
     @BindString(R.string.percent)
     String percent;
 
+    @BindView(R.id.img_btn_start_harvest)
+    ImageButton imgBtnStartHarvest;
+    @BindView(R.id.img_btn_pause_harvest)
+    ImageButton imgBtnPauseHarvest;
+
     ProgressBar progressBar;
     int counter;
     CountDownTimer mCounterTimer;
+
+    String idString;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plant);
         ButterKnife.bind(PlantActivity.this);
-
-        String idString;
-        int id;
 
         alertPlant.setVisibility(View.GONE);
 
@@ -72,37 +79,64 @@ public class PlantActivity extends AppCompatActivity {
             }
         });
 
+        imgBtnPauseHarvest.setVisibility(View.GONE);
+
         txtPlantData.setText(getIntent().getStringExtra("DESCRIPTION"));
         id = getIntent().getIntExtra("ID", 0);
         idString = Integer.toString(getIntent().getIntExtra("ID", 0));
         plantId.setText(idString);
 
+        imgBtnStartHarvest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    startTimer(id, getPlantData());
+                    imgBtnPauseHarvest.setVisibility(View.VISIBLE);
+                    imgBtnStartHarvest.setVisibility(View.GONE);
+            }
+        });
+
+        imgBtnPauseHarvest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    mCounterTimer.cancel();
+                    imgBtnPauseHarvest.setVisibility(View.GONE);
+                    imgBtnStartHarvest.setVisibility(View.VISIBLE);
+            }
+        });
+
         showValues(id, getPlantData());
     }
 
-    void showValues(int id, int plantArray[][]) {
+    void startTimer(int id, int plantArray[][]) {
         final int totalSeconds = plantArray[id][0];
+
+        Intent intent = new Intent(PlantActivity.this, BroadcastTimerService.class);
+        intent.putExtra("HARVEST_TIME", totalSeconds);
+
+            progressBar = findViewById(R.id.progressBar);
+
+            mCounterTimer = new CountDownTimer(totalSeconds * 1000, 1000) {
+
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    counter++;
+                    textCounter.setText(String.valueOf(counter));
+                    progressBar.setProgress(counter * 10000 / (totalSeconds * 100));
+                }
+
+                public void onFinish() {
+                    counter++;
+                    textCounter.setText(R.string.finish_harvest_time);
+                    progressBar.setProgress(100);
+                }
+            };
+            mCounterTimer.start();
+    }
+
+    void showValues(int id, int plantArray[][]) {
         int water = plantArray[id][1];
         int temperature = plantArray[id][2];
         int light = plantArray[id][3];
-
-        progressBar = findViewById(R.id.progressBar);
-
-        mCounterTimer = new CountDownTimer(totalSeconds * 1000, 1000){
-
-            @Override
-            public void onTick(long millisUntilFinished){
-                counter++;
-                textCounter.setText(String.valueOf(counter));
-                progressBar.setProgress(counter * 10000 / (totalSeconds * 100));
-            }
-            public  void onFinish(){
-                counter++;
-                textCounter.setText(R.string.finish_harvest_time);
-                progressBar.setProgress(100);
-            }
-        };
-        mCounterTimer.start();
 
         showIcons(id, plantArray);
         showHealth(id, water, temperature, light);
