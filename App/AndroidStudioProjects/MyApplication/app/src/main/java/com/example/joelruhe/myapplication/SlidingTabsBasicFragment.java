@@ -28,7 +28,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joelruhe.myapplication.activities.PlantActivity;
@@ -37,14 +39,6 @@ import com.example.joelruhe.myapplication.common.view.SlidingTabLayout;
 import java.util.Objects;
 
 public class SlidingTabsBasicFragment extends Fragment {
-
-    int water = 100;
-    int soil = 100;
-    int temperature = 100;
-
-    int [][] plantarray =  {
-
-    };
 
     protected SlidingTabLayout mSlidingTabLayout;
 
@@ -57,8 +51,6 @@ public class SlidingTabsBasicFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
 
         return inflater.inflate(R.layout.fragment_sample, container, false);
     }
@@ -85,14 +77,12 @@ public class SlidingTabsBasicFragment extends Fragment {
         };
 
         private String[] slide_headings = {
-
                 "CACTUS",
                 "TOMATOES",
                 "SPINACH",
                 "BASIL",
                 "SPIDER PLANT"
         };
-
 
         @Override
         public int getCount() {
@@ -124,6 +114,8 @@ public class SlidingTabsBasicFragment extends Fragment {
 
             btn.setImageResource(slide_images[position]);
             slideHeading.setText(slide_headings[position]);
+
+
 
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -164,6 +156,8 @@ public class SlidingTabsBasicFragment extends Fragment {
             // Return the View
             return view;
         }
+
+
 
         @Override
         public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {

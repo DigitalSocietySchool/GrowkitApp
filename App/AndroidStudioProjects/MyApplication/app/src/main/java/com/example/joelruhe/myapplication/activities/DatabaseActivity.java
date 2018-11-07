@@ -38,8 +38,7 @@ public class DatabaseActivity extends AsyncTask<String,Void,String> {
         String type = params[0];
         String conn_url = "http://145.28.47.43/connDatabase.php";
         try {
-            String user_name = params[1];
-            String password = params[2];
+            String id = "2";
             URL url = new URL(conn_url);
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
             httpURLConnection.setRequestMethod("POST");
@@ -47,7 +46,7 @@ public class DatabaseActivity extends AsyncTask<String,Void,String> {
             httpURLConnection.setDoInput(true);
             OutputStream outputstream = httpURLConnection.getOutputStream();
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputstream, "UTF-8"));
-            String post_data = URLEncoder.encode("user_name", "UTF-8")+"="+URLEncoder.encode(user_name, "UTF-8")+"&"+URLEncoder.encode("password", "UTF-8")+"="+URLEncoder.encode(password, "UTF-8");
+            String post_data = URLEncoder.encode("id", "UTF-8")+"="+URLEncoder.encode(id, "UTF-8");
             bufferedWriter.write(post_data);
             bufferedWriter.flush();
             bufferedWriter.close();
