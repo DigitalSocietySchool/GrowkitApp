@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <menu xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <item android:id = "@+id/nav_profilet"
+        android:title = "My plants"
+        android:icon="@drawable/icon_myplants"
+        />
+
+    <item android:id = "@+id/nav_mynetwork"
+        android:title = "My network"
+        android:icon="@drawable/icon_mynetwork"
+        />
+
+    <item android:id = "@+id/nav_settings"
+        android:title = "Settings"
+        android:icon="@drawable/icon_settings"/>
+
+    <item android:id = "@+id/nav_logout"
+        android:title = "Logout"
+        android:icon="@drawable/icon_logout"/>
+    </menu>

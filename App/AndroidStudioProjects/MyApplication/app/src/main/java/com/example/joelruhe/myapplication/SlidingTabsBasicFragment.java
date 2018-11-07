@@ -24,7 +24,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +38,6 @@ import com.example.joelruhe.myapplication.common.view.SlidingTabLayout;
 import java.util.Objects;
 
 public class SlidingTabsBasicFragment extends Fragment {
-
     protected SlidingTabLayout mSlidingTabLayout;
 
     String descriptionCactus = "Cactus Data Example";
@@ -63,7 +61,7 @@ public class SlidingTabsBasicFragment extends Fragment {
 
         mSlidingTabLayout = view.findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setViewPager(mViewPager);
-    }
+        }
 
     class SamplePagerAdapter extends PagerAdapter {
 
@@ -73,7 +71,7 @@ public class SlidingTabsBasicFragment extends Fragment {
                 R.drawable.plant1,
                 R.drawable.plant2,
                 R.drawable.plants,
-                R.drawable.potplant
+                R.drawable.potplant,
         };
 
         private String[] slide_headings = {

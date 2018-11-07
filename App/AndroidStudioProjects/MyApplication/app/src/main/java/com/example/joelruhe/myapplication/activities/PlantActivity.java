@@ -1,6 +1,7 @@
 package com.example.joelruhe.myapplication.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,12 +12,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import com.example.joelruhe.myapplication.R;
-
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class PlantActivity extends AppCompatActivity {
 
@@ -25,13 +26,17 @@ public class PlantActivity extends AppCompatActivity {
     Toolbar plantScreenToolbar;
     @BindView(R.id.btn_back)
     ImageButton btnBack;
-    @BindView(R.id.imageDrop)
+    @BindView(R.id.image_drop)
     ImageView drop;
+    @BindView(R.id.alert_plant)
+    ImageView alertPlant;
 
     @BindView(R.id.text_plant_data)
     TextView txtPlantData;
     @BindView(R.id.view_id)
     TextView plantId;
+    @BindView(R.id.counter)
+    TextView textCounter;
     @BindView(R.id.water_value)
     TextView waterValue;
     @BindView(R.id.textViewHealth)
@@ -43,12 +48,17 @@ public class PlantActivity extends AppCompatActivity {
     @BindString(R.string.percent)
     String percent;
 
-    ProgressBar progressBar;
-    TextView textCounter;
-    MyCountDownTimer myCountDownTimer;
+    @BindView(R.id.img_btn_start_harvest)
+    ImageButton imgBtnStartHarvest;
+    @BindView(R.id.img_btn_pause_harvest)
+    ImageButton imgBtnPauseHarvest;
 
-    long totalSeconds = 30;
-    long intervalSeconds = 1;
+    ProgressBar progressBar;
+    int counter;
+    CountDownTimer mCounterTimer;
+
+    String idString;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +66,7 @@ public class PlantActivity extends AppCompatActivity {
         setContentView(R.layout.activity_plant);
         ButterKnife.bind(PlantActivity.this);
 
-        progressBar = findViewById(R.id.progressBar);
-        textCounter = findViewById(R.id.counter);
-
-        progressBar.setProgress(100);
-        myCountDownTimer = new MyCountDownTimer(totalSeconds * 1000, intervalSeconds * 500);
-        myCountDownTimer.start();
-
-        String idString;
-        int id;
+        alertPlant.setVisibility(View.GONE);
 
         // get access to the custom title view
         assert plantScreenToolbar != null;
@@ -76,39 +78,67 @@ public class PlantActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        imgBtnPauseHarvest.setVisibility(View.GONE);
+
         txtPlantData.setText(getIntent().getStringExtra("DESCRIPTION"));
         id = getIntent().getIntExtra("ID", 0);
         idString = Integer.toString(getIntent().getIntExtra("ID", 0));
         plantId.setText(idString);
 
+        imgBtnStartHarvest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    startTimer(id, getPlantData());
+                    imgBtnPauseHarvest.setVisibility(View.VISIBLE);
+                    imgBtnStartHarvest.setVisibility(View.GONE);
+            }
+        });
+
+        imgBtnPauseHarvest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    mCounterTimer.cancel();
+                    imgBtnPauseHarvest.setVisibility(View.GONE);
+                    imgBtnStartHarvest.setVisibility(View.VISIBLE);
+            }
+        });
+
         showValues(id, getPlantData());
     }
 
-    public class MyCountDownTimer extends CountDownTimer {
+    void startTimer(int id, int plantArray[][]) {
+        final int totalSeconds = plantArray[id][0];
 
-        private MyCountDownTimer(long millisInFuture, long countDownInterval) {
-            super(millisInFuture, countDownInterval);
-        }
+        Intent intent = new Intent(PlantActivity.this, BroadcastTimerService.class);
+        intent.putExtra("HARVEST_TIME", totalSeconds);
 
-        @Override
-        public void onTick(long millisUntilFinished) {
-            int progress = (int) (totalSeconds * 1000 - millisUntilFinished) / 1000;
-            progressBar.setProgress(progress);
-        }
+            progressBar = findViewById(R.id.progressBar);
 
-        @Override
-        public void onFinish() {
-            textCounter.setText(R.string.finish_harvest_time);
-            progressBar.setProgress(0);
-        }
+            mCounterTimer = new CountDownTimer(totalSeconds * 1000, 1000) {
+
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    counter++;
+                    textCounter.setText(String.valueOf(counter));
+                    progressBar.setProgress(counter * 10000 / (totalSeconds * 100));
+                }
+
+                public void onFinish() {
+                    counter++;
+                    textCounter.setText(R.string.finish_harvest_time);
+                    progressBar.setProgress(100);
+                }
+            };
+            mCounterTimer.start();
     }
 
-    void showValues(int id, int plantarray[][]) {
-        int water = plantarray[id][0];
-        int temperature = plantarray[id][1];
-        int light = plantarray[id][2];
+    void showValues(int id, int plantArray[][]) {
+        int water = plantArray[id][1];
+        int temperature = plantArray[id][2];
+        int light = plantArray[id][3];
 
-        showIcons(id, plantarray);
+        showIcons(id, plantArray);
         showHealth(id, water, temperature, light);
         showIconValue(water, temperature, light);
     }
@@ -135,10 +165,10 @@ public class PlantActivity extends AppCompatActivity {
         plantHealth.setText("health:" + calculateHealth(water, temperature, light));
     }
 
-    void showIcons(int id, int plantarray[][]) {
+    void showIcons(int id, int plantArray[][]) {
         int[] dropIcons = new int[]{R.drawable.drop, R.drawable.drop1, R.drawable.drop2};
 
-        int water = plantarray[id][0];
+        int water = plantArray[id][1];
         if (water >= 66) {
             drop.setImageResource(dropIcons[0]);
         }
@@ -147,9 +177,11 @@ public class PlantActivity extends AppCompatActivity {
         }
         if (water <= 33) {
             drop.setImageResource(dropIcons[2]);
+            alertPlant.setVisibility(View.VISIBLE);
+            Toast.makeText(this, "Water your plants", Toast.LENGTH_LONG).show();
         }
 
-        int light = plantarray[id][0];
+        int light = plantArray[id][2];
         if (light >= 66) {
         }
         if (light < 66 && light > 33) {
@@ -157,7 +189,7 @@ public class PlantActivity extends AppCompatActivity {
         if (light <= 33) {
         }
 
-        int temperature = plantarray[id][0];
+        int temperature = plantArray[id][3];
         if (temperature >= 66) {
         }
         if (temperature < 66 && temperature > 33) {
@@ -175,14 +207,13 @@ public class PlantActivity extends AppCompatActivity {
 
     int[][] getPlantData() {
         //These values will be pulled from the database!
-        int plantarray[][] = {
-                {44, 60, 78},
-                {98, 88, 92},
-                {5, 22, 11},
-                {66, 28, 55},
-                {44, 7, 29}
+        int plantArray[][] = {
+                {10, 44, 60, 78},
+                {20, 98, 88, 92},
+                {30, 5, 22, 11},
+                {15, 66, 28, 55},
+                {10, 44, 7, 29}
         };
-
-        return plantarray;
+        return plantArray;
     }
 }

@@ -1,29 +1,46 @@
-<LinearLayout
-      xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
+<android.support.v4.widget.DrawerLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawer"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:id="@+id/sample_main_layout">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".activities.MainActivity">
 
-    <include
-        android:id="@+id/mainScreenToolbar"
-        layout="@layout/main_screen_toolbar" />
-
-    <View
-        android:id="@+id/view"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray" />
+        android:layout_height="match_parent"
+        android:id="@+id/sample_main_layout">
 
-    <FrameLayout
-        android:id="@+id/sample_content_fragment"
-        android:layout_weight="2"
-        android:layout_width="match_parent"
-        android:layout_height="0px">
+        <include android:id="@+id/mainScreenToolbar"
+            layout="@layout/main_screen_toolbar"
+            xmlns:android="http://schemas.android.com/apk/res/android" />
 
-    </FrameLayout>
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
 
-</LinearLayout>
+        <FrameLayout
+            android:id="@+id/sample_content_fragment"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0px"/>
+
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        app:headerLayout="@layout/navigation_header"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:menu="@menu/navigation_menu"
+        android:layout_gravity="start">
+    </android.support.design.widget.NavigationView>
+
+
+</android.support.v4.widget.DrawerLayout>
 

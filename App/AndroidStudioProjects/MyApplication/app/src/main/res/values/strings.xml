@@ -11,4 +11,7 @@
     <string name="name_plant">Name Plant</string>
     <string name="finish_harvest_time">Finished</string>
     <string name="percent">%</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
 </resources>
