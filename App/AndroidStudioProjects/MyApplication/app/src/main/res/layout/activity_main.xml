@@ -15,10 +15,6 @@
         android:layout_height="match_parent"
         android:id="@+id/sample_main_layout">
 
-        <include android:id="@+id/mainScreenToolbar"
-            layout="@layout/main_screen_toolbar"
-            xmlns:android="http://schemas.android.com/apk/res/android" />
-
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"

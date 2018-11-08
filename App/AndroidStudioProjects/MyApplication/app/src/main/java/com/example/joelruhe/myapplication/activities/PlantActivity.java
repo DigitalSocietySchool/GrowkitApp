@@ -21,11 +21,6 @@ import butterknife.OnClick;
 
 public class PlantActivity extends AppCompatActivity {
 
-    @Nullable
-    @BindView(R.id.plant_screen_toolbar)
-    Toolbar plantScreenToolbar;
-    @BindView(R.id.btn_back)
-    ImageButton btnBack;
     @BindView(R.id.image_drop)
     ImageView drop;
     @BindView(R.id.alert_plant)
@@ -37,14 +32,8 @@ public class PlantActivity extends AppCompatActivity {
     TextView plantId;
     @BindView(R.id.counter)
     TextView textCounter;
-    @BindView(R.id.water_value)
-    TextView waterValue;
     @BindView(R.id.textViewHealth)
     TextView plantHealth;
-    @BindView(R.id.temperature_value)
-    TextView temperatureValue;
-    @BindView(R.id.light_value)
-    TextView lightValue;
     @BindString(R.string.percent)
     String percent;
 
@@ -69,15 +58,6 @@ public class PlantActivity extends AppCompatActivity {
         alertPlant.setVisibility(View.GONE);
 
         // get access to the custom title view
-        assert plantScreenToolbar != null;
-        btnBack = plantScreenToolbar.findViewById(R.id.btn_back);
-        assert btnBack != null;
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
 
         imgBtnPauseHarvest.setVisibility(View.GONE);
 
@@ -200,9 +180,6 @@ public class PlantActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     void showIconValue(int water, int temperature, int light) {
-        waterValue.setText(water + percent);
-        lightValue.setText(light + percent);
-        temperatureValue.setText(temperature + percent);
     }
 
     int[][] getPlantData() {
