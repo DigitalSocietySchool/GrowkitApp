@@ -7,5 +7,6 @@
     <color name="colorBlack">#000000</color>
     <color name="colorImgPressed">#a9c3f9cd</color>
     <color name="colorLightGreen">#04802a</color>
+    <color name="colorDarkGreen">#347235</color>
 
 </resources>

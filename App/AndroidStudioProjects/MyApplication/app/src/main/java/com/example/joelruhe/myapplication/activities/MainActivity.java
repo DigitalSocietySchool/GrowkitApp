@@ -49,12 +49,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*public boolean onOptionItemSelected(MenuItem item){
-        if (mToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

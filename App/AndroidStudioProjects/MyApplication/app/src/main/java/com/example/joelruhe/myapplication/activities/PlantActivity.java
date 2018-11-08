@@ -49,6 +49,9 @@ public class PlantActivity extends AppCompatActivity {
     String idString;
     int id;
 
+    int totalSeconds = 10;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +91,6 @@ public class PlantActivity extends AppCompatActivity {
     }
 
     void startTimer(int id, int plantArray[][]) {
-        final int totalSeconds = plantArray[id][0];
 
         Intent intent = new Intent(PlantActivity.this, BroadcastTimerService.class);
         intent.putExtra("HARVEST_TIME", totalSeconds);
@@ -99,7 +101,7 @@ public class PlantActivity extends AppCompatActivity {
 
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    counter++;
+                    counter--;
                     textCounter.setText(String.valueOf(counter));
                     progressBar.setProgress(counter * 10000 / (totalSeconds * 100));
                 }
