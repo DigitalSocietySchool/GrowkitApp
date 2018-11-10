@@ -23,8 +23,12 @@ public class PlantActivity extends AppCompatActivity {
 
     @BindView(R.id.image_drop)
     ImageView drop;
-    @BindView(R.id.alert_plant)
-    ImageView alertPlant;
+    @BindView(R.id.water_alert)
+    ImageView alertWater;
+    @BindView(R.id.water_check)
+    ImageView checkWater;
+    @BindView(R.id.water_warning)
+    ImageView warningWater;
 
     @BindView(R.id.text_plant_data)
     TextView txtPlantData;
@@ -58,7 +62,8 @@ public class PlantActivity extends AppCompatActivity {
         setContentView(R.layout.activity_plant);
         ButterKnife.bind(PlantActivity.this);
 
-        alertPlant.setVisibility(View.GONE);
+        alertWater.setVisibility(View.GONE);
+        warningWater.setVisibility(View.GONE);
 
         // get access to the custom title view
 
@@ -148,19 +153,18 @@ public class PlantActivity extends AppCompatActivity {
     }
 
     void showIcons(int id, int plantArray[][]) {
-        int[] dropIcons = new int[]{R.drawable.drop, R.drawable.drop1, R.drawable.drop2};
-
         int water = plantArray[id][1];
-        if (water >= 66) {
-            drop.setImageResource(dropIcons[0]);
+
+        if (water <= 50 && water > 33) {
+            warningWater.setVisibility(View.VISIBLE);
+            checkWater.setVisibility(View.GONE);
+            Toast.makeText(this, "I am a little thirsty", Toast.LENGTH_LONG).show();
         }
-        if (water < 66 && water > 33) {
-            drop.setImageResource(dropIcons[1]);
-        }
+
         if (water <= 33) {
-            drop.setImageResource(dropIcons[2]);
-            alertPlant.setVisibility(View.VISIBLE);
-            Toast.makeText(this, "Water your plants", Toast.LENGTH_LONG).show();
+            alertWater.setVisibility(View.VISIBLE);
+            checkWater.setVisibility(View.GONE);
+            Toast.makeText(this, "I am dying of thirst", Toast.LENGTH_LONG).show();
         }
 
         int light = plantArray[id][2];

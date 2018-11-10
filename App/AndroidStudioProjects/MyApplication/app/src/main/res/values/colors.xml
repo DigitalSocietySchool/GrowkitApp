@@ -8,5 +8,6 @@
     <color name="colorImgPressed">#a9c3f9cd</color>
     <color name="colorLightGreen">#04802a</color>
     <color name="colorDarkGreen">#347235</color>
+    <color name="colorLightBlue">#00bfff</color>
 
 </resources>
