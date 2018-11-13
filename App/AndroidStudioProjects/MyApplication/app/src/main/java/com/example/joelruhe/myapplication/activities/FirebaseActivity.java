@@ -9,11 +9,14 @@ import com.example.joelruhe.myapplication.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+
+
 public class FirebaseActivity extends AppCompatActivity {
 
     private Button mFirebaseBtn;
 
     private DatabaseReference mDatabase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,16 +26,5 @@ public class FirebaseActivity extends AppCompatActivity {
         mFirebaseBtn = findViewById(R.id.firebase_btn);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        mFirebaseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-
-
-                //mDatabase.child("Name").setValue("Spinach");
-        }
-        });
-
-}
+    }
 }
