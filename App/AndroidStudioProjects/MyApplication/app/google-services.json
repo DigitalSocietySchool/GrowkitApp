@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "935308220147",
+    "firebase_url": "https://growkit-020.firebaseio.com",
+    "project_id": "growkit-020",
+    "storage_bucket": "growkit-020.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935308220147:android:78473b07ba514067",
+        "android_client_info": {
+          "package_name": "com.example.joelruhe.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935308220147-k2eaqk8m46isl2qjb0thld488oj5u866.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9e93Jq-SKevX9i2qYRCLfu6spSV4fuyA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
