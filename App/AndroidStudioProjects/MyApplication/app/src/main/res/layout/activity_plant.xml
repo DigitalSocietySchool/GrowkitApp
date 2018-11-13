@@ -139,7 +139,7 @@
         app:srcCompat="@drawable/ic_play_circle_filled_black_24dp" />
 
     <ImageButton
-        android:id="@+id/img_btn_pause_harvest"
+        android:id="@+id/img_btn_reset_harvest"
         android:layout_width="43dp"
         android:layout_height="39dp"
         android:layout_marginStart="8dp"
@@ -155,7 +155,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.236"
-        app:srcCompat="@drawable/ic_pause_circle_filled_black_24dp" />
+        app:srcCompat="@drawable/ic_restore_black_24dp" />
 
     <Button
         android:id="@+id/button_temperature"
