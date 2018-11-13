@@ -45,18 +45,16 @@ public class PlantActivity extends AppCompatActivity {
 
     @BindView(R.id.img_btn_start_harvest)
     ImageButton imgBtnStartHarvest;
-    @BindView(R.id.img_btn_pause_harvest)
-    ImageButton imgBtnPauseHarvest;
+    @BindView(R.id.img_btn_reset_harvest)
+    ImageButton imgBtnResetHarvest;
 
     ProgressBar progressBar;
     int counter;
+    int progress;
     CountDownTimer mCounterTimer;
 
     String idString;
     int id;
-
-    int totalSeconds = 10;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +65,7 @@ public class PlantActivity extends AppCompatActivity {
         alertWater.setVisibility(View.GONE);
         warningWater.setVisibility(View.GONE);
 
-        // get access to the custom title view
-
-        imgBtnPauseHarvest.setVisibility(View.GONE);
+        imgBtnResetHarvest.setVisibility(View.GONE);
 
         txtPlantData.setText(getIntent().getStringExtra("DESCRIPTION"));
         id = getIntent().getIntExtra("ID", 0);
@@ -82,16 +78,16 @@ public class PlantActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                     startTimer(id, getPlantData());
-                    imgBtnPauseHarvest.setVisibility(View.VISIBLE);
+                    imgBtnResetHarvest.setVisibility(View.VISIBLE);
                     imgBtnStartHarvest.setVisibility(View.GONE);
             }
         });
 
-        imgBtnPauseHarvest.setOnClickListener(new View.OnClickListener() {
+        imgBtnResetHarvest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                     mCounterTimer.cancel();
-                    imgBtnPauseHarvest.setVisibility(View.GONE);
+                    imgBtnResetHarvest.setVisibility(View.GONE);
                     imgBtnStartHarvest.setVisibility(View.VISIBLE);
             }
         });
@@ -100,9 +96,10 @@ public class PlantActivity extends AppCompatActivity {
     }
 
     void startTimer(int id, int plantArray[][]) {
-
-        Intent intent = new Intent(PlantActivity.this, BroadcastTimerService.class);
-        intent.putExtra("HARVEST_TIME", totalSeconds);
+        final int totalSeconds = plantArray[id][0];
+        counter = totalSeconds;
+        /*Intent intent = new Intent(PlantActivity.this, BroadcastTimerService.class);
+        intent.putExtra("HARVEST_TIME", totalSeconds);*/
 
             progressBar = findViewById(R.id.progressBar);
 
@@ -111,12 +108,13 @@ public class PlantActivity extends AppCompatActivity {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     counter--;
+                    progress++;
                     textCounter.setText(String.valueOf(counter));
-                    progressBar.setProgress(counter * 10000 / (totalSeconds * 100));
+                    progressBar.setProgress(progress * 10000 / (totalSeconds * 100));
                 }
 
                 public void onFinish() {
-                    counter++;
+                    counter--;
                     textCounter.setText(R.string.finish_harvest_time);
                     progressBar.setProgress(100);
                 }
