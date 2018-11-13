@@ -77,18 +77,20 @@ public class PlantActivity extends AppCompatActivity {
         imgBtnStartHarvest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    startTimer(id, getPlantData());
-                    imgBtnResetHarvest.setVisibility(View.VISIBLE);
-                    imgBtnStartHarvest.setVisibility(View.GONE);
+                startTimer(id, getPlantData());
+                imgBtnResetHarvest.setVisibility(View.VISIBLE);
+                imgBtnStartHarvest.setVisibility(View.GONE);
             }
         });
 
         imgBtnResetHarvest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    mCounterTimer.cancel();
-                    imgBtnResetHarvest.setVisibility(View.GONE);
-                    imgBtnStartHarvest.setVisibility(View.VISIBLE);
+                mCounterTimer.cancel();
+                progressBar.setProgress(0);
+                mCounterTimer = null;
+                imgBtnResetHarvest.setVisibility(View.GONE);
+                imgBtnStartHarvest.setVisibility(View.VISIBLE);
             }
         });
 
@@ -98,6 +100,9 @@ public class PlantActivity extends AppCompatActivity {
     void startTimer(int id, int plantArray[][]) {
         final int totalSeconds = plantArray[id][0];
         counter = totalSeconds;
+
+        progress = 0;
+
         /*Intent intent = new Intent(PlantActivity.this, BroadcastTimerService.class);
         intent.putExtra("HARVEST_TIME", totalSeconds);*/
 
@@ -109,7 +114,7 @@ public class PlantActivity extends AppCompatActivity {
                 public void onTick(long millisUntilFinished) {
                     counter--;
                     progress++;
-                    textCounter.setText(String.valueOf(counter));
+                    textCounter.setText(String.valueOf("Days remaining: " + counter));
                     progressBar.setProgress(progress * 10000 / (totalSeconds * 100));
                 }
 
@@ -117,6 +122,7 @@ public class PlantActivity extends AppCompatActivity {
                     counter--;
                     textCounter.setText(R.string.finish_harvest_time);
                     progressBar.setProgress(100);
+
                 }
             };
             mCounterTimer.start();
