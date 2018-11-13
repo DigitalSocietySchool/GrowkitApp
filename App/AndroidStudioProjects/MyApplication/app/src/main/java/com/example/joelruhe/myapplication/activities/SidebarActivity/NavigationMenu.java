@@ -31,7 +31,6 @@ public class NavigationMenu extends AppCompatActivity implements NavigationView.
         int id = item.getItemId();
 
         if (id == R.id.nav_myplants){
-
         }
         else if (id == R.id.nav_mynetwork){
             startActivity(new Intent(NavigationMenu.this,LoginActivity.class));

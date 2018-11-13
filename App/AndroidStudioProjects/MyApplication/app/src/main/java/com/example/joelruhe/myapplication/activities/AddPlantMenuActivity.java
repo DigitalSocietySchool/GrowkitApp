@@ -6,10 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SearchView;
+import android.support.v7.widget.SearchView;
 
 import com.example.joelruhe.myapplication.R;
 import com.example.joelruhe.myapplication.activities.SidebarActivity.NavigationMenu;
@@ -27,7 +28,6 @@ public class AddPlantMenuActivity extends AppCompatActivity {
     int i = 0;
 
     private ListView listView;
-    private Button btnAdd;
     private DatabaseReference mDatabase;
     private ArrayList<String> arrayList = new ArrayList<>();
     private ArrayAdapter<String> adapter;
@@ -40,49 +40,58 @@ public class AddPlantMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_plant_menu);
 
-        Button button = (Button)findViewById(R.id.button2);
+        searchView = (SearchView)findViewById(R.id.searchview);
+        searchView.setQueryHint("Search your plant");
 
-        button.setOnClickListener(new View.OnClickListener() {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        final DatabaseReference plantmDatabase = mDatabase.child("Plants");
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
+
+        listView = (ListView)findViewById(R.id.database_list_view);
+
+        listView.setAdapter(adapter);
+
+        //SearchQuery for SearchView
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View v) {
-                // Add your code in here!
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        //Go to next activity when item in ListView is pressed
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 i = 1;
-                Intent intent = new Intent(AddPlantMenuActivity.this,MainActivity.class);
+                Intent intent = new Intent(AddPlantMenuActivity.this, MainActivity.class);
                 intent.putExtra("number", i);
                 startActivity(intent);
             }
         });
 
-        searchView = (SearchView)findViewById(R.id.searchview);
-        searchView.setQueryHint("Search plants...");
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        //final DatabaseReference plantmDatabase = mDatabase.child("Plants").child("emgpiPu6R9kYeEibLlox");
-
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
-
-        listView = (ListView)findViewById(R.id.database_list_view);
-        btnAdd = (Button)findViewById(R.id.btnAdd);
-
-        listView.setAdapter(adapter);
-
+        //To add something into the database (in this case it is Hey):
+        /*
         btnAdd.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v){
-               mDatabase.push().setValue("Hey");
-               //String userId = mDatabase.push().getKey();
-               //plantmDatabase.child(userId).setValue("test");
+               plantmDatabase.push().setValue("Hey");
            }
-       });
+       });*/
 
-        mDatabase.addChildEventListener(new ChildEventListener() {
+        plantmDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
                 String string = dataSnapshot.getValue(String.class);
                 arrayList.add(string);
                 adapter.notifyDataSetChanged();
-
             }
 
             @Override
