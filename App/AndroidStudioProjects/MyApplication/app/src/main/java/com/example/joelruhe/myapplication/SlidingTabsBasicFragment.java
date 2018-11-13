@@ -107,13 +107,12 @@ public class SlidingTabsBasicFragment extends Fragment {
             // Add the newly created View to the ViewPager
             container.addView(view);
 
+
             ImageButton btn = view.findViewById(R.id.slide_image);
             TextView slideHeading = view.findViewById(R.id.slide_heading);
 
             btn.setImageResource(slide_images[position]);
             slideHeading.setText(slide_headings[position]);
-
-
 
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
