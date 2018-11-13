@@ -2,6 +2,7 @@ package com.example.joelruhe.myapplication.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +30,8 @@ public class PlantActivity extends AppCompatActivity {
     ImageView checkWater;
     @BindView(R.id.water_warning)
     ImageView warningWater;
-
+    @BindView(R.id.textviewWater)
+    TextView textviewWater;
     @BindView(R.id.text_plant_data)
     TextView txtPlantData;
     @BindView(R.id.view_id)
@@ -73,6 +75,8 @@ public class PlantActivity extends AppCompatActivity {
         id = getIntent().getIntExtra("ID", 0);
         idString = Integer.toString(getIntent().getIntExtra("ID", 0));
         plantId.setText(idString);
+
+       // textviewWater.setShadowLayer(30, 0, 0, Color.BLACK);
 
         imgBtnStartHarvest.setOnClickListener(new View.OnClickListener() {
             @Override
