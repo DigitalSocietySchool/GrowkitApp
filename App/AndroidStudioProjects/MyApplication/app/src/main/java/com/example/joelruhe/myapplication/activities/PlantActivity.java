@@ -88,6 +88,7 @@ public class PlantActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mCounterTimer.cancel();
                 progressBar.setProgress(0);
+                textCounter.setText("");
                 mCounterTimer = null;
                 imgBtnResetHarvest.setVisibility(View.GONE);
                 imgBtnStartHarvest.setVisibility(View.VISIBLE);

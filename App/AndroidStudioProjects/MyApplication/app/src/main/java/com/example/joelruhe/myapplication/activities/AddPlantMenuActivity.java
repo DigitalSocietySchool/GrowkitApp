@@ -65,7 +65,7 @@ public class AddPlantMenuActivity extends AppCompatActivity {
            @Override
            public void onClick(View v){
                //plantmDatabase.push().setValue("Hey");
-               String userId = plant    mDatabase.push().getKey();
+               String userId = mDatabase.push().getKey();
                plantmDatabase.child(userId).setValue("test");
 
 
