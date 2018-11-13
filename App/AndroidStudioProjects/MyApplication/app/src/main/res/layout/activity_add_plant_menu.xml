@@ -7,8 +7,8 @@
     tools:context=".activities.AddPlantMenuActivity">
 
     <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="368dp"
+        android:id="@+id/searchview"
+        android:layout_width="347dp"
         android:layout_height="44dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"

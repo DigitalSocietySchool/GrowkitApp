@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.example.joelruhe.myapplication.R;
 import com.example.joelruhe.myapplication.activities.SidebarActivity.NavigationMenu;
@@ -31,6 +32,8 @@ public class AddPlantMenuActivity extends AppCompatActivity {
     private ArrayList<String> arrayList = new ArrayList<>();
     private ArrayAdapter<String> adapter;
 
+    SearchView searchView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +53,11 @@ public class AddPlantMenuActivity extends AppCompatActivity {
             }
         });
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        final DatabaseReference plantmDatabase = mDatabase.child("Plants").child("emgpiPu6R9kYeEibLlox");
+        searchView = (SearchView)findViewById(R.id.searchview);
+        searchView.setQueryHint("Search plants...");
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        //final DatabaseReference plantmDatabase = mDatabase.child("Plants").child("emgpiPu6R9kYeEibLlox");
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
 
@@ -61,14 +66,12 @@ public class AddPlantMenuActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
-       btnAdd.setOnClickListener(new View.OnClickListener() {
+        btnAdd.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v){
-               //plantmDatabase.push().setValue("Hey");
-               String userId = mDatabase.push().getKey();
-               plantmDatabase.child(userId).setValue("test");
-
-
+               mDatabase.push().setValue("Hey");
+               //String userId = mDatabase.push().getKey();
+               //plantmDatabase.child(userId).setValue("test");
            }
        });
 
@@ -89,7 +92,9 @@ public class AddPlantMenuActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                String string = dataSnapshot.getValue(String.class);
+                arrayList.remove(string);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
