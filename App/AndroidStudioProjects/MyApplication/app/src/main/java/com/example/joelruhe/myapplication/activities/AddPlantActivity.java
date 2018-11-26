@@ -22,6 +22,4 @@ public class AddPlantActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

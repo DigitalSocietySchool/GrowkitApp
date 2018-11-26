@@ -1,5 +1,6 @@
 package com.example.joelruhe.myapplication.activities;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -9,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.ImageView;
 
 import com.example.joelruhe.myapplication.R;
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        getWindow().setEnterTransition(new android.transition.Explode());
         setContentView(R.layout.activity_main);
 
         //Menu icon for sidebar
@@ -73,8 +77,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
         else if (id == R.id.nav_mynetwork){
-            startActivity(new Intent(MainActivity.this,LoginActivity.class));
-
+            Intent i = new Intent(MainActivity.this, FireBaseLoginActivity.class);
+            startActivity(i,
+                    ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
         }
         else if (id == R.id.nav_settings){
 

@@ -6,8 +6,9 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
     <color name="colorImgPressed">#a9c3f9cd</color>
-    <color name="colorLightGreen">#04802a</color>
     <color name="colorDarkGreen">#347235</color>
     <color name="colorLightBlue">#00bfff</color>
+    <color name="colorLightGreen">#00A89B</color>
+    <color name="colorYellow">#f4e345</color>
 
 </resources>

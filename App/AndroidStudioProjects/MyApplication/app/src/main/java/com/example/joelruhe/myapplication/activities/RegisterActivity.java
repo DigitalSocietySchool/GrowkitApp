@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean validate() {
-        boolean temp=true;
+        boolean temp = true;
         String firstname = firstnameET.getText().toString();
         String lastname = lastnameET.getText().toString();
         String email = emailET.getText().toString();
