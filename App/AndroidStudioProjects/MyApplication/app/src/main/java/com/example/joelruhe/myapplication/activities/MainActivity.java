@@ -1,7 +1,10 @@
 package com.example.joelruhe.myapplication.activities;
 
+import android.app.ActionBar;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +19,8 @@ import android.widget.ImageView;
 import com.example.joelruhe.myapplication.R;
 import com.example.joelruhe.myapplication.SlidingTabsBasicFragment;
 import com.example.joelruhe.myapplication.activities.SidebarActivity.NavigationMenu;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 
@@ -40,7 +45,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mToggle = new ActionBarDrawerToggle(this, mDrawerlayout, R.string.open, R.string.close);
         mDrawerlayout.addDrawerListener(mToggle);
         mToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable
+                (new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
 
         int number = getIntent().getIntExtra("number", 0);
 

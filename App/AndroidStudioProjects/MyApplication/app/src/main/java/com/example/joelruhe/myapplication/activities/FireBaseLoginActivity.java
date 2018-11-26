@@ -1,13 +1,19 @@
 package com.example.joelruhe.myapplication.activities;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.joelruhe.myapplication.R;
@@ -23,12 +29,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FireBaseLoginActivity extends AppCompatActivity {
+public class FireBaseLoginActivity extends Activity {
 
     @BindView(R.id.email)
     EditText emailEditText;
     @BindView(R.id.password)
     EditText passwordEditText;
+    @BindView(R.id.backBtn)
+    Button backBtn;
 
     @BindString(R.string.click_msg)
     String clickMsg;
@@ -54,7 +62,6 @@ public class FireBaseLoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_firebase_login);
         ButterKnife.bind(this);
 
@@ -71,6 +78,11 @@ public class FireBaseLoginActivity extends AppCompatActivity {
 
         emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
+    }
+
+    @OnClick(R.id.backBtn)
+    public void goBack(View v) {
+        finish();
     }
 
     @OnClick({R.id.logoImageView, R.id.loginBtn, R.id.resetPasswordBtn, R.id.signupBtn})
