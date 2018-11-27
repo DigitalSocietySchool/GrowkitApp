@@ -62,7 +62,7 @@
         app:srcCompat="@drawable/icon_help" />
 
     <EditText
-        android:id="@+id/textviewPin"
+        android:id="@+id/edittextPin"
         android:layout_width="154dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -72,9 +72,9 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
-        android:inputType="numberSigned"
-        android:hint="PIN"
         android:gravity="center"
+        android:hint="PIN"
+        android:inputType="numberSigned"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

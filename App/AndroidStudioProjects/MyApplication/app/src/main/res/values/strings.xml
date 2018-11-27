@@ -13,5 +13,6 @@
     <string name="percent">%</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="addplant">Hello User! You have not selected a plant yet :(</string>
 
 </resources>
