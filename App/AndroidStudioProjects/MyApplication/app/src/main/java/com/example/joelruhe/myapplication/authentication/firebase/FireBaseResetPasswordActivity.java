@@ -1,4 +1,4 @@
-package com.example.joelruhe.myapplication.activities;
+package com.example.joelruhe.myapplication.authentication.firebase;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;

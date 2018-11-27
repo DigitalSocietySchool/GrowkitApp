@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".activities.FireBaseLoginActivity">
+    tools:context=".authentication.firebase.FireBaseLoginActivity">
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"

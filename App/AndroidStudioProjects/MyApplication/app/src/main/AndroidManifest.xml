@@ -25,13 +25,13 @@
         <activity android:name=".activities.AddPlantActivity" />
         <activity android:name=".activities.AddPlantMenuActivity" />
         <activity android:name=".activities.DatabaseActivity" />
-        <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".authentication.LoginActivity" />
+        <activity android:name=".authentication.RegisterActivity" />
         <activity android:name=".activities.SidebarActivity.NavigationMenu" />
         <activity android:name=".activities.EnterPinActivity" />
-        <activity android:name=".activities.FireBaseLoginActivity"/>
-        <activity android:name=".activities.FireBaseRegisterActivity" />
-        <activity android:name=".activities.FireBaseResetPasswordActivity" />
+        <activity android:name=".authentication.firebase.FireBaseLoginActivity"/>
+        <activity android:name=".authentication.firebase.FireBaseRegisterActivity" />
+        <activity android:name=".authentication.firebase.FireBaseResetPasswordActivity" />
         <activity android:name=".activities.MyNetworkActivity"></activity>
     </application>
 

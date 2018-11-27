@@ -1,4 +1,4 @@
-package com.example.joelruhe.myapplication.activities;
+package com.example.joelruhe.myapplication.authentication;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -11,9 +11,9 @@ import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.joelruhe.myapplication.R;
+import com.example.joelruhe.myapplication.activities.DatabaseActivity;
 
 import static java.util.Calendar.getInstance;
 

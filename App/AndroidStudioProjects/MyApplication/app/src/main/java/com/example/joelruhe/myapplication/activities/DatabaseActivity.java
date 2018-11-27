@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
+
+import com.example.joelruhe.myapplication.authentication.LoginActivity;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -21,7 +24,7 @@ public class DatabaseActivity extends AsyncTask<String,Void,String> {
     AlertDialog alertDialog;
     String type;
 
-    DatabaseActivity(Context ctx) {
+    public DatabaseActivity(Context ctx) {
         context = ctx;
     }
 

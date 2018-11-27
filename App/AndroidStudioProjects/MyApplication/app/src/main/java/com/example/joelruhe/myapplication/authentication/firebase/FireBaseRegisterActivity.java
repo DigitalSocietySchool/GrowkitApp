@@ -1,4 +1,4 @@
-package com.example.joelruhe.myapplication.activities;
+package com.example.joelruhe.myapplication.authentication.firebase;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -12,6 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.joelruhe.myapplication.R;
+import com.example.joelruhe.myapplication.activities.FirebaseClass;
+import com.example.joelruhe.myapplication.activities.MyNetworkActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -112,7 +114,7 @@ public class FireBaseRegisterActivity extends AppCompatActivity {
                                 FirebaseClass firebaseClass = new FirebaseClass();
                                 firebaseClass.insertNewUser(email, password);
 
-                                startActivity(new Intent(FireBaseRegisterActivity.this, MainActivity.class));
+                                startActivity(new Intent(FireBaseRegisterActivity.this, MyNetworkActivity.class));
                                 finish();
                             }
                         }

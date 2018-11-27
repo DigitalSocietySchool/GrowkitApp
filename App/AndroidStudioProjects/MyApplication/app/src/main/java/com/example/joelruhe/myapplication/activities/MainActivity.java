@@ -1,9 +1,7 @@
 package com.example.joelruhe.myapplication.activities;
 
-import android.app.ActionBar;
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -14,15 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
-import android.widget.ImageView;
 
 import com.example.joelruhe.myapplication.R;
 import com.example.joelruhe.myapplication.SlidingTabsBasicFragment;
-import com.example.joelruhe.myapplication.activities.SidebarActivity.NavigationMenu;
+import com.example.joelruhe.myapplication.authentication.firebase.FireBaseLoginActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
-import butterknife.BindView;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -30,8 +28,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle mToggle;
 
     int empty_array[][] = {
-            //{2, 3}
+            {2, 3}
     };
+
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mToggle = new ActionBarDrawerToggle(this, mDrawerlayout, R.string.open, R.string.close);
         mDrawerlayout.addDrawerListener(mToggle);
         mToggle.syncState();
+
+        //get firebase auth instance
+        auth = FirebaseAuth.getInstance();
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable
@@ -85,15 +88,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
         else if (id == R.id.nav_mynetwork){
-            Intent i = new Intent(MainActivity.this, FireBaseLoginActivity.class);
+            /*Intent i = new Intent(MainActivity.this, FireBaseLoginActivity.class);
             startActivity(i,
-                    ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                    ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());*/
         }
         else if (id == R.id.nav_settings){
 
         }
         else if (id == R.id.nav_logout){
-
+            //auth.signOut();
         }
         return true;
     }
