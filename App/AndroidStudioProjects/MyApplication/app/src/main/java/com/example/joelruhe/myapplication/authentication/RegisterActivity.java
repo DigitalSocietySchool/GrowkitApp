@@ -1,13 +1,13 @@
-package com.example.joelruhe.myapplication.activities;
+package com.example.joelruhe.myapplication.authentication;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.joelruhe.myapplication.R;
+import com.example.joelruhe.myapplication.activities.DatabaseActivity;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,8 +44,9 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+
     private boolean validate() {
-        boolean temp=true;
+        boolean temp = true;
         String firstname = firstnameET.getText().toString();
         String lastname = lastnameET.getText().toString();
         String email = emailET.getText().toString();

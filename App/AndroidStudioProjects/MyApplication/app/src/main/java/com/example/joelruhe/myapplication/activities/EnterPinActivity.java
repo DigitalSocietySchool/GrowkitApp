@@ -59,7 +59,8 @@ public class EnterPinActivity extends AppCompatActivity {
                                 Toast.makeText(EnterPinActivity.this,"Pin is already in use",Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                refPin.child("verify").setValue("verified");
+                                refPin.child("verify").setValue("unverified");
+                                finish();
                                 startActivity(new Intent(EnterPinActivity.this, MainActivity.class));
                             }
                             /*pinVerify.addListenerForSingleValueEvent(new ValueEventListener() {

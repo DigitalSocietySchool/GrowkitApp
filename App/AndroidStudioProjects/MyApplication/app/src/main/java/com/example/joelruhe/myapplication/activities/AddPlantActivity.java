@@ -18,10 +18,9 @@ public class AddPlantActivity extends AppCompatActivity {
         Button button= (Button) findViewById(R.id.button1);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                finish();
                 startActivity(new Intent(AddPlantActivity.this,AddPlantMenuActivity.class));
             }
         });
     }
-
-
 }

@@ -18,17 +18,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-       <!-- <activity android:name=".activities.MainActivity" />-->
-        <activity android:name=".activities.MainActivity"/>
+        <!-- <activity android:name=".activities.MainActivity" /> -->
+        <activity android:name=".activities.MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
         <activity android:name=".activities.PlantActivity" />
         <activity android:name=".activities.AddPlantActivity" />
-        <activity android:name=".activities.AddPlantMenuActivity" />
+        <activity android:name=".activities.AddPlantMenuActivity"/>
         <activity android:name=".activities.DatabaseActivity" />
-        <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".authentication.LoginActivity" />
+        <activity android:name=".authentication.RegisterActivity" />
         <activity android:name=".activities.SidebarActivity.NavigationMenu" />
-        <activity android:name=".activities.EnterPinActivity"></activity>
-
+        <activity android:name=".activities.EnterPinActivity" />
+        <activity android:name=".authentication.firebase.FireBaseLoginActivity"/>
+        <activity android:name=".authentication.firebase.FireBaseRegisterActivity" />
+        <activity android:name=".authentication.firebase.FireBaseResetPasswordActivity" />
+        <activity android:name=".activities.MyNetworkActivity"></activity>
     </application>
 
 </manifest>

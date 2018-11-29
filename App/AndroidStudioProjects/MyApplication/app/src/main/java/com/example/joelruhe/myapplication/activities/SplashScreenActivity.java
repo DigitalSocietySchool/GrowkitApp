@@ -1,10 +1,13 @@
 package com.example.joelruhe.myapplication.activities;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.transition.Explode;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
 import android.widget.ImageView;
 
 import com.example.joelruhe.myapplication.R;
@@ -16,9 +19,13 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        getWindow().setEnterTransition(new android.transition.Explode());
+
         setContentView(R.layout.activity_splashscreen);
 
-        SPLASH_TIME_OUT = 4000; 
+        SPLASH_TIME_OUT = 4000;
 
         ImageView imageView= findViewById(R.id.plantImage);
         imageView.setBackgroundResource(R.drawable.splashscreen_animation);
@@ -28,7 +35,8 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent homeIntent = new Intent(SplashScreenActivity.this, EnterPinActivity.class);
-                startActivity(homeIntent);
+                startActivity(homeIntent,
+                        ActivityOptions.makeSceneTransitionAnimation(SplashScreenActivity.this).toBundle());
                 finish();
             }
         }, SPLASH_TIME_OUT);

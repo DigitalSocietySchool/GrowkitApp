@@ -1,6 +1,8 @@
 package com.example.joelruhe.myapplication.activities;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -9,13 +11,16 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ImageView;
+import android.view.Window;
 
 import com.example.joelruhe.myapplication.R;
 import com.example.joelruhe.myapplication.SlidingTabsBasicFragment;
-import com.example.joelruhe.myapplication.activities.SidebarActivity.NavigationMenu;
+import com.example.joelruhe.myapplication.authentication.firebase.FireBaseLoginActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
-import butterknife.BindView;
+import java.util.Objects;
+
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -23,12 +28,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle mToggle;
 
     int empty_array[][] = {
-            //{2, 3}
+           // {2, 3}
     };
+
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        getWindow().setEnterTransition(new android.transition.Explode());
         setContentView(R.layout.activity_main);
 
         //Menu icon for sidebar
@@ -36,7 +45,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mToggle = new ActionBarDrawerToggle(this, mDrawerlayout, R.string.open, R.string.close);
         mDrawerlayout.addDrawerListener(mToggle);
         mToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //get firebase auth instance
+        auth = FirebaseAuth.getInstance();
+
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable
+                (new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
 
         int number = getIntent().getIntExtra("number", 0);
 
@@ -73,14 +88,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
         else if (id == R.id.nav_mynetwork){
-            startActivity(new Intent(MainActivity.this,LoginActivity.class));
-
+            Intent i = new Intent(MainActivity.this, FireBaseLoginActivity.class);
+            startActivity(i,
+                    ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
         }
         else if (id == R.id.nav_settings){
 
         }
         else if (id == R.id.nav_logout){
-
+            auth.signOut();
         }
         return true;
     }

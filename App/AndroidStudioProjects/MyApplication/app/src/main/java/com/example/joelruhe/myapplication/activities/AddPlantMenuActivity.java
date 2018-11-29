@@ -73,6 +73,7 @@ public class AddPlantMenuActivity extends AppCompatActivity {
                 i = 1;
                 Intent intent = new Intent(AddPlantMenuActivity.this, MainActivity.class);
                 intent.putExtra("number", i);
+                finish();
                 startActivity(intent);
             }
         });
