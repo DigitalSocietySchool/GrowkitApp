@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if (id == R.id.nav_logout){
             auth.signOut();
+            finish();
+            startActivity(getIntent());
         }
         return true;
     }

@@ -2,6 +2,7 @@ package com.example.joelruhe.myapplication.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,7 +33,7 @@ public class EnterPinActivity extends AppCompatActivity {
     EditText editTextpin;
     //@BindView(R.id.edittextPin)
 
-    String pin;
+    String pin = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +41,14 @@ public class EnterPinActivity extends AppCompatActivity {
         setContentView(R.layout.activity_enter_pin);
 
         editTextpin = (EditText) findViewById(R.id.edittextPin);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
 
-        final SharedPreferences mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
-        final String sharedPin = mPreferences.getString("pin", pin);
+        SharedPreferences.Editor editor = pref.edit();
+        //SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+         //String sharedPin = pref.getString(pin, pin);
 
-        if (sharedPin.equals(null)) {
+        //if (sharedPin == null && sharedPin.isEmpty()) {
+
             Button nextButton = (Button) findViewById(R.id.buttonNext);
             mDatabase = FirebaseDatabase.getInstance().getReference();
             final DatabaseReference plantmDatabase = mDatabase.child("Pins");
@@ -69,9 +73,10 @@ public class EnterPinActivity extends AppCompatActivity {
                                 if (pinValue.equals("verified")) {
                                     Toast.makeText(EnterPinActivity.this, "Pin is already in use", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    SharedPreferences.Editor editor = mPreferences.edit();
-                                    editor.putString("pin", pin);
-                                    editor.commit();
+                                    //SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+                                    //SharedPreferences.Editor editor = pref.edit();
+                                    //editor.putString("pin", pin);
+                                    //editor.commit();
 
                                     refPin.child("verify").setValue("verified");
                                     finish();
@@ -100,9 +105,6 @@ public class EnterPinActivity extends AppCompatActivity {
 
                 }
             });
-        } else {
-            startActivity(new Intent(EnterPinActivity.this, MainActivity.class));
-        }
     }
 }
 
