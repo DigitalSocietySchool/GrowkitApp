@@ -1,5 +1,6 @@
 package com.example.joelruhe.myapplication.activities;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.joelruhe.myapplication.R;
+import com.example.joelruhe.myapplication.authentication.firebase.FireBaseLoginActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,25 +33,23 @@ public class EnterPinActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private FirebaseAuth auth;
 
-    EditText editTextpin;
-    //@BindView(R.id.edittextPin)
+    public static final String MY_PREFS_NAME = "MyPrefs";
 
+    EditText editTextpin;
     String pin = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        getWindow().setEnterTransition(new android.transition.Explode());
         setContentView(R.layout.activity_enter_pin);
 
         editTextpin = (EditText) findViewById(R.id.edittextPin);
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        String restoredPin = pref.getString("pin", null);
 
-        SharedPreferences.Editor editor = pref.edit();
-        //SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-         //String sharedPin = pref.getString(pin, pin);
-
-        //if (sharedPin == null && sharedPin.isEmpty()) {
-
+        if (restoredPin == null) {
             Button nextButton = (Button) findViewById(R.id.buttonNext);
             mDatabase = FirebaseDatabase.getInstance().getReference();
             final DatabaseReference plantmDatabase = mDatabase.child("Pins");
@@ -73,27 +74,15 @@ public class EnterPinActivity extends AppCompatActivity {
                                 if (pinValue.equals("verified")) {
                                     Toast.makeText(EnterPinActivity.this, "Pin is already in use", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    //SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
-                                    //SharedPreferences.Editor editor = pref.edit();
-                                    //editor.putString("pin", pin);
-                                    //editor.commit();
+                                    SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                                    editor.putString("pin", pin);
+                                    editor.apply();
 
                                     refPin.child("verify").setValue("verified");
                                     finish();
                                     startActivity(new Intent(EnterPinActivity.this, MainActivity.class));
 
                                 }
-                            /*pinVerify.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    pinVerify.setValue()
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                }
-                            });*/
                             }
                         }
 
@@ -105,6 +94,13 @@ public class EnterPinActivity extends AppCompatActivity {
 
                 }
             });
+        }
+        else {
+            Intent i = new Intent(EnterPinActivity.this, MainActivity.class);
+            startActivity(i,
+                    ActivityOptions.makeSceneTransitionAnimation(EnterPinActivity.this).toBundle());
+            finish();
+        }
     }
 }
 

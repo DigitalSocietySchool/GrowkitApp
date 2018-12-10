@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.support.v7.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.joelruhe.myapplication.R;
 import com.example.joelruhe.myapplication.activities.SidebarActivity.NavigationMenu;
@@ -70,9 +71,11 @@ public class AddPlantMenuActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String value = arrayList.get(i);
+
                 i = 1;
                 Intent intent = new Intent(AddPlantMenuActivity.this, MainActivity.class);
-                intent.putExtra("number", i);
+                intent.putExtra("plant", value);
                 finish();
                 startActivity(intent);
             }

@@ -20,16 +20,17 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
-import butterknife.OnClick;
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout mDrawerlayout;
     private ActionBarDrawerToggle mToggle;
 
-    int empty_array[][] = {
-           // {2, 3}
-    };
+    Intent i= getIntent();
+    String plant = i.getExtras().getString("plant");
+
+
+
+    String plant_array[] = {plant};
 
     private FirebaseAuth auth;
 
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         int number = getIntent().getIntExtra("number", 0);
 
-        if (empty_array.length == 0 && number == 0) {
+        if (plant_array.length == 0 && number == 0) {
            Intent i = new Intent(MainActivity.this, AddPlantActivity.class);
            startActivity(i);
            finish();
