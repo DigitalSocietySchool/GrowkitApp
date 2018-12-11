@@ -1,13 +1,17 @@
 package com.example.joelruhe.myapplication.activities;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -77,7 +81,7 @@ public class PlantActivity extends AppCompatActivity {
         imgBtnStartHarvest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startTimer(id, getPlantData());
+                //startTimer(id, getPlantData());
                 imgBtnResetHarvest.setVisibility(View.VISIBLE);
                 imgBtnStartHarvest.setVisibility(View.GONE);
             }
@@ -96,8 +100,11 @@ public class PlantActivity extends AppCompatActivity {
         });
 
         showValues(id, getPlantData());
+
+        startService(new Intent(this, BroadcastTimerService.class));
     }
 
+    /*
     void startTimer(int id, int plantArray[][]) {
         final int totalSeconds = plantArray[id][0];
         counter = totalSeconds;
@@ -105,7 +112,7 @@ public class PlantActivity extends AppCompatActivity {
         progress = 0;
 
         /*Intent intent = new Intent(PlantActivity.this, BroadcastTimerService.class);
-        intent.putExtra("HARVEST_TIME", totalSeconds);*/
+        intent.putExtra("HARVEST_TIME", totalSeconds);
 
             progressBar = findViewById(R.id.progressBar);
 
@@ -127,7 +134,7 @@ public class PlantActivity extends AppCompatActivity {
                 }
             };
             mCounterTimer.start();
-    }
+    }*/
 
     void showValues(int id, int plantArray[][]) {
         int water = plantArray[id][1];
@@ -207,5 +214,46 @@ public class PlantActivity extends AppCompatActivity {
                 {10, 44, 7, 29}
         };
         return plantArray;
+    }
+
+    private BroadcastReceiver br = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateGUI(intent); // or whatever method used to update your GUI fields
+        }
+    };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        registerReceiver(br, new IntentFilter(BroadcastTimerService.COUNTDOWN_BR));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        unregisterReceiver(br);
+    }
+
+    @Override
+    public void onStop() {
+        try {
+            unregisterReceiver(br);
+        } catch (Exception e) {
+            // Receiver was probably already stopped in onPause()
+        }
+        super.onStop();
+    }
+    @Override
+    public void onDestroy() {
+        stopService(new Intent(this, BroadcastTimerService.class));
+        super.onDestroy();
+    }
+
+    private void updateGUI(Intent intent) {
+        if (intent.getExtras() != null) {
+            long millisUntilFinished = intent.getLongExtra("countdown", 0);
+            Toast.makeText(this,  "Countdown seconds remaining: " +  millisUntilFinished / 1000, Toast.LENGTH_LONG).show();
+        }
     }
 }

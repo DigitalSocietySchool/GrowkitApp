@@ -79,9 +79,10 @@ public class EnterPinActivity extends AppCompatActivity {
                                     editor.apply();
 
                                     refPin.child("verify").setValue("verified");
+                                    refPin.child("Plants").setValue("0");
                                     finish();
-                                    startActivity(new Intent(EnterPinActivity.this, MainActivity.class));
-
+                                    startActivity(new Intent(EnterPinActivity.this, AddPlantMenuActivity.class));
+                                    //startActivity(new Intent(EnterPinActivity.this, MainActivity.class));
                                 }
                             }
                         }
@@ -90,8 +91,6 @@ public class EnterPinActivity extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                         }
                     });
-
-
                 }
             });
         }
@@ -100,6 +99,12 @@ public class EnterPinActivity extends AppCompatActivity {
             startActivity(i,
                     ActivityOptions.makeSceneTransitionAnimation(EnterPinActivity.this).toBundle());
             finish();
+
+            /*
+            Intent i = new Intent(EnterPinActivity.this, AddPlantMenuActivity.class);
+            startActivity(i,
+                    ActivityOptions.makeSceneTransitionAnimation(EnterPinActivity.this).toBundle());
+            finish();*/
         }
     }
 }

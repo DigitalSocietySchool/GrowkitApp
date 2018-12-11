@@ -14,14 +14,7 @@ public class BroadcastTimerService extends Service {
     public static final String COUNTDOWN_BR = "your_package_name.countdown_br";
     Intent bi = new Intent(COUNTDOWN_BR);
 
-    CountDownTimer mCountDownTimer = null;
-
-    Context context;
-    int totalSeconds;
-
-    BroadcastTimerService(Context ctx) {
-        context = ctx;
-    }
+    CountDownTimer cdt = null;
 
     @Override
     public void onCreate() {
@@ -29,9 +22,7 @@ public class BroadcastTimerService extends Service {
 
         Log.i(TAG, "Starting timer...");
 
-        //totalSeconds = context.getIntent("ID", 0);
-
-        mCountDownTimer = new CountDownTimer(totalSeconds * 1000, 1000) {
+        cdt = new CountDownTimer(30000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
 
@@ -46,33 +37,13 @@ public class BroadcastTimerService extends Service {
             }
         };
 
-        mCountDownTimer.start();
-
-        /*progressBar = findViewById(R.id.progressBar);
-
-        mCounterTimer = new CountDownTimer(totalSeconds * 1000, 1000) {
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-                counter++;
-                textCounter.setText(String.valueOf(counter));
-                progressBar.setProgress(counter * 10000 / (totalSeconds * 100));
-            }
-
-            public void onFinish() {
-                counter++;
-                textCounter.setText(R.string.finish_harvest_time);
-                progressBar.setProgress(100);
-            }
-        };
-        mCounterTimer.start();*/
-
+        cdt.start();
     }
 
     @Override
     public void onDestroy() {
 
-        mCountDownTimer.cancel();
+        cdt.cancel();
         Log.i(TAG, "Timer cancelled");
         super.onDestroy();
     }

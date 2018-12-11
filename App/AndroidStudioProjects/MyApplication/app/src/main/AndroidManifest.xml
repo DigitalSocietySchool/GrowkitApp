@@ -33,6 +33,7 @@
         <activity android:name=".authentication.firebase.FireBaseRegisterActivity" />
         <activity android:name=".authentication.firebase.FireBaseResetPasswordActivity" />
         <activity android:name=".activities.MyNetworkActivity"></activity>
+        <service android:name=".activities.BroadcastTimerService"></service>
     </application>
 
 </manifest>

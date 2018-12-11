@@ -1,6 +1,8 @@
 package com.example.joelruhe.myapplication.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -8,13 +10,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.support.v7.widget.SearchView;
-import android.widget.Toast;
 
 import com.example.joelruhe.myapplication.R;
-import com.example.joelruhe.myapplication.activities.SidebarActivity.NavigationMenu;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,34 +21,37 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AddPlantMenuActivity extends AppCompatActivity {
 
-    int i = 0;
-
-    private ListView listView;
-    private DatabaseReference mDatabase;
     private ArrayList<String> arrayList = new ArrayList<>();
     private ArrayAdapter<String> adapter;
 
-    SearchView searchView;
+    public static final String MY_PREFS_NAME = "MyPrefs";
 
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_plant_menu);
 
-        searchView = (SearchView)findViewById(R.id.searchview);
+        searchView = findViewById(R.id.searchview);
         searchView.setQueryHint("Search your plant");
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         final DatabaseReference plantmDatabase = mDatabase.child("Plants");
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
+        final DatabaseReference userPinDatabase = mDatabase.child("Pins");
 
-        listView = (ListView)findViewById(R.id.database_list_view);
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        final String pinString = preferences.getString("pin", null);
+
+        final DatabaseReference childUserPin = userPinDatabase.child(pinString);
+
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
+
+        ListView listView = findViewById(R.id.database_list_view);
 
         listView.setAdapter(adapter);
 
@@ -72,23 +74,14 @@ public class AddPlantMenuActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String value = arrayList.get(i);
-
-                i = 1;
+                final DatabaseReference plantUserPin = childUserPin.child("Plants");
+                plantUserPin.child(value).setValue(value);
                 Intent intent = new Intent(AddPlantMenuActivity.this, MainActivity.class);
                 intent.putExtra("plant", value);
                 finish();
                 startActivity(intent);
             }
         });
-
-        //To add something into the database (in this case it is Hey):
-        /*
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v){
-               plantmDatabase.push().setValue("Hey");
-           }
-       });*/
 
         plantmDatabase.addChildEventListener(new ChildEventListener() {
             @Override
