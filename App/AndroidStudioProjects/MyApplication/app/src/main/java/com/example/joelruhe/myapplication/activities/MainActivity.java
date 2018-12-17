@@ -11,7 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
@@ -26,8 +25,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Objects;
 
 import static android.widget.Toast.LENGTH_LONG;
@@ -58,7 +55,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         final String pinString = preferences.getString("pin", null);
 
-       DatabaseReference plantsPerPin = databaseReference.child(pinString).child("Plants");
+        assert pinString != null;
+        DatabaseReference plantsPerPin = databaseReference.child(pinString).child("Plants");
 
         plantsPerPin.addValueEventListener(new ValueEventListener() {
             @Override
@@ -119,7 +117,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_myplants){
-
+            Intent i = new Intent(MainActivity.this, AddPlantMenuActivity.class);
+            startActivity(i);
         }
         else if (id == R.id.nav_mynetwork){
             Intent i = new Intent(MainActivity.this, FireBaseLoginActivity.class);

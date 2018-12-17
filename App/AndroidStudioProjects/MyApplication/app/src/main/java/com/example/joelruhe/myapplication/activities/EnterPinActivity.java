@@ -95,16 +95,15 @@ public class EnterPinActivity extends AppCompatActivity {
             });
         }
         else {
-            Intent i = new Intent(EnterPinActivity.this, MainActivity.class);
-            startActivity(i,
-                    ActivityOptions.makeSceneTransitionAnimation(EnterPinActivity.this).toBundle());
-            finish();
-
-            /*
-            Intent i = new Intent(EnterPinActivity.this, AddPlantMenuActivity.class);
+            /*Intent i = new Intent(EnterPinActivity.this, MainActivity.class);
             startActivity(i,
                     ActivityOptions.makeSceneTransitionAnimation(EnterPinActivity.this).toBundle());
             finish();*/
+
+            Intent i = new Intent(EnterPinActivity.this, AddPlantMenuActivity.class);
+            startActivity(i,
+                    ActivityOptions.makeSceneTransitionAnimation(EnterPinActivity.this).toBundle());
+            finish();
         }
     }
 }
