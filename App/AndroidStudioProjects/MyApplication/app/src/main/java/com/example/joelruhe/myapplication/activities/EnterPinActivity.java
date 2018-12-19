@@ -3,6 +3,7 @@ package com.example.joelruhe.myapplication.activities;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +40,8 @@ public class EnterPinActivity extends AppCompatActivity {
     EditText editTextpin;
     String pin = "";
 
+    TextView t;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +49,16 @@ public class EnterPinActivity extends AppCompatActivity {
         getWindow().setEnterTransition(new android.transition.Explode());
         setContentView(R.layout.activity_enter_pin);
 
-        editTextpin = (EditText) findViewById(R.id.edittextPin);
+        t = findViewById(R.id.textHeader);
+        Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Bold.ttf");
+        t.setTypeface(myCustomFont);
+
+        editTextpin = findViewById(R.id.edittextPin);
         SharedPreferences pref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         String restoredPin = pref.getString("pin", null);
 
         if (restoredPin == null) {
-            Button nextButton = (Button) findViewById(R.id.buttonNext);
+            ImageButton nextButton = findViewById(R.id.buttonNext);
             mDatabase = FirebaseDatabase.getInstance().getReference();
             final DatabaseReference plantmDatabase = mDatabase.child("Pins");
 

@@ -2,17 +2,18 @@ package com.example.joelruhe.myapplication.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.support.v7.widget.SearchView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.joelruhe.myapplication.R;
 import com.google.firebase.database.ChildEventListener;
@@ -50,11 +51,37 @@ public class AddPlantMenuActivity extends AppCompatActivity {
         assert pinString != null;
         final DatabaseReference childUserPin = userPinDatabase.child(pinString);
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
-
         ListView listView = findViewById(R.id.database_list_view);
 
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
+
         listView.setAdapter(adapter);
+
+        // Create an ArrayAdapter from List
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
+                (this, R.layout.text_listview_left, arrayList) {
+            @NonNull
+            @Override
+            public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+                // Get the Item from ListView
+                View view = super.getView(position, convertView, parent);
+
+                // Initialize a TextView for ListView each Item
+                TextView tv = view.findViewById(android.R.id.text1);
+
+                // Set the text color of TextView (ListView Item)
+                tv.setTextColor(getResources().getColor(R.color.colorPrimary));
+
+                Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Regular.ttf");
+                tv.setTypeface(myCustomFont);
+
+                // Generate ListView Item using TextView
+                return view;
+            }
+        };
+
+        // DataBind ListView with items from ArrayAdapter
+        listView.setAdapter(arrayAdapter);
 
         //SearchQuery for SearchView
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

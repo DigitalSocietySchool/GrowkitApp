@@ -44,4 +44,10 @@
     <string name="btn_reset_password">Reset Password</string>
     <string name="btn_back"><![CDATA[<< Back]]></string>
 
+    <!--Enter Pincode activity -->
+    <string name="pin_code_header">Hi there!</string>
+    <string name="pin_hint">PIN</string>
+    <string name="pin_text">Good to have you here. To get started, fill in the PIN of the product.</string>
+    <string name="add_plant">Add plant</string>
+
 </resources>
