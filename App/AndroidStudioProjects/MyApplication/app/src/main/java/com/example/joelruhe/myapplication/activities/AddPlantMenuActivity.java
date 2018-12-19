@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.support.v7.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.example.joelruhe.myapplication.R;
 import com.google.firebase.database.ChildEventListener;
@@ -39,9 +40,7 @@ public class AddPlantMenuActivity extends AppCompatActivity {
     SearchView searchView;
     ImageButton cancelIcon;
 
-    @BindView(R.id.addPlantMenuToolbar)
     AppBarLayout addPlantMenuToolbar;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +49,15 @@ public class AddPlantMenuActivity extends AppCompatActivity {
         searchView = findViewById(R.id.searchview);
         searchView.setQueryHint("Search your plant");
 
+        addPlantMenuToolbar = findViewById(R.id.addPlantMenuToolbar);
         cancelIcon = addPlantMenuToolbar.findViewById(R.id.btn_cancel);
+
+        cancelIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         final DatabaseReference plantmDatabase = mDatabase.child("Plants");

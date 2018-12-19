@@ -3,10 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="70dp"
-    android:id="@+id/drawer"
+    android:id="@+id/addPlantMenuToolbar"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
-    android:elevation="30dp"
     app:contentInsetLeft="0dp"
     app:contentInsetStart="0dp"
     app:contentInsetRight="0dp"
@@ -16,16 +15,15 @@
         android:layout_width="match_parent"
         android:layout_height="67dp">
 
-    <ImageButton
-        android:id="@+id/btn_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginStart="7dp"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/app_name"
-        android:cropToPadding="false"
-        app:srcCompat="@drawable/ic_cancel" />
+        <ImageButton
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/app_name"
+            android:cropToPadding="false"
+            app:srcCompat="@drawable/ic_cancel" />
 
     <TextView
         android:layout_width="wrap_content"
