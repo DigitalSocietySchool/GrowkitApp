@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<android.support.v7.widget.Toolbar
+<android.support.design.widget.AppBarLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="70dp"
     android:id="@+id/drawer"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
+    android:elevation="30dp"
     app:contentInsetLeft="0dp"
     app:contentInsetStart="0dp"
     app:contentInsetRight="0dp"
     app:contentInsetEnd="0dp">
 
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="67dp">
+
     <ImageButton
-        android:id="@+id/btn_back"
+        android:id="@+id/btn_cancel"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginLeft="7dp"
         android:layout_marginStart="7dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
         android:contentDescription="@string/app_name"
         android:cropToPadding="false"
-        app:srcCompat="@drawable/" />
+        app:srcCompat="@drawable/ic_cancel" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,9 +33,14 @@
         android:text="@string/add_plants"
         android:textSize="@dimen/toolbar_title_size"
         android:textColor="@color/colorWhite"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginStart="10dp" />
+    </android.support.v7.widget.Toolbar>
 
+    <View
 
+        android:id="@+id/toolbar_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@drawable/toolbar_drop_shadow" />
 
-</android.support.v7.widget.Toolbar>
+</android.support.design.widget.AppBarLayout>

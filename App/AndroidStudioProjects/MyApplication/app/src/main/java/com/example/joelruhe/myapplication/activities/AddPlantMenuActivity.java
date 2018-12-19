@@ -5,12 +5,15 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.support.v7.widget.SearchView;
 import android.widget.TextView;
@@ -24,6 +27,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+
 public class AddPlantMenuActivity extends AppCompatActivity {
 
     private ArrayList<String> arrayList = new ArrayList<>();
@@ -32,6 +37,11 @@ public class AddPlantMenuActivity extends AppCompatActivity {
     public static final String MY_PREFS_NAME = "MyPrefs";
 
     SearchView searchView;
+    ImageButton cancelIcon;
+
+    @BindView(R.id.addPlantMenuToolbar)
+    AppBarLayout addPlantMenuToolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +49,8 @@ public class AddPlantMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_plant_menu);
         searchView = findViewById(R.id.searchview);
         searchView.setQueryHint("Search your plant");
+
+        cancelIcon = addPlantMenuToolbar.findViewById(R.id.btn_cancel);
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         final DatabaseReference plantmDatabase = mDatabase.child("Plants");
