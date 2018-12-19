@@ -40,7 +40,7 @@ public class EnterPinActivity extends AppCompatActivity {
     EditText editTextpin;
     String pin = "";
 
-    TextView t;
+    TextView textHeaderPin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +49,9 @@ public class EnterPinActivity extends AppCompatActivity {
         getWindow().setEnterTransition(new android.transition.Explode());
         setContentView(R.layout.activity_enter_pin);
 
-        t = findViewById(R.id.textHeader);
+        textHeaderPin = findViewById(R.id.textHeader);
         Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Bold.ttf");
-        t.setTypeface(myCustomFont);
+        textHeaderPin.setTypeface(myCustomFont);
 
         editTextpin = findViewById(R.id.edittextPin);
         SharedPreferences pref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);

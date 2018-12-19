@@ -39,8 +39,9 @@ public class AddPlantMenuActivity extends AppCompatActivity {
 
     SearchView searchView;
     ImageButton cancelIcon;
+    TextView addPlantsTitle;
 
-    AppBarLayout addPlantMenuToolbar;
+    Toolbar addPlantMenuToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,10 @@ public class AddPlantMenuActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        addPlantsTitle = addPlantMenuToolbar.findViewById(R.id.text_view_add_plants);
+        Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Bold.ttf");
+        addPlantsTitle.setTypeface(myCustomFont);
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         final DatabaseReference plantmDatabase = mDatabase.child("Plants");
