@@ -48,6 +48,8 @@
     <string name="pin_code_header">Hi there!</string>
     <string name="pin_hint">PIN</string>
     <string name="pin_text">Good to have you here. To get started, fill in the PIN of the product.</string>
-    <string name="add_plant">Add plant</string>
+
+    <!--Add Plant Menu Activity -->
+    <string name="add_plants">Add plants</string>
 
 </resources>
