@@ -18,6 +18,7 @@ package com.example.joelruhe.myapplication;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -49,11 +50,11 @@ import static android.content.Context.MODE_PRIVATE;
 public class SlidingTabsBasicFragment extends Fragment {
     protected SlidingTabLayout mSlidingTabLayout;
 
-    String descriptionCactus = "Cactus Data Example";
-    String descriptionTomatoes = "Tomatoes Data Example";
-    String descriptionSpinach = "Spinach Data Example";
-    String descriptionBasil = "Basil Data Example";
-    String descriptionSpiderPlant = "Spider Plant Data Example";
+    String descriptionCactus = "Cactus";
+    String descriptionTomatoes = "Tomatoes";
+    String descriptionSpinach = "Spinach";
+    String descriptionBasil = "Basil";
+    String descriptionSpiderPlant = "Spider Plant";
 
     private ArrayList<String> arrayList = new ArrayList<>();
     private ArrayAdapter<String> adapter;
@@ -120,28 +121,29 @@ public class SlidingTabsBasicFragment extends Fragment {
 
     class SamplePagerAdapter extends PagerAdapter {
 
-        private ArrayList<String> slide_headings = new ArrayList<>();
-        private ArrayList<Integer> slide_images = new ArrayList<>();
+        //private ArrayList<String> slide_headings = new ArrayList<>();
+        //private ArrayList<Integer> slide_images = new ArrayList<>();
 
-        /*private int[] slide_images = {
-                R.drawable.cactus,
-                R.drawable.plant1,
-                R.drawable.plant2,
-                R.drawable.plants,
-                R.drawable.potplant,
-        };*/
+        private int[] slide_images = {
+                R.drawable.coriander,
+                R.drawable.strawberry,
+                R.drawable.flowerpot,
+                R.drawable.flowerpot,
+                R.drawable.flowerpot,
+        };
 
-        /*private String[] slide_headings = {
-                "CACTUS",
-                "TOMATOES",
+        private String[] slide_headings = {
+                "CORIANDER",
+                "STRAWBERRY",
                 "SPINACH",
                 "BASIL",
                 "SPIDER PLANT"
-        };*/
+        };
 
         @Override
         public int getCount() {
-            return slide_headings.size();
+            //return slide_headings.size();
+            return slide_headings.length;
         }
 
         @Override
@@ -151,7 +153,8 @@ public class SlidingTabsBasicFragment extends Fragment {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return slide_headings.get(position);
+            //return slide_headings.get(position);
+            return slide_headings[position];
         }
 
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -167,8 +170,15 @@ public class SlidingTabsBasicFragment extends Fragment {
             ImageButton btn = view.findViewById(R.id.slide_image);
             TextView slideHeading = view.findViewById(R.id.slide_heading);
 
-            btn.setImageResource(slide_images.get(position));
-            slideHeading.setText(slide_headings.get(position));
+            //btn.setImageResource(slide_images.get(position));
+            //slideHeading.setText(slide_headings.get(position));
+
+            Typeface myCustomFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_bold.ttf");
+
+            btn.setImageResource(slide_images[position]);
+            slideHeading.setText(slide_headings[position]);
+            slideHeading.setTypeface(myCustomFont);
+            slideHeading.setTextColor(getResources().getColor(R.color.colorPrimary));
 
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override

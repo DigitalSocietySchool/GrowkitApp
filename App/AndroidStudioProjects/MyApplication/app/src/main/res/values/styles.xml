@@ -2,20 +2,16 @@
 
     <!-- Base application theme. -->
     <style name="CustomToolbarStyle" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowFullscreen">true</item>
 
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
 
-        <!-- Status bar color -->
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <!-- Status bar color. -->
+        <item name="android:colorPrimaryDark">@color/colorBlack</item>
     </style>
 
-    <style name="CustomToolbarStyle.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="CustomToolbarStyle.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
+    <!-- SupportActionBar MainActivity -->
+    <style name="Toolbar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarSize">65dp</item>
+    </style>
 </resources>

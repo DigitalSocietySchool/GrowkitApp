@@ -7,7 +7,6 @@
     tools:context=".activities.AddPlantActivity">
 
     <TextView
-        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -17,7 +16,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
-        android:text="@string/addplant"
+        android:text="@string/add_plant"
         android:textAllCaps="false"
         android:textSize="30sp"
         android:textStyle="bold"

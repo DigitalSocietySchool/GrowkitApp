@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -26,24 +27,24 @@ import butterknife.OnClick;
 
 public class PlantActivity extends AppCompatActivity {
 
-    @BindView(R.id.image_drop)
-    ImageView drop;
     @BindView(R.id.water_alert)
     ImageView alertWater;
-    @BindView(R.id.water_check)
-    ImageView checkWater;
-    @BindView(R.id.water_warning)
-    ImageView warningWater;
-    @BindView(R.id.textviewWater)
-    TextView textviewWater;
     @BindView(R.id.text_plant_data)
     TextView txtPlantData;
-    @BindView(R.id.view_id)
+    @BindView(R.id.text_plant_data_toolbar)
+    TextView txtPlantDataToolbar;
+    @BindView(R.id.text_plant_health)
+    TextView txtPlantHealth;
+    @BindView(R.id.text_plant_harvest_time_start)
+    TextView txtPlantHarvestTimeStart;
+    @BindView(R.id.text_plant_harvest_time_left)
+    TextView txtPlantHarvestTimeLeft;
+    /*@BindView(R.id.view_id)
     TextView plantId;
     @BindView(R.id.counter)
     TextView textCounter;
     @BindView(R.id.textViewHealth)
-    TextView plantHealth;
+    TextView plantHealth;*/
     @BindString(R.string.percent)
     String percent;
 
@@ -63,18 +64,21 @@ public class PlantActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plant);
+        setContentView(R.layout.activity_plant_health);
         ButterKnife.bind(PlantActivity.this);
 
         alertWater.setVisibility(View.GONE);
-        warningWater.setVisibility(View.GONE);
-
         imgBtnResetHarvest.setVisibility(View.GONE);
 
         txtPlantData.setText(getIntent().getStringExtra("DESCRIPTION"));
-        id = getIntent().getIntExtra("ID", 0);
+        txtPlantDataToolbar.setText(getIntent().getStringExtra("DESCRIPTION"));
+        Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_bold.ttf");
+        txtPlantData.setTypeface(myCustomFont);
+        txtPlantDataToolbar.setTypeface(myCustomFont);
+
+        /*id = getIntent().getIntExtra("ID", 0);
         idString = Integer.toString(getIntent().getIntExtra("ID", 0));
-        plantId.setText(idString);
+        plantId.setText(idString);*/
 
        // textviewWater.setShadowLayer(30, 0, 0, Color.BLACK);
 
@@ -92,7 +96,7 @@ public class PlantActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mCounterTimer.cancel();
                 progressBar.setProgress(0);
-                textCounter.setText("");
+                //textCounter.setText("");
                 mCounterTimer = null;
                 imgBtnResetHarvest.setVisibility(View.GONE);
                 imgBtnStartHarvest.setVisibility(View.VISIBLE);
@@ -146,52 +150,65 @@ public class PlantActivity extends AppCompatActivity {
         showIconValue(water, temperature, light);
     }
 
-    int calculateHealth(int water, int temperature, int soil) {
-        int health = 0;
+    String calculateHealth(int water, int temperature, int light) {
 
-        if (water < soil && water < temperature) {
+        int health = 0;
+        String healthString;
+
+        if (water < light && water < temperature) {
             health = water;
         }
 
-        if (temperature < water && temperature < soil) {
+        if (temperature < water && temperature < light) {
             health = temperature;
         }
 
-        if (soil < water && soil < temperature) {
-            health = soil;
+        if (light < water && light < temperature) {
+            health = light;
         }
 
-        return health;
+        if (health < 20) {
+            healthString = "Low";
+        }
+        if (health <= 50 && health >= 20) {
+            healthString = "Medium";
+        } else {
+            healthString = "High";
+        }
+
+        return healthString;
     }
 
     void showHealth(int id, int water, int temperature, int light) {
-        plantHealth.setText("health:" + calculateHealth(water, temperature, light));
+        txtPlantHealth.setText(String.format("Overall Health: %s", calculateHealth(water, temperature, light)));
+        Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+        txtPlantHealth.setTypeface(myCustomFont);
     }
 
     void showIcons(int id, int plantArray[][]) {
         int water = plantArray[id][1];
 
         if (water <= 50 && water > 33) {
-            warningWater.setVisibility(View.VISIBLE);
-            checkWater.setVisibility(View.GONE);
             Toast.makeText(this, "I am a little thirsty", Toast.LENGTH_LONG).show();
         }
 
         if (water <= 33) {
             alertWater.setVisibility(View.VISIBLE);
-            checkWater.setVisibility(View.GONE);
             Toast.makeText(this, "I am dying of thirst", Toast.LENGTH_LONG).show();
         }
 
         int light = plantArray[id][2];
         if (light >= 66) {
         }
+
         if (light < 66 && light > 33) {
         }
+
         if (light <= 33) {
         }
 
         int temperature = plantArray[id][3];
+
         if (temperature >= 66) {
         }
         if (temperature < 66 && temperature > 33) {
@@ -213,6 +230,7 @@ public class PlantActivity extends AppCompatActivity {
                 {15, 66, 28, 55},
                 {10, 44, 7, 29}
         };
+
         return plantArray;
     }
 

@@ -56,7 +56,7 @@ public class AddPlantMenuActivity extends AppCompatActivity {
         });
 
         addPlantsTitle = addPlantMenuToolbar.findViewById(R.id.text_view_add_plants);
-        Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Bold.ttf");
+        Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_bold.ttf");
         addPlantsTitle.setTypeface(myCustomFont);
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -91,7 +91,7 @@ public class AddPlantMenuActivity extends AppCompatActivity {
                 // Set the text color of TextView (ListView Item)
                 tv.setTextColor(getResources().getColor(R.color.colorPrimary));
 
-                Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Regular.ttf");
+                Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
                 tv.setTypeface(myCustomFont);
 
                 // Generate ListView Item using TextView

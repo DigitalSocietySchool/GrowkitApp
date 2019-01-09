@@ -25,7 +25,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splashscreen);
 
-        SPLASH_TIME_OUT = 4000;
+        SPLASH_TIME_OUT = 3000;
 
         ImageView imageView= findViewById(R.id.plantImage);
         imageView.setBackgroundResource(R.drawable.splashscreen_animation);

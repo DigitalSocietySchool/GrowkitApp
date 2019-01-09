@@ -1,6 +1,5 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="fab_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_horizontal_margin">0dp</dimen>
     <dimen name="logo_w_h">120dp</dimen>
@@ -8,11 +7,14 @@
     <!-- Font size -->
     <dimen name="btn_text_size">15sp</dimen>
     <dimen name="medium_text_size">20sp</dimen>
-    <dimen name="small_text_size">14sp</dimen>
+    <dimen name="small_text_size">16sp</dimen>
     <dimen name="header_text_size">32sp</dimen>
     <dimen name="normal_text_size">18sp</dimen>
-    <dimen name="search_view_text_size">14sp</dimen>
+    <dimen name="search_view_text_size">16sp</dimen>
+    <dimen name="hamburger_menu_text_size">20sp</dimen>
+    <dimen name="plant_description_text_size">14sp</dimen>
 
     <!-- Toolbar margins -->
-    <dimen name="toolbar_title_size">23sp</dimen>
+    <dimen name="toolbar_title_size">20sp</dimen>
+
 </resources>

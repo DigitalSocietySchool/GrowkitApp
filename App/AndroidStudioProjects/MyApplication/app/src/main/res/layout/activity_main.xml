@@ -1,5 +1,4 @@
 
-
 <android.support.v4.widget.DrawerLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,14 +11,12 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/sample_main_layout">
+        android:layout_height="match_parent">
 
         <View
-            android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
+            android:layout_height="8dp"
+            android:background="@drawable/main_toolbar_drop_shadow"/>
 
         <FrameLayout
             android:id="@+id/sample_content_fragment"
@@ -34,10 +31,13 @@
         app:headerLayout="@layout/navigation_header"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:menu="@layout/navigation_menu"
+        app:menu="@menu/navigation_menu"
+        android:background="@color/menuBackgroundColor"
+        app:itemIconTint="@color/colorPrimary"
+        app:itemTextColor="@color/colorPrimary"
+        app:itemBackground="@drawable/item_divider_custom"
         android:layout_gravity="start">
     </android.support.design.widget.NavigationView>
-
 
 </android.support.v4.widget.DrawerLayout>
 

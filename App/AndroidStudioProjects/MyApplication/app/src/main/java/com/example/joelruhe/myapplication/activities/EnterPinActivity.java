@@ -4,31 +4,23 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.joelruhe.myapplication.R;
-import com.example.joelruhe.myapplication.authentication.firebase.FireBaseLoginActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ValueEventListener;
-
-import butterknife.BindView;
 
 public class EnterPinActivity extends AppCompatActivity {
 
@@ -50,7 +42,7 @@ public class EnterPinActivity extends AppCompatActivity {
         setContentView(R.layout.activity_enter_pin);
 
         textHeaderPin = findViewById(R.id.textHeader);
-        Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Bold.ttf");
+        Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_bold.ttf");
         textHeaderPin.setTypeface(myCustomFont);
 
         editTextpin = findViewById(R.id.edittextPin);
@@ -89,7 +81,7 @@ public class EnterPinActivity extends AppCompatActivity {
                                     refPin.child("verify").setValue("verified");
                                     refPin.child("Plants").setValue("0");
                                     finish();
-                                    startActivity(new Intent(EnterPinActivity.this, AddPlantMenuActivity.class));
+                                    startActivity(new Intent(EnterPinActivity.this, MainActivity.class));
                                     //startActivity(new Intent(EnterPinActivity.this, MainActivity.class));
                                 }
                             }
@@ -103,15 +95,15 @@ public class EnterPinActivity extends AppCompatActivity {
             });
         }
         else {
-            /*Intent i = new Intent(EnterPinActivity.this, MainActivity.class);
-            startActivity(i,
-                    ActivityOptions.makeSceneTransitionAnimation(EnterPinActivity.this).toBundle());
-            finish();*/
-
-            Intent i = new Intent(EnterPinActivity.this, AddPlantMenuActivity.class);
+            Intent i = new Intent(EnterPinActivity.this, MainActivity.class);
             startActivity(i,
                     ActivityOptions.makeSceneTransitionAnimation(EnterPinActivity.this).toBundle());
             finish();
+
+            /*Intent i = new Intent(EnterPinActivity.this, AddPlantMenuActivity.class);
+            startActivity(i,
+                    ActivityOptions.makeSceneTransitionAnimation(EnterPinActivity.this).toBundle());
+            finish();*/
         }
     }
 }

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.EnterPinActivity">
+    tools:context=".activities.EnterPinActivity"
+    android:background="@drawable/fill_pin">
 
 
     <EditText
@@ -19,6 +20,7 @@
         android:ems="10"
         android:gravity="center"
         android:hint="@string/pin_hint"
+        android:textColorHint="@color/colorPrimary"
         android:inputType="numberSigned"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,10 +61,10 @@
         app:layout_constraintStart_toEndOf="@+id/edittextPin"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.635"
-        app:srcCompat="@drawable/ic_lens_black_24dp" />
+        app:srcCompat="@drawable/ic_lens_black_24dp"
+        android:contentDescription="@string/app_name" />
 
     <TextView
-        android:id="@+id/textView6"
         android:layout_width="201dp"
         android:layout_height="82dp"
         android:layout_marginBottom="8dp"
@@ -94,7 +96,7 @@
         app:layout_constraintStart_toStartOf="@+id/lens"
         app:layout_constraintTop_toTopOf="@+id/lens"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
-
+        app:srcCompat="@drawable/ic_arrow_forward_white_24dp"
+        android:contentDescription="@string/app_name" />
 
 </android.support.constraint.ConstraintLayout>
