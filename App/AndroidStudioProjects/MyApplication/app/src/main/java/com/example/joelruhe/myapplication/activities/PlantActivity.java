@@ -5,21 +5,22 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.CountDownTimer;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.os.CountDownTimer;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.joelruhe.myapplication.R;
+import com.tooltip.OnDismissListener;
+import com.tooltip.Tooltip;
+
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,6 +54,13 @@ public class PlantActivity extends AppCompatActivity {
     @BindView(R.id.img_btn_reset_harvest)
     ImageButton imgBtnResetHarvest;
 
+    @BindView(R.id.water_icon)
+    TextView iconWater;
+    @BindView(R.id.light_icon)
+    TextView iconLight;
+    @BindView(R.id.temp_icon)
+    TextView iconTemp;
+
     ProgressBar progressBar;
     int counter;
     int progress;
@@ -60,11 +68,13 @@ public class PlantActivity extends AppCompatActivity {
 
     String idString;
     int id;
+    ImageView imgPlant;
+    int countClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plant_health);
+        setContentView(R.layout.activity_plant);
         ButterKnife.bind(PlantActivity.this);
 
         alertWater.setVisibility(View.GONE);
@@ -76,11 +86,19 @@ public class PlantActivity extends AppCompatActivity {
         txtPlantData.setTypeface(myCustomFont);
         txtPlantDataToolbar.setTypeface(myCustomFont);
 
-        /*id = getIntent().getIntExtra("ID", 0);
-        idString = Integer.toString(getIntent().getIntExtra("ID", 0));
-        plantId.setText(idString);*/
+        imgPlant = findViewById(R.id.imageViewPlant);
 
-       // textviewWater.setShadowLayer(30, 0, 0, Color.BLACK);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            int resId = bundle.getInt("plantImage");
+            imgPlant.setImageResource(resId);
+        }
+
+        id = getIntent().getIntExtra("ID", 0);
+        idString = Integer.toString(getIntent().getIntExtra("ID", 0));
+        //plantId.setText(idString);
+
+        //textviewWater.setShadowLayer(30, 0, 0, Color.BLACK);
 
         imgBtnStartHarvest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +124,101 @@ public class PlantActivity extends AppCompatActivity {
         showValues(id, getPlantData());
 
         startService(new Intent(this, BroadcastTimerService.class));
+
+    }
+
+    @OnClick({R.id.water_icon, R.id.light_icon, R.id.temp_icon})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.water_icon:
+                countClicked++;
+                if (countClicked < 2)
+                showTooltipWater(view, Gravity.BOTTOM);
+                break;
+            case R.id.light_icon:
+                countClicked++;
+                if (countClicked < 2)
+                    showTooltipLight(view, Gravity.BOTTOM);
+                break;
+            case R.id.temp_icon:
+                countClicked++;
+                if (countClicked < 2)
+                    showTooltipTemp(view, Gravity.BOTTOM);
+                break;
+            default:
+        }
+    }
+
+    private void showTooltipWater(View v, int gravity) {
+        TextView tv = (TextView) v;
+        Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+        final Tooltip tooltip = new Tooltip.Builder(tv)
+                .setText("Water level " + getPlantData()[id][1] +  " is fine at the moment." +
+                        "You will need to water your" +
+                        getIntent().getStringExtra("plantNameNoCapital") + " again in 1 day.")
+                .setTypeface(myCustomFont2)
+                .setTextSize(getResources().getDimension(R.dimen.plant_description_text_size))
+                .setTextColor(getResources().getColor(R.color.colorBlue))
+                .setGravity(gravity)
+                .setBackgroundColor(getResources().getColor(R.color.colorBlueOpacity))
+                .setCornerRadius(10f)
+                .setDismissOnClick(true)
+                .show();
+
+        tooltip.setOnDismissListener(new OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                countClicked = 0;
+            }
+        });
+    }
+
+    private void showTooltipLight(View v, int gravity) {
+        TextView tv = (TextView) v;
+        Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+        final Tooltip tooltip = new Tooltip.Builder(tv)
+                .setText("Your " + getIntent().getStringExtra("plantNameNoCapital") +  " plant is not receiving enough" +
+                        "light right now." +
+                        "Try to put it in a sunny place, or if not possible under a lamp.")
+                .setTypeface(myCustomFont2)
+                .setTextSize(getResources().getDimension(R.dimen.plant_description_text_size))
+                .setTextColor(getResources().getColor(R.color.colorYellow))
+                .setGravity(gravity)
+                .setBackgroundColor(getResources().getColor(R.color.colorYellowOpacity))
+                .setCornerRadius(10f)
+                .setDismissOnClick(true)
+                .show();
+
+        tooltip.setOnDismissListener(new OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                countClicked = 0;
+            }
+        });
+    }
+
+    private void showTooltipTemp(View v, int gravity) {
+        TextView tv = (TextView) v;
+        Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+        final Tooltip tooltip = new Tooltip.Builder(tv)
+                .setText("The current temperature" +
+                        "around your " + getIntent().getStringExtra("plantNameNoCapital") + " is" + getPlantData()[id][3] +  "." +
+                        "Perfect!")
+                .setTypeface(myCustomFont2)
+                .setTextSize(getResources().getDimension(R.dimen.plant_description_text_size))
+                .setTextColor(getResources().getColor(R.color.colorRed))
+                .setGravity(gravity)
+                .setBackgroundColor(getResources().getColor(R.color.colorRedOpacity))
+                .setCornerRadius(10f)
+                .setDismissOnClick(true)
+                .show();
+
+        tooltip.setOnDismissListener(new OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                countClicked = 0;
+            }
+        });
     }
 
     /*

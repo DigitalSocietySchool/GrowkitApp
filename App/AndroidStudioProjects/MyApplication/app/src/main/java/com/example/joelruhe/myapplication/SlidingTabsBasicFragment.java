@@ -18,6 +18,8 @@ package com.example.joelruhe.myapplication;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -42,6 +44,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -125,19 +128,19 @@ public class SlidingTabsBasicFragment extends Fragment {
         //private ArrayList<Integer> slide_images = new ArrayList<>();
 
         private int[] slide_images = {
-                R.drawable.coriander,
-                R.drawable.strawberry,
+                R.drawable.flowerpot,
+                R.drawable.flowerpot,
                 R.drawable.flowerpot,
                 R.drawable.flowerpot,
                 R.drawable.flowerpot,
         };
 
         private String[] slide_headings = {
-                "CORIANDER",
-                "STRAWBERRY",
-                "SPINACH",
-                "BASIL",
-                "SPIDER PLANT"
+                "Coriander",
+                "Strawberry",
+                "Spinach",
+                "Basil",
+                "Spider plant"
         };
 
         @Override
@@ -170,9 +173,6 @@ public class SlidingTabsBasicFragment extends Fragment {
             ImageButton btn = view.findViewById(R.id.slide_image);
             TextView slideHeading = view.findViewById(R.id.slide_heading);
 
-            //btn.setImageResource(slide_images.get(position));
-            //slideHeading.setText(slide_headings.get(position));
-
             Typeface myCustomFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_bold.ttf");
 
             btn.setImageResource(slide_images[position]);
@@ -185,32 +185,42 @@ public class SlidingTabsBasicFragment extends Fragment {
                 public void onClick(View view) {
                     if (position == 0) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
-                        intent.putExtra("DESCRIPTION", descriptionCactus);
+                        intent.putExtra("DESCRIPTION", slide_headings[position]);
                         intent.putExtra("ID", position);
+                        intent.putExtra("plantImage", slide_images[position]);
+                        intent.putExtra("plantNameNoCapital", "coriander");
                         startActivity(intent);
                     }
                     if (position == 1) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
-                        intent.putExtra("DESCRIPTION", descriptionTomatoes);
+                        intent.putExtra("DESCRIPTION", slide_headings[position]);
                         intent.putExtra("ID", position);
+                        intent.putExtra("plantImage", slide_images[position]);
+                        intent.putExtra("plantNameNoCapital", "strawberry");
                         startActivity(intent);
                     }
                     if (position == 2) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
-                        intent.putExtra("DESCRIPTION", descriptionSpinach);
+                        intent.putExtra("DESCRIPTION", slide_headings[position]);
                         intent.putExtra("ID", position);
+                        intent.putExtra("plantImage", slide_images[position]);
+                        intent.putExtra("plantNameNoCapital", "spinach");
                         startActivity(intent);
                     }
                     if (position == 3) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
-                        intent.putExtra("DESCRIPTION", descriptionBasil);
+                        intent.putExtra("DESCRIPTION", slide_headings[position]);
                         intent.putExtra("ID", position);
+                        intent.putExtra("plantImage", slide_images[position]);
+                        intent.putExtra("plantNameNoCapital", "basil");
                         startActivity(intent);
                     }
                     if (position == 4) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
-                        intent.putExtra("DESCRIPTION", descriptionSpiderPlant);
+                        intent.putExtra("DESCRIPTION", slide_headings[position]);
                         intent.putExtra("ID", position);
+                        intent.putExtra("plantImage", slide_images[position]);
+                        intent.putExtra("plantNameNoCapital", "spider plant");
                         startActivity(intent);
                     }
                 }

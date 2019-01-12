@@ -95,19 +95,17 @@ public class FireBaseSignUpActivity extends AppCompatActivity {
         final String password = inputPasswordEditText.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(getApplicationContext(), emptyEmail, Toast.LENGTH_SHORT).show();
             inputEmailEditText.setError(enterEmail);
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(getApplicationContext(), emptyPassword, Toast.LENGTH_SHORT).show();
             inputPasswordEditText.setError(enterPassword);
             return;
         }
 
         if (password.length() < 6) {
-            Toast.makeText(getApplicationContext(), minPassword, Toast.LENGTH_SHORT).show();
+            inputPasswordEditText.setError(minPassword);
             return;
         }
 

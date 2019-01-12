@@ -31,8 +31,6 @@
         <activity android:name=".authentication.LoginActivity" />
         <activity android:name=".authentication.RegisterActivity" />
         <activity android:name=".activities.EnterPinActivity" />
-        <activity android:name=".authentication.firebase.FireBaseRegisterActivity" />
-        <activity android:name=".authentication.firebase.FireBaseResetPasswordActivity" />
         <activity android:name=".activities.MyNetworkActivity"></activity>
         <activity android:name=".activities.JoinCommunityActivity" />
         <activity android:name=".authentication.firebase.FireBaseSignUpActivity" />
