@@ -429,7 +429,7 @@ public class PlantActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy() {
-        stopService(new Intent(this, BroadcastTimerService.class));
+        //stopService(new Intent(this, BroadcastTimerService.class));
         super.onDestroy();
     }
 
