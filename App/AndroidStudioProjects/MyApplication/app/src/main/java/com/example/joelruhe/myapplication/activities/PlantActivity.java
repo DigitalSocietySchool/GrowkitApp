@@ -387,6 +387,9 @@ public class PlantActivity extends AppCompatActivity {
 
     int[][] getPlantData() {
         //These values will be pulled from the database!
+
+        
+
         int plantArray[][] = {
                 {10, 34, 35, 50},
                 {20, 45, 34, 30},
