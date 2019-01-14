@@ -439,7 +439,6 @@ public class PlantActivity extends AppCompatActivity {
             Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
             txtPlantHarvestTimeLeft.setText(counter + " days until harvest!");
             txtPlantHarvestTimeLeft.setTypeface(myCustomFont);
-            //Toast.makeText(this,  "Countdown seconds remaining: " +  days2, Toast.LENGTH_LONG).show();
         }
     }
 }

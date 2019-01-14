@@ -37,7 +37,6 @@ public class BroadcastTimerService extends Service {
 
         counter = sec;
 
-
         cdt = new CountDownTimer(sec * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -50,7 +49,7 @@ public class BroadcastTimerService extends Service {
 
             @Override
             public void onFinish() {
-                Log.i(TAG, "Timer finished");
+                counter--;
             }
         };
 
