@@ -36,6 +36,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.joelruhe.myapplication.activities.BroadcastTimerService;
 import com.example.joelruhe.myapplication.activities.PlantActivity;
 import com.example.joelruhe.myapplication.common.view.SlidingTabLayout;
 import com.google.firebase.database.ChildEventListener;
@@ -52,12 +53,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SlidingTabsBasicFragment extends Fragment {
     protected SlidingTabLayout mSlidingTabLayout;
-
-    String descriptionCactus = "Cactus";
-    String descriptionTomatoes = "Tomatoes";
-    String descriptionSpinach = "Spinach";
-    String descriptionBasil = "Basil";
-    String descriptionSpiderPlant = "Spider Plant";
 
     private ArrayList<String> arrayList = new ArrayList<>();
     private ArrayAdapter<String> adapter;
@@ -190,6 +185,10 @@ public class SlidingTabsBasicFragment extends Fragment {
                         intent.putExtra("plantImage", slide_images[position]);
                         intent.putExtra("plantNameNoCapital", "coriander");
                         startActivity(intent);
+
+                        Intent serviceIntent = new Intent(getActivity(), BroadcastTimerService.class);
+                        serviceIntent.putExtra("UserID", position);
+                        getActivity().startService(serviceIntent);
                     }
                     if (position == 1) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);

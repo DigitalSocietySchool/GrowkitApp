@@ -49,6 +49,10 @@
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="reset_password_subtext">Fill in your E-mail, and we\'ll send you a link to reset your password.</string>
     <string name="forgot_password_header">Oops!</string>
-    <string name="plant_health">Overall Health</string>
+    <string name="health_low">Overall Health: Low</string>
+    <string name="health_medium">Overall Health: Medium</string>
+    <string name="health_high">Overall Health: High</string>
+    <string name="harvest_left">left until harvest!</string>
+    <string name="average_harvest">Average Harvest Time:</string>
 
 </resources>

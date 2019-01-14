@@ -13,7 +13,7 @@
     <dimen name="search_view_text_size">16sp</dimen>
     <dimen name="hamburger_menu_text_size">20sp</dimen>
     <dimen name="plant_description_text_size">14sp</dimen>
-    <dimen name="plant_factors_text_size">7sp</dimen>
+    <dimen name="plant_factors_text_size">8sp</dimen>
 
     <!-- Toolbar margins -->
     <dimen name="toolbar_title_size">20sp</dimen>

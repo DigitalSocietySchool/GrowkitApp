@@ -61,16 +61,11 @@ class SlidingTabStrip extends LinearLayout {
         final float density = getResources().getDisplayMetrics().density;
 
         TypedValue outValue = new TypedValue();
-        context.getTheme().resolveAttribute(android.R.attr.colorForeground, outValue, true);
+        context.getTheme().resolveAttribute(android.R.attr.colorBackground, outValue, true);
         //final int themeForegroundColor =  outValue.data;
 
         int mDefaultBottomBorderColor = setColorAlpha(0xFF31D177,
                 DEFAULT_BOTTOM_BORDER_COLOR_ALPHA);
-
-        mDefaultTabColorizer = new SimpleTabColorizer();
-        mDefaultTabColorizer.setDividerColors(mDefaultBottomBorderColor);
-        mDefaultTabColorizer.setIndicatorColors(DEFAULT_SELECTED_INDICATOR_COLOR);
-
 
         mBottomBorderThickness = (int) (DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS * density);
         mBottomBorderPaint = new Paint();
@@ -83,6 +78,11 @@ class SlidingTabStrip extends LinearLayout {
         mDividerHeight = DEFAULT_DIVIDER_HEIGHT;
         mDividerPaint = new Paint();
         mDividerPaint.setStrokeWidth((int) (DEFAULT_DIVIDER_THICKNESS_DIPS * density));
+
+
+        mDefaultTabColorizer = new SimpleTabColorizer();
+        mDefaultTabColorizer.setDividerColors(mDefaultBottomBorderColor);
+        mDefaultTabColorizer.setIndicatorColors(DEFAULT_SELECTED_INDICATOR_COLOR);
     }
 
     void setCustomTabColorizer(SlidingTabLayout.TabColorizer customTabColorizer) {
@@ -90,17 +90,17 @@ class SlidingTabStrip extends LinearLayout {
         invalidate();
     }
 
-    void setSelectedIndicatorColors(int... colors) {
-        // Make sure that the custom colorizer is removed
-        mCustomTabColorizer = null;
-        mDefaultTabColorizer.setIndicatorColors(colors);
-        invalidate();
-    }
-
     void setDividerColors(int... colors) {
         // Make sure that the custom colorizer is removed
         mCustomTabColorizer = null;
         mDefaultTabColorizer.setDividerColors(colors);
+        invalidate();
+    }
+
+    void setSelectedIndicatorColors(int... colors) {
+        // Make sure that the custom colorizer is removed
+        mCustomTabColorizer = null;
+        mDefaultTabColorizer.setIndicatorColors(colors);
         invalidate();
     }
 
@@ -118,6 +118,18 @@ class SlidingTabStrip extends LinearLayout {
         final SlidingTabLayout.TabColorizer tabColorizer = mCustomTabColorizer != null
                 ? mCustomTabColorizer
                 : mDefaultTabColorizer;
+
+        // Thin underline along the entire bottom edge
+        canvas.drawRect(0, height - mBottomBorderThickness, getWidth(), height, mBottomBorderPaint);
+
+        // Vertical separators between the titles
+        int separatorTop = (height - dividerHeightPx) / 2;
+        for (int i = 0; i < childCount - 1; i++) {
+            View child = getChildAt(i);
+            mDividerPaint.setColor(tabColorizer.getDividerColor(i));
+            canvas.drawLine(child.getRight(), separatorTop, child.getRight(),
+                    separatorTop + dividerHeightPx, mDividerPaint);
+        }
 
         // Thick colored underline below the current selection
         if (childCount > 0) {
@@ -145,18 +157,6 @@ class SlidingTabStrip extends LinearLayout {
             canvas.drawRect(left, height - mSelectedIndicatorThickness, right,
                     height, mSelectedIndicatorPaint);
         }
-
-        // Thin underline along the entire bottom edge
-        canvas.drawRect(0, height - mBottomBorderThickness, getWidth(), height, mBottomBorderPaint);
-
-        // Vertical separators between the titles
-        int separatorTop = (height - dividerHeightPx) / 2;
-        for (int i = 0; i < childCount - 1; i++) {
-            View child = getChildAt(i);
-            mDividerPaint.setColor(tabColorizer.getDividerColor(i));
-            canvas.drawLine(child.getRight(), separatorTop, child.getRight(),
-                    separatorTop + dividerHeightPx, mDividerPaint);
-        }
     }
 
     private static int setColorAlpha(int color, byte alpha) {
@@ -176,21 +176,22 @@ class SlidingTabStrip extends LinearLayout {
         private int[] mDividerColors;
 
         @Override
-        public final int getIndicatorColor(int position) {
-            return mIndicatorColors[position % mIndicatorColors.length];
-        }
-
-        @Override
         public final int getDividerColor(int position) {
             return mDividerColors[position % mDividerColors.length];
+        }
+
+        void setDividerColors(int... colors) {
+            mDividerColors = colors;
         }
 
         void setIndicatorColors(int... colors) {
             mIndicatorColors = colors;
         }
 
-        void setDividerColors(int... colors) {
-            mDividerColors = colors;
+        @Override
+        public final int getIndicatorColor(int position) {
+            return mIndicatorColors[position % mIndicatorColors.length];
         }
+
     }
 }

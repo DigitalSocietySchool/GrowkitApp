@@ -30,6 +30,7 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -42,11 +43,11 @@
             android:layout_height="492dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="11dp">
+            android:layout_marginBottom="23dp">
 
             <TextView
                 android:id="@+id/plant_circle_image"
-                android:layout_width="wrap_content"
+                android:layout_width="102dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
@@ -124,12 +125,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@+id/text_plant_data"
                     android:layout_below="@+id/text_plant_data"
-                    android:text="@string/plant_health"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/plant_description_text_size"
                     tools:layout_editor_absoluteX="164dp"
                     tools:layout_editor_absoluteY="94dp"
-                    tools:text="Overall Health: Medium" />
+                    tools:text="" />
 
                 <TextView
                     android:id="@+id/text_plant_harvest_time_start"
@@ -142,7 +142,7 @@
                     android:textSize="@dimen/plant_description_text_size"
                     tools:layout_editor_absoluteX="164dp"
                     tools:layout_editor_absoluteY="123dp"
-                    tools:text="Planted days ago " />
+                    tools:text="" />
 
                 <TextView
                     android:id="@+id/text_plant_harvest_time_left"
@@ -155,7 +155,7 @@
                     android:textSize="@dimen/plant_description_text_size"
                     tools:layout_editor_absoluteX="164dp"
                     tools:layout_editor_absoluteY="153dp"
-                    tools:text="days until harvest! " />
+                    tools:text="" />
 
             </LinearLayout>
 
@@ -181,11 +181,11 @@
                 android:layout_width="338dp"
                 android:layout_height="188dp"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
                 android:background="@drawable/rounded_frame"
                 android:elevation="-1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0">
@@ -238,7 +238,38 @@
                 android:elevation="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.197"
+                app:layout_constraintHorizontal_bias="0.146"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_error_black_24dp" />
+
+            <ImageView
+                android:id="@+id/light_alert"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:elevation="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.587"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_error_black_24dp" />
+
+            <ImageView
+                android:id="@+id/temp_alert"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:elevation="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_error_black_24dp" />
