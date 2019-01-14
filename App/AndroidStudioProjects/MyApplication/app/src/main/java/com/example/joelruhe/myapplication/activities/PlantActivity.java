@@ -160,7 +160,7 @@ public class PlantActivity extends AppCompatActivity {
                             "You will need to water your" +
                             getIntent().getStringExtra("plantNameNoCapital") + " again in 1 day.")
                     .setTypeface(myCustomFont2)
-                    .setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
+                    //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
                     .setTextColor(getResources().getColor(R.color.colorBlue))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorBlueOpacity))
@@ -207,7 +207,7 @@ public class PlantActivity extends AppCompatActivity {
             final Tooltip tooltip = new Tooltip.Builder(tv)
                     .setText("Your " + getIntent().getStringExtra("plantNameNoCapital") +  " plant has been getting enough light. Keep it up!")
                     .setTypeface(myCustomFont2)
-                    .setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
+                    //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
                     .setTextColor(getResources().getColor(R.color.colorYellow))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorYellowOpacity))
@@ -255,7 +255,7 @@ public class PlantActivity extends AppCompatActivity {
                             " around your " + getIntent().getStringExtra("plantNameNoCapital") + " is " + getPlantData()[id][3] + ". " +
                             "Perfect!")
                     .setTypeface(myCustomFont2)
-                    .setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
+                    //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
                     .setTextColor(getResources().getColor(R.color.colorRed))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorRedOpacity))
@@ -429,7 +429,7 @@ public class PlantActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy() {
-        stopService(new Intent(this, BroadcastTimerService.class));
+        //stopService(new Intent(this, BroadcastTimerService.class));
         super.onDestroy();
     }
 
