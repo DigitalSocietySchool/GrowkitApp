@@ -18,6 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.joelruhe.myapplication.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.tooltip.OnDismissListener;
 import com.tooltip.Tooltip;
 
@@ -64,12 +69,18 @@ public class PlantActivity extends AppCompatActivity {
     TextView iconLight;
     @BindView(R.id.temp_icon)
     TextView iconTemp;
+    @BindView(R.id.imageViewPlant)
+    ImageView imgPlant;
 
     ProgressBar progressBar;
 
     int id;
-    ImageView imgPlant;
     int countClicked;
+
+    int waterValue;
+    int lightValue;
+    int temperatureValue;
+    int durationValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +103,7 @@ public class PlantActivity extends AppCompatActivity {
         txtPlantData.setTypeface(myCustomFont);
         txtPlantDataToolbar.setTypeface(myCustomFont);
 
-        imgPlant = findViewById(R.id.imageViewPlant);
+        //imgPlant = findViewById(R.id.imageViewPlant);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -101,6 +112,8 @@ public class PlantActivity extends AppCompatActivity {
         }
 
         id = getIntent().getIntExtra("ID", 0);
+
+        getPlantData(id);
 
         //txtPlantHarvestTimeLeft.setText(R.string.average_harvest + getPlantData()[id][0]);
         //txtPlantHarvestTimeLeft.setTypeface(myCustomFont2);
@@ -123,7 +136,6 @@ public class PlantActivity extends AppCompatActivity {
             }
         });
 
-        showValues(id, getPlantData());
     }
 
     @OnClick({R.id.water_icon, R.id.light_icon, R.id.temp_icon})
@@ -132,31 +144,31 @@ public class PlantActivity extends AppCompatActivity {
             case R.id.water_icon:
                 countClicked++;
                 if (countClicked < 2)
-                showTooltipWater(view, Gravity.BOTTOM, id, getPlantData());
+                    showTooltipWater(view, Gravity.BOTTOM, id, getPlantData(id));
                 break;
             case R.id.light_icon:
                 countClicked++;
                 if (countClicked < 2)
-                    showTooltipLight(view, Gravity.BOTTOM, id, getPlantData());
+                    showTooltipLight(view, Gravity.BOTTOM, id, getPlantData(id));
                 break;
             case R.id.temp_icon:
                 countClicked++;
                 if (countClicked < 2)
-                    showTooltipTemp(view, Gravity.BOTTOM, id, getPlantData());
+                    showTooltipTemp(view, Gravity.BOTTOM, id, getPlantData(id));
                 break;
             default:
         }
     }
 
-    private void showTooltipWater(View v, int gravity, int id, int plantArray[][]) {
+    private void showTooltipWater(View v, int gravity, int id, int plantArray[]) {
         TextView tv = (TextView) v;
         Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
 
-        int water = plantArray[id][1];
+        int water = plantArray[1];
 
         if (water > 33 && water < 50) {
             final Tooltip tooltip = new Tooltip.Builder(tv)
-                    .setText("Water level (" + getPlantData()[id][1] +  "%) is fine at the moment. " +
+                    .setText("Water level (" + getPlantData(id)[1] +  "%) is fine at the moment. " +
                             "You will need to water your" +
                             getIntent().getStringExtra("plantNameNoCapital") + " again in 1 day.")
                     .setTypeface(myCustomFont2)
@@ -177,11 +189,11 @@ public class PlantActivity extends AppCompatActivity {
 
         if (water <= 33 || water >= 50) {
             final Tooltip tooltip = new Tooltip.Builder(tv)
-                    .setText("Water level (" + getPlantData()[id][1] +  "%) is not fine at the moment. " +
+                    .setText("Water level (" + getPlantData(id)[1] +  "%) is not fine at the moment. " +
                             "You will need to water your " +
                             getIntent().getStringExtra("plantNameNoCapital") + " again as soon as possible.")
                     .setTypeface(myCustomFont2)
-                    .setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
+                    //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
                     .setTextColor(getResources().getColor(R.color.colorBlue))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorBlueOpacity))
@@ -197,13 +209,13 @@ public class PlantActivity extends AppCompatActivity {
         }
     }
 
-    private void showTooltipLight(View v, int gravity, int id, int plantArray[][]) {
+    private void showTooltipLight(View v, int gravity, int id, int plantArray[]) {
         TextView tv = (TextView) v;
         Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
 
-        int light = plantArray[id][2];
+        int light = plantArray[2];
 
-        if (light > 33 && light < 50) {
+        if (light > 33 ) {
             final Tooltip tooltip = new Tooltip.Builder(tv)
                     .setText("Your " + getIntent().getStringExtra("plantNameNoCapital") +  " plant has been getting enough light. Keep it up!")
                     .setTypeface(myCustomFont2)
@@ -221,13 +233,13 @@ public class PlantActivity extends AppCompatActivity {
                 }
             });
         }
-        if (light <= 33 || light >= 50) {
+        if (light <= 33) {
             final Tooltip tooltip = new Tooltip.Builder(tv)
                     .setText("Your " + getIntent().getStringExtra("plantNameNoCapital") +  " plant is not receiving enough " +
                             "light right now." +
                             " Try to put it in a sunny place, or if not possible under a lamp.")
                     .setTypeface(myCustomFont2)
-                    .setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
+                    //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
                     .setTextColor(getResources().getColor(R.color.colorYellow))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorYellowOpacity))
@@ -244,15 +256,15 @@ public class PlantActivity extends AppCompatActivity {
         }
     }
 
-    private void showTooltipTemp(View v, int gravity, int id, int plantArray[][]) {
+    private void showTooltipTemp(View v, int gravity, int id, int plantArray[]) {
         TextView tv = (TextView) v;
         Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
-        int temp = plantArray[id][3];
+        int temp = plantArray[3];
 
-        if (temp > 10 && temp < 35) {
+        if (temp > 18) {
             final Tooltip tooltip = new Tooltip.Builder(tv)
                     .setText("The current temperature" +
-                            " around your " + getIntent().getStringExtra("plantNameNoCapital") + " is " + getPlantData()[id][3] + ". " +
+                            " around your " + getIntent().getStringExtra("plantNameNoCapital") + " is " + getPlantData(id)[3] + ". " +
                             "Perfect!")
                     .setTypeface(myCustomFont2)
                     //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
@@ -271,13 +283,13 @@ public class PlantActivity extends AppCompatActivity {
             });
         }
 
-        if (temp <= 10 || temp >= 35 ) {
+        if (temp <= 18 ) {
             final Tooltip tooltip = new Tooltip.Builder(tv)
                     .setText("The current temperature" +
-                            " around your " + getIntent().getStringExtra("plantNameNoCapital") + " is " + getPlantData()[id][3] + " which is not good. " +
+                            " around your " + getIntent().getStringExtra("plantNameNoCapital") + " is " + getPlantData(id)[3] + " degrees Celsius, which is not good. " +
                             "Try to get the efficient temperature for your plant.")
                     .setTypeface(myCustomFont2)
-                    .setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
+                    //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
                     .setTextColor(getResources().getColor(R.color.colorRed))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorRedOpacity))
@@ -325,26 +337,26 @@ public class PlantActivity extends AppCompatActivity {
             mCounterTimer.start();
     }*/
 
-    void showValues(int id, int plantArray[][]) {
-        showIcons(id, plantArray);
-    }
+    /*void showIcons(int id, int plantArray[]) {
 
-    void showIcons(int id, int plantArray[][]) {
-        int water = plantArray[id][1];
+        int water = getPlantData(id)[1];
 
-        if (water <= 33 || water >= 50) {
+        //int water =  getPlantData(id)[1];
+        //test123.setText(String.valueOf(water));
+
+        if (water <= 33) {
             alertWater.setVisibility(View.VISIBLE);
         }
 
-        int light = plantArray[id][2];
+        int light = plantArray[2];
 
-        if (light <= 33 || light >= 50) {
+        if (light <= 33 ) {
             alertLight.setVisibility(View.VISIBLE);
         }
 
-        int temp = plantArray[id][3];
+        int temp = plantArray[3];
 
-        if (temp <= 10 || temp >= 35) {
+        if (temp <= 18 ) {
             alertTemp.setVisibility(View.VISIBLE);
         }
 
@@ -383,22 +395,115 @@ public class PlantActivity extends AppCompatActivity {
             txtPlantHealth.setTypeface(myCustomFont);
         }
 
-    }
+    }*/
 
-    int[][] getPlantData() {
-        //These values will be pulled from the database!
+    int[] getPlantData(int id) {
 
-        
+        int plantID = id + 1;
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        final DatabaseReference plantValues = mDatabase.child("Pins").child("7777").child("Plants").child("Stick"+plantID);
+
+        plantValues.child("Water").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                int water = Integer.valueOf(snapshot.getValue().toString());
+                waterValue = water;
+                //test123.setText(String.valueOf(water));
+                if (water <= 33) {
+                    alertWater.setVisibility(View.VISIBLE);
+                }
+                }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+        plantValues.child("Light").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                int light = Integer.valueOf(snapshot.getValue().toString());
+                lightValue = light;
+                if (light <= 33 ) {
+                    alertLight.setVisibility(View.VISIBLE);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+        plantValues.child("Temperature").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                int temperature = Integer.valueOf(snapshot.getValue().toString());
+                temperatureValue = temperature;
+                if (temperature <= 18 ) {
+                    alertTemp.setVisibility(View.VISIBLE);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+        plantValues.child("Duration").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                int duration = Integer.valueOf(snapshot.getValue().toString());
+                durationValue = duration;
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+        if (alertWater.getVisibility() == View.GONE &&
+                alertLight.getVisibility() == View.GONE &&
+                alertTemp.getVisibility() == View.GONE ) {
+            txtPlantHealth.setText(R.string.health_high);
+            Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+            txtPlantHealth.setTypeface(myCustomFont);
+        }
+
+        if ((alertWater.getVisibility() == View.VISIBLE) ||
+                (alertLight.getVisibility() == View.VISIBLE) ||
+                (alertTemp.getVisibility() == View.VISIBLE)) {
+            txtPlantHealth.setText(R.string.health_medium);
+            Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+            txtPlantHealth.setTypeface(myCustomFont);
+        }
+
+        if ((alertWater.getVisibility() == View.VISIBLE &&
+                alertLight.getVisibility() == View.VISIBLE) ||
+                (alertTemp.getVisibility() == View.VISIBLE &&
+                        alertLight.getVisibility() == View.VISIBLE)
+                || (alertWater.getVisibility() == View.VISIBLE && alertTemp.getVisibility() == View.VISIBLE)) {
+            txtPlantHealth.setText(R.string.health_low);
+            Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+            txtPlantHealth.setTypeface(myCustomFont);
+        }
+
+
+        if (alertWater.getVisibility() == View.VISIBLE &&
+                alertLight.getVisibility() == View.VISIBLE &&
+                alertTemp.getVisibility() == View.VISIBLE) {
+            txtPlantHealth.setText(R.string.health_low);
+            Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+            txtPlantHealth.setTypeface(myCustomFont);
+        }
+
 
         int plantArray[][] = {
+                {durationValue, waterValue, lightValue, temperatureValue}
+        };
+
+        /*int plantArray[][] = {
                 {10, 34, 35, 50},
                 {20, 45, 34, 30},
                 {30, 20, 40, 11},
                 {15, 32, 28, 55},
                 {10, 44, 7, 29}
-        };
+        };*/
 
-        return plantArray;
+        return plantArray[0];
     }
 
     private BroadcastReceiver br = new BroadcastReceiver() {
