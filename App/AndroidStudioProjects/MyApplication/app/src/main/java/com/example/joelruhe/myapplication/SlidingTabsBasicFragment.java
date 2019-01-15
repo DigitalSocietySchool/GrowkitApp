@@ -47,6 +47,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -88,9 +89,10 @@ public class SlidingTabsBasicFragment extends Fragment {
         childUserPlants.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                String string = dataSnapshot.getValue(String.class);
-                arrayList.add(string);
-                adapter.notifyDataSetChanged();
+                Map<String, Object> string = (Map<String, Object>) dataSnapshot.getValue();
+                //String string = dataSnapshot.getValue(String.class);
+                //arrayList.add(string);
+                //adapter.notifyDataSetChanged();
             }
 
             @Override

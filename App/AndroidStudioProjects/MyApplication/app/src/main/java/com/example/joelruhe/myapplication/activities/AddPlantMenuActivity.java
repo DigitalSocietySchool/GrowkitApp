@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.support.v7.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.joelruhe.myapplication.R;
 import com.google.firebase.database.ChildEventListener;
@@ -23,6 +25,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -38,6 +41,8 @@ public class AddPlantMenuActivity extends AppCompatActivity {
     TextView addPlantsTitle;
 
     Toolbar addPlantMenuToolbar;
+
+    int x;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +74,7 @@ public class AddPlantMenuActivity extends AppCompatActivity {
 
         assert pinString != null;
         final DatabaseReference childUserPin = userPinDatabase.child(pinString);
+        final DatabaseReference allPlants = childUserPin.child("Plants");
 
         ListView listView = findViewById(R.id.database_list_view);
 
@@ -116,13 +122,53 @@ public class AddPlantMenuActivity extends AppCompatActivity {
             }
         });
 
+
+        final ArrayList<String> allSticks = new ArrayList<String>();
+
         //Go to next activity when item in ListView is pressed
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String value = arrayList.get(i);
+                    allPlants.addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                            Integer.valueOf(dataSnapshot.getValue().toString());
+                            Long k = dataSnapshot.getChildrenCount();
+                            String string = String.valueOf(k);
+                            x = Integer.valueOf(string);
+                            Toast.makeText(AddPlantMenuActivity.this, x, Toast.LENGTH_SHORT).show();
+                            Log.e(dataSnapshot.getKey(),dataSnapshot.getChildrenCount() + "");
+                        }
+                        @Override
+                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                int stickNumber = x + 1;
+
                 final DatabaseReference plantUserPin = childUserPin.child("Plants");
-                plantUserPin.push().setValue(value);
+                //final DatabaseReference plantUserPin = plantUserPin.child("Plants");
+
+                //plantUserPin.push().setValue("Stick"+stickNumber);
+                plantUserPin.child("Stick"+stickNumber).child("Water").setValue("0");
+
                 Intent intent = new Intent(AddPlantMenuActivity.this, MainActivity.class);
                 intent.putExtra("plant", value);
                 finish();

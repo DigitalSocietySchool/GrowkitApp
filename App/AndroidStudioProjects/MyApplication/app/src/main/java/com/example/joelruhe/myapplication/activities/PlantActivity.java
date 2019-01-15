@@ -88,10 +88,6 @@ public class PlantActivity extends AppCompatActivity {
         setContentView(R.layout.activity_plant);
         ButterKnife.bind(PlantActivity.this);
 
-        alertWater.setVisibility(View.GONE);
-        alertLight.setVisibility(View.GONE);
-        alertTemp.setVisibility(View.GONE);
-
         imgBtnResetHarvest.setVisibility(View.GONE);
 
         progressBar = findViewById(R.id.progressBar);
@@ -166,11 +162,10 @@ public class PlantActivity extends AppCompatActivity {
 
         int water = plantArray[1];
 
-        if (water > 33 && water < 50) {
+        if (water > 50) {
             final Tooltip tooltip = new Tooltip.Builder(tv)
-                    .setText("Water level (" + getPlantData(id)[1] +  "%) is fine at the moment. " +
-                            "You will need to water your" +
-                            getIntent().getStringExtra("plantNameNoCapital") + " again in 1 day.")
+                    .setText("The water level of "+ getIntent().getStringExtra("plantNameNoCapital") +" is" +
+                            " " + getPlantData(id)[1] + "%. This is a healthy percentage for your plant!")
                     .setTypeface(myCustomFont2)
                     //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
                     .setTextColor(getResources().getColor(R.color.colorBlue))
@@ -187,11 +182,32 @@ public class PlantActivity extends AppCompatActivity {
             });
         }
 
-        if (water <= 33 || water >= 50) {
+        if (water > 33 && water < 50) {
             final Tooltip tooltip = new Tooltip.Builder(tv)
-                    .setText("Water level (" + getPlantData(id)[1] +  "%) is not fine at the moment. " +
-                            "You will need to water your " +
-                            getIntent().getStringExtra("plantNameNoCapital") + " again as soon as possible.")
+                    .setText("The water level is " + getPlantData(id)[1] + "% which is still high enough" +
+                            "You will need to water your" +
+                            getIntent().getStringExtra("plantNameNoCapital") + " again in about 1 day.")
+                    .setTypeface(myCustomFont2)
+                    //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
+                    .setTextColor(getResources().getColor(R.color.colorBlue))
+                    .setGravity(gravity)
+                    .setBackgroundColor(getResources().getColor(R.color.colorBlueOpacity))
+                    .setCornerRadius(10f)
+                    .setDismissOnClick(true)
+                    .show();
+            tooltip.setOnDismissListener(new OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    countClicked = 0;
+                }
+            });
+        }
+
+        if (water <= 33) {
+            final Tooltip tooltip = new Tooltip.Builder(tv)
+                    .setText("The water level of your "+ getIntent().getStringExtra("plantNameNoCapital") +" is" +
+                            " " + getPlantData(id)[1] +  "%  at the moment, which is not healthy for your plant. " +
+                            "You will need to water your "+ getIntent().getStringExtra("plantNameNoCapital") +" again as soon as possible!")
                     .setTypeface(myCustomFont2)
                     //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
                     .setTextColor(getResources().getColor(R.color.colorBlue))
@@ -215,9 +231,10 @@ public class PlantActivity extends AppCompatActivity {
 
         int light = plantArray[2];
 
-        if (light > 33 ) {
+        if (light >= 60 ) {
             final Tooltip tooltip = new Tooltip.Builder(tv)
-                    .setText("Your " + getIntent().getStringExtra("plantNameNoCapital") +  " plant has been getting enough light. Keep it up!")
+                    .setText("Your " + getIntent().getStringExtra("plantNameNoCapital") +  " plant it's " +
+                            "light level is " + getPlantData(id)[2] +  "%. This is healthy for the plant, keep it up!")
                     .setTypeface(myCustomFont2)
                     //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
                     .setTextColor(getResources().getColor(R.color.colorYellow))
@@ -233,10 +250,31 @@ public class PlantActivity extends AppCompatActivity {
                 }
             });
         }
+
+        if (light > 33 && light < 60 ) {
+            final Tooltip tooltip = new Tooltip.Builder(tv)
+                    .setText("Your " + getIntent().getStringExtra("plantNameNoCapital") +  " plant it's " +
+                            "light level is " + getPlantData(id)[2] +  "%. The plant will survive, but it is not the optimal condition.")
+                    .setTypeface(myCustomFont2)
+                    //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
+                    .setTextColor(getResources().getColor(R.color.colorYellow))
+                    .setGravity(gravity)
+                    .setBackgroundColor(getResources().getColor(R.color.colorYellowOpacity))
+                    .setCornerRadius(10f)
+                    .setDismissOnClick(true)
+                    .show();
+            tooltip.setOnDismissListener(new OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    countClicked = 0;
+                }
+            });
+        }
+
         if (light <= 33) {
             final Tooltip tooltip = new Tooltip.Builder(tv)
-                    .setText("Your " + getIntent().getStringExtra("plantNameNoCapital") +  " plant is not receiving enough " +
-                            "light right now." +
+                    .setText("Your " + getIntent().getStringExtra("plantNameNoCapital") +  " is " +
+                            "receiving " + getPlantData(id)[2] +  "% light right now. This not enough!" +
                             " Try to put it in a sunny place, or if not possible under a lamp.")
                     .setTypeface(myCustomFont2)
                     //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
@@ -337,72 +375,12 @@ public class PlantActivity extends AppCompatActivity {
             mCounterTimer.start();
     }*/
 
-    /*void showIcons(int id, int plantArray[]) {
-
-        int water = getPlantData(id)[1];
-
-        //int water =  getPlantData(id)[1];
-        //test123.setText(String.valueOf(water));
-
-        if (water <= 33) {
-            alertWater.setVisibility(View.VISIBLE);
-        }
-
-        int light = plantArray[2];
-
-        if (light <= 33 ) {
-            alertLight.setVisibility(View.VISIBLE);
-        }
-
-        int temp = plantArray[3];
-
-        if (temp <= 18 ) {
-            alertTemp.setVisibility(View.VISIBLE);
-        }
-
-        if (alertWater.getVisibility() == View.GONE &&
-                alertLight.getVisibility() == View.GONE &&
-                alertTemp.getVisibility() == View.GONE ) {
-            txtPlantHealth.setText(R.string.health_high);
-            Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
-            txtPlantHealth.setTypeface(myCustomFont);
-        }
-
-        if ((alertWater.getVisibility() == View.VISIBLE) ||
-                (alertLight.getVisibility() == View.VISIBLE) ||
-                (alertTemp.getVisibility() == View.VISIBLE)) {
-            txtPlantHealth.setText(R.string.health_medium);
-            Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
-            txtPlantHealth.setTypeface(myCustomFont);
-        }
-
-        if ((alertWater.getVisibility() == View.VISIBLE &&
-                alertLight.getVisibility() == View.VISIBLE) ||
-                (alertTemp.getVisibility() == View.VISIBLE &&
-                        alertLight.getVisibility() == View.VISIBLE)
-                || (alertWater.getVisibility() == View.VISIBLE && alertTemp.getVisibility() == View.VISIBLE)) {
-            txtPlantHealth.setText(R.string.health_low);
-            Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
-            txtPlantHealth.setTypeface(myCustomFont);
-        }
-
-
-        if (alertWater.getVisibility() == View.VISIBLE &&
-                alertLight.getVisibility() == View.VISIBLE &&
-                alertTemp.getVisibility() == View.VISIBLE) {
-            txtPlantHealth.setText(R.string.health_low);
-            Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
-            txtPlantHealth.setTypeface(myCustomFont);
-        }
-
-    }*/
-
     int[] getPlantData(int id) {
 
         int plantID = id + 1;
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        final DatabaseReference plantValues = mDatabase.child("Pins").child("7777").child("Plants").child("Stick"+plantID);
+        final DatabaseReference plantValues = mDatabase.child("Pins").child("4444").child("Plants").child("Stick"+plantID);
 
         plantValues.child("Water").addValueEventListener(new ValueEventListener() {
             @Override
@@ -412,6 +390,10 @@ public class PlantActivity extends AppCompatActivity {
                 //test123.setText(String.valueOf(water));
                 if (water <= 33) {
                     alertWater.setVisibility(View.VISIBLE);
+                }
+                else{
+                    alertWater.setVisibility(View.GONE);
+
                 }
                 }
             @Override
@@ -426,6 +408,9 @@ public class PlantActivity extends AppCompatActivity {
                 if (light <= 33 ) {
                     alertLight.setVisibility(View.VISIBLE);
                 }
+                else{
+                    alertLight.setVisibility(View.GONE);
+                }
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -438,6 +423,9 @@ public class PlantActivity extends AppCompatActivity {
                 temperatureValue = temperature;
                 if (temperature <= 18 ) {
                     alertTemp.setVisibility(View.VISIBLE);
+                }
+                else{
+                    alertTemp.setVisibility(View.GONE);
                 }
             }
             @Override
