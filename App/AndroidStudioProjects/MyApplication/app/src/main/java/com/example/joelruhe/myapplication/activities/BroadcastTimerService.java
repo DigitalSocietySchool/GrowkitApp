@@ -49,7 +49,6 @@ public class BroadcastTimerService extends Service {
 
             @Override
             public void onFinish() {
-                counter--;
             }
         };
 

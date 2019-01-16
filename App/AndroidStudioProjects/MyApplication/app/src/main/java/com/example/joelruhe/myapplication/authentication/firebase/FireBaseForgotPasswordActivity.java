@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -35,6 +36,9 @@ public class FireBaseForgotPasswordActivity extends AppCompatActivity {
     TextView forgotPaswordHeader;
     @BindView(R.id.forgot_password_subtext)
     TextView forgotPaswordSubtext;
+
+    @BindString(R.string.enter_registered_email)
+    String enterEmail;
 
     private FirebaseAuth auth;
 
@@ -77,7 +81,7 @@ public class FireBaseForgotPasswordActivity extends AppCompatActivity {
         String email = inputEmailEditText.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(getApplication(), "Enter your registered email id", Toast.LENGTH_SHORT).show();
+            inputEmailEditText.setError(enterEmail);
             return;
         }
 

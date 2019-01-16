@@ -125,7 +125,7 @@ public class FireBaseSignUpActivity extends AppCompatActivity {
                                 Toast.makeText(FireBaseSignUpActivity.this, regiUnsuccessful + task.getException(),
                                         Toast.LENGTH_SHORT).show();
                             } else {
-                                //Insert new user in realtime database
+                                //Insert new user in real time database
                                 FirebaseClass firebaseClass = new FirebaseClass();
                                 firebaseClass.insertNewUser(email, password);
 

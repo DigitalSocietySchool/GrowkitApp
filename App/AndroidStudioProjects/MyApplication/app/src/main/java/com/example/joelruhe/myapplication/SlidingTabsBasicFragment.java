@@ -188,9 +188,9 @@ public class SlidingTabsBasicFragment extends Fragment {
                         intent.putExtra("plantNameNoCapital", "coriander");
                         startActivity(intent);
 
-                        Intent serviceIntent = new Intent(getActivity(), BroadcastTimerService.class);
+                        /*Intent serviceIntent = new Intent(getActivity(), BroadcastTimerService.class);
                         serviceIntent.putExtra("UserID", position);
-                        getActivity().startService(serviceIntent);
+                        getActivity().startService(serviceIntent);*/
                     }
                     if (position == 1) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
@@ -200,9 +200,9 @@ public class SlidingTabsBasicFragment extends Fragment {
                         intent.putExtra("plantNameNoCapital", "strawberry");
                         startActivity(intent);
 
-                        Intent serviceIntent = new Intent(getActivity(), BroadcastTimerService.class);
+                        /*Intent serviceIntent = new Intent(getActivity(), BroadcastTimerService.class);
                         serviceIntent.putExtra("UserID", position);
-                        getActivity().startService(serviceIntent);
+                        getActivity().startService(serviceIntent);*/
                     }
                     if (position == 2) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
@@ -212,9 +212,9 @@ public class SlidingTabsBasicFragment extends Fragment {
                         intent.putExtra("plantNameNoCapital", "spinach");
                         startActivity(intent);
 
-                        Intent serviceIntent = new Intent(getActivity(), BroadcastTimerService.class);
+                       /*Intent serviceIntent = new Intent(getActivity(), BroadcastTimerService.class);
                         serviceIntent.putExtra("UserID", position);
-                        getActivity().startService(serviceIntent);
+                        getActivity().startService(serviceIntent);*/
                     }
                     if (position == 3) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
@@ -224,9 +224,9 @@ public class SlidingTabsBasicFragment extends Fragment {
                         intent.putExtra("plantNameNoCapital", "basil");
                         startActivity(intent);
 
-                        Intent serviceIntent = new Intent(getActivity(), BroadcastTimerService.class);
+                        /*Intent serviceIntent = new Intent(getActivity(), BroadcastTimerService.class);
                         serviceIntent.putExtra("UserID", position);
-                        getActivity().startService(serviceIntent);
+                        getActivity().startService(serviceIntent);*/
                     }
                     if (position == 4) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);
@@ -236,9 +236,9 @@ public class SlidingTabsBasicFragment extends Fragment {
                         intent.putExtra("plantNameNoCapital", "spider plant");
                         startActivity(intent);
 
-                        Intent serviceIntent = new Intent(getActivity(), BroadcastTimerService.class);
+                        /*Intent serviceIntent = new Intent(getActivity(), BroadcastTimerService.class);
                         serviceIntent.putExtra("UserID", position);
-                        getActivity().startService(serviceIntent);
+                        getActivity().startService(serviceIntent);*/
                     }
                 }
             });
