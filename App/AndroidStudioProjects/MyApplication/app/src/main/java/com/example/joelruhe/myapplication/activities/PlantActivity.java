@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -49,12 +50,6 @@ public class PlantActivity extends AppCompatActivity {
     TextView txtPlantHarvestTimeStart;
     @BindView(R.id.text_plant_harvest_time_left)
     TextView txtPlantHarvestTimeLeft;
-    /*@BindView(R.id.view_id)
-    TextView plantId;
-    @BindView(R.id.counter)
-    TextView textCounter;
-    @BindView(R.id.textViewHealth)
-    TextView plantHealth;*/
     @BindString(R.string.percent)
     String percent;
 
@@ -73,6 +68,8 @@ public class PlantActivity extends AppCompatActivity {
     ImageView imgPlant;
 
     ProgressBar progressBar;
+    Toolbar plantToolbar;
+    ImageButton cancelIcon;
 
     int id;
     int countClicked;
@@ -99,7 +96,14 @@ public class PlantActivity extends AppCompatActivity {
         txtPlantData.setTypeface(myCustomFont);
         txtPlantDataToolbar.setTypeface(myCustomFont);
 
-        //imgPlant = findViewById(R.id.imageViewPlant);
+        plantToolbar = findViewById(R.id.plantHealthToolbar);
+        cancelIcon = plantToolbar.findViewById(R.id.btn_cancel);
+        cancelIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
