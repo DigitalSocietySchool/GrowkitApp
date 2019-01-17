@@ -117,9 +117,9 @@ public class PlantActivity extends AppCompatActivity {
         imgBtnStartHarvest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startService(new Intent(PlantActivity.this, BroadcastTimerService.class));
-                imgBtnResetHarvest.setVisibility(View.VISIBLE);
-                imgBtnStartHarvest.setVisibility(View.GONE);
+                    startService(new Intent(PlantActivity.this, BroadcastTimerService.class));
+                    imgBtnResetHarvest.setVisibility(View.VISIBLE);
+                    imgBtnStartHarvest.setVisibility(View.GONE);
             }
         });
 
