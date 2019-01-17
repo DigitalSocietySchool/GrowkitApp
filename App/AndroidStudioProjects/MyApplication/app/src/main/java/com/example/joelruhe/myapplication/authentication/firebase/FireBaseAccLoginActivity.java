@@ -76,7 +76,6 @@ public class FireBaseAccLoginActivity extends Activity {
 
         authCommunityToolbarLogin = findViewById(R.id.authCommunityToolbarLogin);
         cancelIcon = authCommunityToolbarLogin.findViewById(R.id.btn_cancel2);
-        cancelIcon.setVisibility(View.VISIBLE);
         cancelIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,6 +129,7 @@ public class FireBaseAccLoginActivity extends Activity {
             passwordEditText.setError(enterPassword);
             return false;
         }
+
         return true;
     }
 

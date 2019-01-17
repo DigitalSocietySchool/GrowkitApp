@@ -1,18 +1,19 @@
 package com.example.joelruhe.myapplication.activities;
 
-import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.CountDownTimer;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,12 +50,6 @@ public class PlantActivity extends AppCompatActivity {
     TextView txtPlantHarvestTimeStart;
     @BindView(R.id.text_plant_harvest_time_left)
     TextView txtPlantHarvestTimeLeft;
-    /*@BindView(R.id.view_id)
-    TextView plantId;
-    @BindView(R.id.counter)
-    TextView textCounter;
-    @BindView(R.id.textViewHealth)
-    TextView plantHealth;*/
     @BindString(R.string.percent)
     String percent;
 
@@ -73,6 +68,8 @@ public class PlantActivity extends AppCompatActivity {
     ImageView imgPlant;
 
     ProgressBar progressBar;
+    Toolbar plantToolbar;
+    ImageButton cancelIcon;
 
     int id;
     int countClicked;
@@ -88,6 +85,8 @@ public class PlantActivity extends AppCompatActivity {
         setContentView(R.layout.activity_plant);
         ButterKnife.bind(PlantActivity.this);
 
+        registerReceiver(uiUpdated, new IntentFilter("COUNTDOWN_UPDATED"));
+
         imgBtnResetHarvest.setVisibility(View.GONE);
 
         progressBar = findViewById(R.id.progressBar);
@@ -95,11 +94,17 @@ public class PlantActivity extends AppCompatActivity {
         txtPlantData.setText(getIntent().getStringExtra("DESCRIPTION"));
         txtPlantDataToolbar.setText(getIntent().getStringExtra("DESCRIPTION"));
         final Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_bold.ttf");
-        //final Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
         txtPlantData.setTypeface(myCustomFont);
         txtPlantDataToolbar.setTypeface(myCustomFont);
 
-        //imgPlant = findViewById(R.id.imageViewPlant);
+        plantToolbar = findViewById(R.id.plantHealthToolbar);
+        cancelIcon = plantToolbar.findViewById(R.id.btn_cancel);
+        cancelIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -110,25 +115,19 @@ public class PlantActivity extends AppCompatActivity {
         id = getIntent().getIntExtra("ID", 0);
 
         getPlantData(id);
-
-        //txtPlantHarvestTimeLeft.setText(R.string.average_harvest + getPlantData()[id][0]);
-        //txtPlantHarvestTimeLeft.setTypeface(myCustomFont2);
+        Intent serviceIntent = new Intent(PlantActivity.this, BroadcastTimerService.class);
+        serviceIntent.putExtra("Id", id);
+        startService(serviceIntent);
 
         imgBtnStartHarvest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    startService(new Intent(PlantActivity.this, BroadcastTimerService.class));
-                    imgBtnResetHarvest.setVisibility(View.VISIBLE);
-                    imgBtnStartHarvest.setVisibility(View.GONE);
-            }
-        });
 
-        imgBtnResetHarvest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopService(new Intent(PlantActivity.this, BroadcastTimerService.class));
-                imgBtnResetHarvest.setVisibility(View.GONE);
-                imgBtnStartHarvest.setVisibility(View.VISIBLE);
+                Intent serviceIntent = new Intent(PlantActivity.this, BroadcastTimerService.class);
+                serviceIntent.putExtra("secondsId", getPlantData(id)[0]);
+                serviceIntent.putExtra("Id", id);
+                serviceIntent.putExtra("clicked", 2);
+                startService(serviceIntent);
             }
         });
 
@@ -167,7 +166,6 @@ public class PlantActivity extends AppCompatActivity {
                     .setText("The water level of "+ getIntent().getStringExtra("plantNameNoCapital") +" is" +
                             " " + getPlantData(id)[1] + "%. This is a healthy percentage for your plant!")
                     .setTypeface(myCustomFont2)
-                    //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
                     .setTextColor(getResources().getColor(R.color.colorBlue))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorBlueOpacity))
@@ -188,7 +186,6 @@ public class PlantActivity extends AppCompatActivity {
                             "You will need to water your" +
                             getIntent().getStringExtra("plantNameNoCapital") + " again in about 1 day.")
                     .setTypeface(myCustomFont2)
-                    //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
                     .setTextColor(getResources().getColor(R.color.colorBlue))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorBlueOpacity))
@@ -209,7 +206,6 @@ public class PlantActivity extends AppCompatActivity {
                             " " + getPlantData(id)[1] +  "%  at the moment, which is not healthy for your plant. " +
                             "You will need to water your "+ getIntent().getStringExtra("plantNameNoCapital") +" again as soon as possible!")
                     .setTypeface(myCustomFont2)
-                    //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
                     .setTextColor(getResources().getColor(R.color.colorBlue))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorBlueOpacity))
@@ -236,7 +232,6 @@ public class PlantActivity extends AppCompatActivity {
                     .setText("Your " + getIntent().getStringExtra("plantNameNoCapital") +  " plant it's " +
                             "light level is " + getPlantData(id)[2] +  "%. This is healthy for the plant, keep it up!")
                     .setTypeface(myCustomFont2)
-                    //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
                     .setTextColor(getResources().getColor(R.color.colorYellow))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorYellowOpacity))
@@ -256,7 +251,6 @@ public class PlantActivity extends AppCompatActivity {
                     .setText("Your " + getIntent().getStringExtra("plantNameNoCapital") +  " plant it's " +
                             "light level is " + getPlantData(id)[2] +  "%. The plant will survive, but it is not the optimal condition.")
                     .setTypeface(myCustomFont2)
-                    //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
                     .setTextColor(getResources().getColor(R.color.colorYellow))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorYellowOpacity))
@@ -277,7 +271,6 @@ public class PlantActivity extends AppCompatActivity {
                             "receiving " + getPlantData(id)[2] +  "% light right now. This not enough!" +
                             " Try to put it in a sunny place, or if not possible under a lamp.")
                     .setTypeface(myCustomFont2)
-                    //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
                     .setTextColor(getResources().getColor(R.color.colorYellow))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorYellowOpacity))
@@ -305,7 +298,6 @@ public class PlantActivity extends AppCompatActivity {
                             " around your " + getIntent().getStringExtra("plantNameNoCapital") + " is " + getPlantData(id)[3] + ". " +
                             "Perfect!")
                     .setTypeface(myCustomFont2)
-                    //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
                     .setTextColor(getResources().getColor(R.color.colorRed))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorRedOpacity))
@@ -327,7 +319,6 @@ public class PlantActivity extends AppCompatActivity {
                             " around your " + getIntent().getStringExtra("plantNameNoCapital") + " is " + getPlantData(id)[3] + " degrees Celsius, which is not good. " +
                             "Try to get the efficient temperature for your plant.")
                     .setTypeface(myCustomFont2)
-                    //.setTextSize(getResources().getDimension(R.dimen.plant_factors_text_size))
                     .setTextColor(getResources().getColor(R.color.colorRed))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorRedOpacity))
@@ -344,37 +335,6 @@ public class PlantActivity extends AppCompatActivity {
         }
     }
 
-    /*void startTimer(int id, int plantArray[][]) {
-        final int totalSeconds = plantArray[id][0];
-        counter = totalSeconds;
-
-        progress = 0;
-
-        /*Intent intent = new Intent(PlantActivity.this, BroadcastTimerService.class);
-        intent.putExtra("HARVEST_TIME", totalSeconds);
-
-            progressBar = findViewById(R.id.progressBar);
-
-            mCounterTimer = new CountDownTimer(totalSeconds * 1000, 1000) {
-
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    counter--;
-                    progress++;
-                    textCounter.setText(String.valueOf("Days remaining: " + counter));
-                    progressBar.setProgress(progress * 10000 / (totalSeconds * 100));
-                }
-
-                public void onFinish() {
-                    counter--;
-                    textCounter.setText(R.string.finish_harvest_time);
-                    progressBar.setProgress(100);
-
-                }
-            };
-            mCounterTimer.start();
-    }*/
-
     int[] getPlantData(int id) {
 
         int plantID = id + 1;
@@ -387,15 +347,46 @@ public class PlantActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 int water = Integer.valueOf(snapshot.getValue().toString());
                 waterValue = water;
-                //test123.setText(String.valueOf(water));
                 if (water <= 33) {
                     alertWater.setVisibility(View.VISIBLE);
-                }
-                else{
+                } else {
                     alertWater.setVisibility(View.GONE);
+                }
+                if (alertWater.getVisibility() == View.GONE &&
+                        alertLight.getVisibility() == View.GONE &&
+                        alertTemp.getVisibility() == View.GONE ) {
+                    txtPlantHealth.setText(R.string.health_high);
+                    Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+                    txtPlantHealth.setTypeface(myCustomFont);
+                }
 
+                if ((alertWater.getVisibility() == View.VISIBLE) ||
+                        (alertLight.getVisibility() == View.VISIBLE) ||
+                        (alertTemp.getVisibility() == View.VISIBLE)) {
+                    txtPlantHealth.setText(R.string.health_medium);
+                    Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+                    txtPlantHealth.setTypeface(myCustomFont);
                 }
+
+                if ((alertWater.getVisibility() == View.VISIBLE &&
+                        alertLight.getVisibility() == View.VISIBLE) ||
+                        (alertTemp.getVisibility() == View.VISIBLE &&
+                                alertLight.getVisibility() == View.VISIBLE)
+                        || (alertWater.getVisibility() == View.VISIBLE && alertTemp.getVisibility() == View.VISIBLE)) {
+                    txtPlantHealth.setText(R.string.health_low);
+                    Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+                    txtPlantHealth.setTypeface(myCustomFont);
                 }
+
+
+                if (alertWater.getVisibility() == View.VISIBLE &&
+                        alertLight.getVisibility() == View.VISIBLE &&
+                        alertTemp.getVisibility() == View.VISIBLE) {
+                    txtPlantHealth.setText(R.string.health_low);
+                    Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+                    txtPlantHealth.setTypeface(myCustomFont);
+                }
+            }
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -410,6 +401,40 @@ public class PlantActivity extends AppCompatActivity {
                 }
                 else{
                     alertLight.setVisibility(View.GONE);
+                }
+                if (alertWater.getVisibility() == View.GONE &&
+                        alertLight.getVisibility() == View.GONE &&
+                        alertTemp.getVisibility() == View.GONE ) {
+                    txtPlantHealth.setText(R.string.health_high);
+                    Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+                    txtPlantHealth.setTypeface(myCustomFont);
+                }
+
+                if ((alertWater.getVisibility() == View.VISIBLE) ||
+                        (alertLight.getVisibility() == View.VISIBLE) ||
+                        (alertTemp.getVisibility() == View.VISIBLE)) {
+                    txtPlantHealth.setText(R.string.health_medium);
+                    Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+                    txtPlantHealth.setTypeface(myCustomFont);
+                }
+
+                if ((alertWater.getVisibility() == View.VISIBLE &&
+                        alertLight.getVisibility() == View.VISIBLE) ||
+                        (alertTemp.getVisibility() == View.VISIBLE &&
+                                alertLight.getVisibility() == View.VISIBLE)
+                        || (alertWater.getVisibility() == View.VISIBLE && alertTemp.getVisibility() == View.VISIBLE)) {
+                    txtPlantHealth.setText(R.string.health_low);
+                    Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+                    txtPlantHealth.setTypeface(myCustomFont);
+                }
+
+
+                if (alertWater.getVisibility() == View.VISIBLE &&
+                        alertLight.getVisibility() == View.VISIBLE &&
+                        alertTemp.getVisibility() == View.VISIBLE) {
+                    txtPlantHealth.setText(R.string.health_low);
+                    Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+                    txtPlantHealth.setTypeface(myCustomFont);
                 }
             }
             @Override
@@ -427,6 +452,40 @@ public class PlantActivity extends AppCompatActivity {
                 else{
                     alertTemp.setVisibility(View.GONE);
                 }
+                if (alertWater.getVisibility() == View.GONE &&
+                        alertLight.getVisibility() == View.GONE &&
+                        alertTemp.getVisibility() == View.GONE ) {
+                    txtPlantHealth.setText(R.string.health_high);
+                    Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+                    txtPlantHealth.setTypeface(myCustomFont);
+                }
+
+                if ((alertWater.getVisibility() == View.VISIBLE) ||
+                        (alertLight.getVisibility() == View.VISIBLE) ||
+                        (alertTemp.getVisibility() == View.VISIBLE)) {
+                    txtPlantHealth.setText(R.string.health_medium);
+                    Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+                    txtPlantHealth.setTypeface(myCustomFont);
+                }
+
+                if ((alertWater.getVisibility() == View.VISIBLE &&
+                        alertLight.getVisibility() == View.VISIBLE) ||
+                        (alertTemp.getVisibility() == View.VISIBLE &&
+                                alertLight.getVisibility() == View.VISIBLE)
+                        || (alertWater.getVisibility() == View.VISIBLE && alertTemp.getVisibility() == View.VISIBLE)) {
+                    txtPlantHealth.setText(R.string.health_low);
+                    Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+                    txtPlantHealth.setTypeface(myCustomFont);
+                }
+
+
+                if (alertWater.getVisibility() == View.VISIBLE &&
+                        alertLight.getVisibility() == View.VISIBLE &&
+                        alertTemp.getVisibility() == View.VISIBLE) {
+                    txtPlantHealth.setText(R.string.health_low);
+                    Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
+                    txtPlantHealth.setTypeface(myCustomFont);
+                }
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -443,98 +502,47 @@ public class PlantActivity extends AppCompatActivity {
             }
         });
 
-        if (alertWater.getVisibility() == View.GONE &&
-                alertLight.getVisibility() == View.GONE &&
-                alertTemp.getVisibility() == View.GONE ) {
-            txtPlantHealth.setText(R.string.health_high);
-            Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
-            txtPlantHealth.setTypeface(myCustomFont);
-        }
-
-        if ((alertWater.getVisibility() == View.VISIBLE) ||
-                (alertLight.getVisibility() == View.VISIBLE) ||
-                (alertTemp.getVisibility() == View.VISIBLE)) {
-            txtPlantHealth.setText(R.string.health_medium);
-            Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
-            txtPlantHealth.setTypeface(myCustomFont);
-        }
-
-        if ((alertWater.getVisibility() == View.VISIBLE &&
-                alertLight.getVisibility() == View.VISIBLE) ||
-                (alertTemp.getVisibility() == View.VISIBLE &&
-                        alertLight.getVisibility() == View.VISIBLE)
-                || (alertWater.getVisibility() == View.VISIBLE && alertTemp.getVisibility() == View.VISIBLE)) {
-            txtPlantHealth.setText(R.string.health_low);
-            Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
-            txtPlantHealth.setTypeface(myCustomFont);
-        }
-
-
-        if (alertWater.getVisibility() == View.VISIBLE &&
-                alertLight.getVisibility() == View.VISIBLE &&
-                alertTemp.getVisibility() == View.VISIBLE) {
-            txtPlantHealth.setText(R.string.health_low);
-            Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
-            txtPlantHealth.setTypeface(myCustomFont);
-        }
-
-
         int plantArray[][] = {
                 {durationValue, waterValue, lightValue, temperatureValue}
         };
 
-        /*int plantArray[][] = {
-                {10, 34, 35, 50},
-                {20, 45, 34, 30},
-                {30, 20, 40, 11},
-                {15, 32, 28, 55},
-                {10, 44, 7, 29}
-        };*/
-
         return plantArray[0];
     }
 
-    private BroadcastReceiver br = new BroadcastReceiver() {
+    private BroadcastReceiver uiUpdated = new BroadcastReceiver() {
+
         @Override
         public void onReceive(Context context, Intent intent) {
-            updateGUI(intent); // or whatever method used to update your GUI fields
+            //This is the part where I get the timer value from the service and I update it every second, because I send the data from the service every second.
+            //txtPlantHarvestTimeLeft.setText(intent.getExtras().getString("countdown"));
+            int id2 = intent.getIntExtra("id", 0);
+            int id3 = intent.getIntExtra("id", 0);
+
+            int hideReset = intent.getIntExtra("hideReset", 0);
+            int showReset = intent.getIntExtra("showReset", 0);
+
+            txtPlantHarvestTimeLeft.setId(id2);
+
+            if (id == txtPlantHarvestTimeLeft.getId()) {
+                String s = intent.getExtras().getString("countdown");
+                txtPlantHarvestTimeLeft.setText(s + " " + id2 + id3);
+                if (hideReset == 1) {
+                    imgBtnResetHarvest.setVisibility(View.GONE);
+                    imgBtnStartHarvest.setVisibility(View.VISIBLE);
+                }
+
+                if (showReset == 2) {
+                    imgBtnResetHarvest.setVisibility(View.VISIBLE);
+                    imgBtnResetHarvest.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            stopService(new Intent(PlantActivity.this, BroadcastTimerService.class));
+                        }
+                    });
+                    imgBtnStartHarvest.setVisibility(View.GONE);
+                }
+            }
         }
     };
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        registerReceiver(br, new IntentFilter(BroadcastTimerService.COUNTDOWN_BR));
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        unregisterReceiver(br);
-    }
-
-    @Override
-    public void onStop() {
-        try {
-            unregisterReceiver(br);
-        } catch (Exception e) {
-            // Receiver was probably already stopped in onPause()
-        }
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroy() {
-        //stopService(new Intent(this, BroadcastTimerService.class));
-        super.onDestroy();
-    }
-
-    private void updateGUI(Intent intent) {
-        if (intent.getExtras() != null) {
-            int counter = intent.getIntExtra("countdown", 0);
-            Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
-            txtPlantHarvestTimeLeft.setText(counter + " days until harvest!");
-            txtPlantHarvestTimeLeft.setTypeface(myCustomFont);
-        }
-    }
 }

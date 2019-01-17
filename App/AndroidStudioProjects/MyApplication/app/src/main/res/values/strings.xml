@@ -5,6 +5,7 @@
     <string name="click_msg">Something clicked..</string>
     <string name="permission_fail">"If no request shows up, change permissions in the app settings."</string>
     <string name="enter_email">"Enter e-mail"</string>
+    <string name="enter_registered_email">"Enter registered e-mail"</string>
     <string name="enter_password">"Enter password"</string>
     <string name="users">"Users"</string>
 
