@@ -58,6 +58,7 @@ public class BroadcastTimerService extends Service {
                     i.putExtra("showReset", 2);
                     i.putExtra("id", id);
                     sendBroadcast(i);
+
                 }
 
                 public void onFinish() {
@@ -66,10 +67,6 @@ public class BroadcastTimerService extends Service {
                     i.putExtra("hideReset", 1);
                     i.putExtra("id", id);
                     sendBroadcast(i);
-                    if(Count != null) {
-                        Count.cancel();
-                        Count = null;
-                    }
                     cancel();
                 }
             };
