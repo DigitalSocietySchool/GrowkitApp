@@ -6,14 +6,17 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.joelruhe.myapplication.R;
 import com.google.firebase.database.DataSnapshot;
@@ -82,6 +85,8 @@ public class PlantActivity extends AppCompatActivity {
         setContentView(R.layout.activity_plant);
         ButterKnife.bind(PlantActivity.this);
 
+        registerReceiver(uiUpdated, new IntentFilter("COUNTDOWN_UPDATED"));
+
         imgBtnResetHarvest.setVisibility(View.GONE);
 
         progressBar = findViewById(R.id.progressBar);
@@ -108,23 +113,20 @@ public class PlantActivity extends AppCompatActivity {
         }
 
         id = getIntent().getIntExtra("ID", 0);
+
         getPlantData(id);
+        Intent serviceIntent = new Intent(PlantActivity.this, BroadcastTimerService.class);
+        serviceIntent.putExtra("Id", id);
+        startService(serviceIntent);
 
         imgBtnStartHarvest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startService(new Intent(PlantActivity.this, BroadcastTimerService.class));
-                imgBtnResetHarvest.setVisibility(View.VISIBLE);
-                imgBtnStartHarvest.setVisibility(View.GONE);
-            }
-        });
-
-        imgBtnResetHarvest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopService(new Intent(PlantActivity.this, BroadcastTimerService.class));
-                imgBtnResetHarvest.setVisibility(View.GONE);
-                imgBtnStartHarvest.setVisibility(View.VISIBLE);
+                Intent serviceIntent = new Intent(PlantActivity.this, BroadcastTimerService.class);
+                serviceIntent.putExtra("secondsId", getPlantData(id)[0]);
+                serviceIntent.putExtra("Id", id);
+                serviceIntent.putExtra("clicked", 2);
+                startService(serviceIntent);
             }
         });
     }
@@ -505,46 +507,40 @@ public class PlantActivity extends AppCompatActivity {
         return plantArray[0];
     }
 
-    private BroadcastReceiver br = new BroadcastReceiver() {
+    private BroadcastReceiver uiUpdated = new BroadcastReceiver() {
+
         @Override
         public void onReceive(Context context, Intent intent) {
-            updateGUI(intent); // or whatever method used to update your GUI fields
+            //This is the part where I get the timer value from the service and I update it every second, because I send the data from the service every second.
+            //txtPlantHarvestTimeLeft.setText(intent.getExtras().getString("countdown"));
+            int id2 = intent.getIntExtra("id", 0);
+            int id3 = intent.getIntExtra("id", 0);
+
+            int hideReset = intent.getIntExtra("hideReset", 0);
+            int showReset = intent.getIntExtra("showReset", 0);
+
+            txtPlantHarvestTimeLeft.setId(id2);
+
+            if (id == txtPlantHarvestTimeLeft.getId()) {
+                String s = intent.getExtras().getString("countdown");
+                txtPlantHarvestTimeLeft.setText(s + " " + id2 + id3);
+                if (hideReset == 1) {
+                    imgBtnResetHarvest.setVisibility(View.GONE);
+                    imgBtnStartHarvest.setVisibility(View.VISIBLE);
+                }
+
+                if (showReset == 2) {
+                    imgBtnResetHarvest.setVisibility(View.VISIBLE);
+                    imgBtnResetHarvest.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            stopService(new Intent(PlantActivity.this, BroadcastTimerService.class));
+                        }
+                    });
+                    imgBtnStartHarvest.setVisibility(View.GONE);
+                }
+            }
         }
     };
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        registerReceiver(br, new IntentFilter(BroadcastTimerService.COUNTDOWN_BR));
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        unregisterReceiver(br);
-    }
-
-    @Override
-    public void onStop() {
-        try {
-            unregisterReceiver(br);
-        } catch (Exception e) {
-            // Receiver was probably already stopped in onPause()
-        }
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    private void updateGUI(Intent intent) {
-        if (intent.getExtras() != null) {
-            int counter = intent.getIntExtra("countdown", 0);
-            Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
-            txtPlantHarvestTimeLeft.setText(counter + " days until harvest!");
-            txtPlantHarvestTimeLeft.setTypeface(myCustomFont);
-        }
-    }
 }
