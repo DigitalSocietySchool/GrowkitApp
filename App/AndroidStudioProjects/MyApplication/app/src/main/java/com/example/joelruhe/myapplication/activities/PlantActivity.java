@@ -523,7 +523,7 @@ public class PlantActivity extends AppCompatActivity {
 
             if (id == txtPlantHarvestTimeLeft.getId()) {
                 String s = intent.getExtras().getString("countdown");
-                txtPlantHarvestTimeLeft.setText(s + " " + id2 + id3);
+                txtPlantHarvestTimeLeft.setText(s + " days until harvest!" + id2 + id3);
                 if (hideReset == 1) {
                     imgBtnResetHarvest.setVisibility(View.GONE);
                     imgBtnStartHarvest.setVisibility(View.VISIBLE);
