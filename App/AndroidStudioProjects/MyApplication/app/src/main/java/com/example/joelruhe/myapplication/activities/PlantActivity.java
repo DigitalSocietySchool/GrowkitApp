@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.constraint.Constraints;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -159,17 +160,19 @@ public class PlantActivity extends AppCompatActivity {
         TextView tv = (TextView) v;
         Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
 
+
+
         int water = plantArray[1];
 
         if (water > 50) {
             final Tooltip tooltip = new Tooltip.Builder(tv)
-                    .setText("The water level of "+ getIntent().getStringExtra("plantNameNoCapital") +" is" +
+                    .setText("The water level of "+ getIntent().getStringExtra("DESCRIPTION") +" is" +
                             " " + getPlantData(id)[1] + "%. This is a healthy percentage for your plant!")
                     .setTypeface(myCustomFont2)
                     .setTextColor(getResources().getColor(R.color.colorBlue))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorBlueOpacity))
-                    .setCornerRadius(10f)
+                    .setCornerRadius(20f)
                     .setDismissOnClick(true)
                     .show();
             tooltip.setOnDismissListener(new OnDismissListener() {
@@ -184,12 +187,12 @@ public class PlantActivity extends AppCompatActivity {
             final Tooltip tooltip = new Tooltip.Builder(tv)
                     .setText("The water level is " + getPlantData(id)[1] + "% which is still high enough" +
                             "You will need to water your" +
-                            getIntent().getStringExtra("plantNameNoCapital") + " again in about 1 day.")
+                            getIntent().getStringExtra("DESCRIPTION")  + " again in about 1 day.")
                     .setTypeface(myCustomFont2)
                     .setTextColor(getResources().getColor(R.color.colorBlue))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorBlueOpacity))
-                    .setCornerRadius(10f)
+                    .setCornerRadius(20f)
                     .setDismissOnClick(true)
                     .show();
             tooltip.setOnDismissListener(new OnDismissListener() {
@@ -202,14 +205,19 @@ public class PlantActivity extends AppCompatActivity {
 
         if (water <= 33) {
             final Tooltip tooltip = new Tooltip.Builder(tv)
-                    .setText("The water level of your "+ getIntent().getStringExtra("plantNameNoCapital") +" is" +
+                    .setText("The water level of your "+ getIntent().getStringExtra("DESCRIPTION")  +" is" +
                             " " + getPlantData(id)[1] +  "%  at the moment, which is not healthy for your plant. " +
-                            "You will need to water your "+ getIntent().getStringExtra("plantNameNoCapital") +" again as soon as possible!")
+                            "You will need to water your "+ getIntent().getStringExtra("DESCRIPTION")  +" again as soon as possible!")
+                    .setArrowWidth(100f)
+                    .setMargin(50f)
+                    .setLineSpacing(15f,1f)
                     .setTypeface(myCustomFont2)
                     .setTextColor(getResources().getColor(R.color.colorBlue))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorBlueOpacity))
-                    .setCornerRadius(10f)
+                    .setCornerRadius(50f)
+                    .setPadding(50f)
+                    //.setGravity(Gravity.CENTER)
                     .setDismissOnClick(true)
                     .show();
             tooltip.setOnDismissListener(new OnDismissListener() {
@@ -229,7 +237,7 @@ public class PlantActivity extends AppCompatActivity {
 
         if (light >= 60 ) {
             final Tooltip tooltip = new Tooltip.Builder(tv)
-                    .setText("Your " + getIntent().getStringExtra("plantNameNoCapital") +  " plant it's " +
+                    .setText("Your " + getIntent().getStringExtra("DESCRIPTION")  +  " plant it's " +
                             "light level is " + getPlantData(id)[2] +  "%. This is healthy for the plant, keep it up!")
                     .setTypeface(myCustomFont2)
                     .setTextColor(getResources().getColor(R.color.colorYellow))
@@ -248,7 +256,7 @@ public class PlantActivity extends AppCompatActivity {
 
         if (light > 33 && light < 60 ) {
             final Tooltip tooltip = new Tooltip.Builder(tv)
-                    .setText("Your " + getIntent().getStringExtra("plantNameNoCapital") +  " plant it's " +
+                    .setText("Your " + getIntent().getStringExtra("DESCRIPTION")  +  " plant it's " +
                             "light level is " + getPlantData(id)[2] +  "%. The plant will survive, but it is not the optimal condition.")
                     .setTypeface(myCustomFont2)
                     .setTextColor(getResources().getColor(R.color.colorYellow))
@@ -267,7 +275,7 @@ public class PlantActivity extends AppCompatActivity {
 
         if (light <= 33) {
             final Tooltip tooltip = new Tooltip.Builder(tv)
-                    .setText("Your " + getIntent().getStringExtra("plantNameNoCapital") +  " is " +
+                    .setText("Your " + getIntent().getStringExtra("DESCRIPTION")  +  " is " +
                             "receiving " + getPlantData(id)[2] +  "% light right now. This not enough!" +
                             " Try to put it in a sunny place, or if not possible under a lamp.")
                     .setTypeface(myCustomFont2)
@@ -295,7 +303,7 @@ public class PlantActivity extends AppCompatActivity {
         if (temp > 18) {
             final Tooltip tooltip = new Tooltip.Builder(tv)
                     .setText("The current temperature" +
-                            " around your " + getIntent().getStringExtra("plantNameNoCapital") + " is " + getPlantData(id)[3] + ". " +
+                            " around your " + getIntent().getStringExtra("DESCRIPTION")  + " is " + getPlantData(id)[3] + ". " +
                             "Perfect!")
                     .setTypeface(myCustomFont2)
                     .setTextColor(getResources().getColor(R.color.colorRed))
@@ -316,7 +324,7 @@ public class PlantActivity extends AppCompatActivity {
         if (temp <= 18 ) {
             final Tooltip tooltip = new Tooltip.Builder(tv)
                     .setText("The current temperature" +
-                            " around your " + getIntent().getStringExtra("plantNameNoCapital") + " is " + getPlantData(id)[3] + " degrees Celsius, which is not good. " +
+                            " around your " + getIntent().getStringExtra("DESCRIPTION") + " is " + getPlantData(id)[3] + " degrees Celsius, which is not good. " +
                             "Try to get the efficient temperature for your plant.")
                     .setTypeface(myCustomFont2)
                     .setTextColor(getResources().getColor(R.color.colorRed))
@@ -345,7 +353,7 @@ public class PlantActivity extends AppCompatActivity {
         plantValues.child("Water").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                int water = Integer.valueOf(snapshot.getValue().toString());
+                    int water = Integer.valueOf(snapshot.getValue().toString());
                 waterValue = water;
                 if (water <= 33) {
                     alertWater.setVisibility(View.VISIBLE);

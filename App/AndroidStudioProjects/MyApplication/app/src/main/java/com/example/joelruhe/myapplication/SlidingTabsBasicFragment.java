@@ -235,4 +235,3 @@ public class SlidingTabsBasicFragment extends Fragment {
     }
 }
 
-
