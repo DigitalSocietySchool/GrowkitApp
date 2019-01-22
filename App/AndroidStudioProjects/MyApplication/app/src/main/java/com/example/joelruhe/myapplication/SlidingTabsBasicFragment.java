@@ -116,7 +116,7 @@ public class SlidingTabsBasicFragment extends Fragment {
 
             }
         });
-        }
+    }
 
     class SamplePagerAdapter extends PagerAdapter {
 
@@ -233,3 +233,4 @@ public class SlidingTabsBasicFragment extends Fragment {
         }
     }
 }
+

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -26,8 +27,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.NotNull;
 
 import java.util.ArrayList;
+
+import butterknife.OnItemSelected;
 
 public class AddPlantMenuActivity extends AppCompatActivity {
 
@@ -43,6 +47,8 @@ public class AddPlantMenuActivity extends AppCompatActivity {
     Toolbar addPlantMenuToolbar;
 
     int x;
+    String value = "";
+    int stickNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,57 +129,40 @@ public class AddPlantMenuActivity extends AppCompatActivity {
         });
 
 
+
         final ArrayList<String> allSticks = new ArrayList<String>();
 
         //Go to next activity when item in ListView is pressed
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String value = arrayList.get(i);
-                    allPlants.addChildEventListener(new ChildEventListener() {
-                        @Override
-                        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                            Integer.valueOf(dataSnapshot.getValue().toString());
-                            Long k = dataSnapshot.getChildrenCount();
-                            String string = String.valueOf(k);
-                            x = Integer.valueOf(string);
-                            Toast.makeText(AddPlantMenuActivity.this, x, Toast.LENGTH_SHORT).show();
-                            Log.e(dataSnapshot.getKey(),dataSnapshot.getChildrenCount() + "");
-                        }
-                        @Override
-                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                 value = "";
+                 value = arrayList.get(i);
 
-                        }
-
+                    allPlants.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                        }
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            int x = (int) dataSnapshot.getChildrenCount();
+                            stickNumber = x;
+                            allPlants.child("Stick"+stickNumber).child("Water").setValue("0");
+                            allPlants.child("Stick"+stickNumber).child("Light").setValue("0");
+                            allPlants.child("Stick"+stickNumber).child("Temperature").setValue("0");
+                            allPlants.child("Stick"+stickNumber).child("Duration").setValue("0");
+                            allPlants.child("Stick"+stickNumber).child("Name").setValue(value);
+                            }
 
                         @Override
-                        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
                         }
                     });
-
-                int stickNumber = x + 1;
-
-                final DatabaseReference plantUserPin = childUserPin.child("Plants");
-                //final DatabaseReference plantUserPin = plantUserPin.child("Plants");
-
-                //plantUserPin.push().setValue("Stick"+stickNumber);
-                plantUserPin.child("Stick"+stickNumber).child("Water").setValue("0");
 
                 Intent intent = new Intent(AddPlantMenuActivity.this, MainActivity.class);
                 intent.putExtra("plant", value);
                 finish();
                 startActivity(intent);
             }
+
         });
 
         plantmDatabase.addChildEventListener(new ChildEventListener() {
@@ -206,5 +195,6 @@ public class AddPlantMenuActivity extends AppCompatActivity {
 
             }
         });
+        }
     }
-}
+
