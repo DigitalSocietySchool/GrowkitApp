@@ -1,5 +1,6 @@
 package com.example.joelruhe.myapplication.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -7,13 +8,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.joelruhe.myapplication.R;
+import com.example.joelruhe.myapplication.activities.AddFriendsActivity;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MyFriendsFragment extends Fragment {
 
+    @BindView(R.id.fab)
     FloatingActionButton btn;
 
     @Override
@@ -31,5 +37,11 @@ public class MyFriendsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+    }
+
+    @OnClick(R.id.fab)
+    public void setBtn(View view){
+        Intent i = new Intent(getActivity(), AddFriendsActivity.class) {}
+        
     }
 }
