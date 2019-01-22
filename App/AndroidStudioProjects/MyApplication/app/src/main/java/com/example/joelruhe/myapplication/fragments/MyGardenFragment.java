@@ -24,6 +24,16 @@ import static android.view.View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION;
 
 public class MyGardenFragment extends Fragment {
 
+    @BindView(R.id.plant_name)
+    TextView plantName;
+    @BindView(R.id.plant_age)
+    TextView plantAge;
+    @BindView(R.id.plant_name2)
+    TextView plantName2;
+    @BindView(R.id.plant_age2)
+    TextView plantAge2;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,65 +47,9 @@ public class MyGardenFragment extends Fragment {
         Typeface myCustomFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_bold.ttf");
         Typeface myCustomFont2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_regular.ttf");
 
-        HorizontalScrollView scrollView = (HorizontalScrollView) view.findViewById(R.id.horizontalScrollView);
-
-        LinearLayout topLinearLayout = new LinearLayout(getActivity());
-        // topLinearLayout.setLayoutParams(android.widget.LinearLayout.LayoutParams.FILL_PARENT,android.widget.LinearLayout.LayoutParams.FILL_PARENT);
-        topLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
-
-        int[] slide_images = {
-                R.drawable.flowerpot,
-                R.drawable.flowerpot,
-                R.drawable.flowerpot,
-                R.drawable.flowerpot,
-                R.drawable.flowerpot,
-        };
-
-        String[] slide_headings = {
-                "Coriander",
-                "Strawberry",
-                "Spinach",
-                "Basil",
-                "Spider plant"
-        };
-
-        String[] age = {
-                "4 months old",
-                "2 months old",
-                "1 months old",
-                "3 months old",
-                "5 months old"
-        };
-
-
-        for (int i = 0; i < slide_images.length; i++){
-
-            final ImageView imageView = new ImageView (getActivity());
-            TextView myText = new TextView(getActivity());
-            myText.setX(470);
-            myText.setY(290);
-            myText.setText(slide_headings[i]);
-            myText.setTypeface(myCustomFont);
-            myText.setTextSize(20);
-            myText.setTextColor(getResources().getColor(R.color.colorPrimary));
-            topLinearLayout.addView(myText);
-
-            TextView myText2 = new TextView(getActivity());
-            myText2.setX(300);
-            myText2.setY(320);
-            myText2.setText(age[i]);
-            myText2.setTextColor(getResources().getColor(R.color.colorPrimary));
-            myText2.setTypeface(myCustomFont2);
-
-            topLinearLayout.addView(myText2);
-
-            imageView.setTag(i);
-
-            imageView.setImageResource(slide_images[i]);
-            imageView.setX(-300);
-
-            topLinearLayout.addView(imageView);
-        }
-        scrollView.addView(topLinearLayout);
+        plantName.setTypeface(myCustomFont);
+        plantAge.setTypeface(myCustomFont2);
+        plantName2.setTypeface(myCustomFont);
+        plantAge2.setTypeface(myCustomFont2);
     }
 }

@@ -124,19 +124,15 @@ public class SlidingTabsBasicFragment extends Fragment {
         //private ArrayList<Integer> slide_images = new ArrayList<>();
 
         private int[] slide_images = {
-                R.drawable.flowerpot,
-                R.drawable.flowerpot,
-                R.drawable.flowerpot,
-                R.drawable.flowerpot,
-                R.drawable.flowerpot,
+                R.drawable.coriander,
+                R.drawable.strawberry,
+                R.drawable.spinach
         };
 
         private String[] slide_headings = {
                 "Coriander",
                 "Strawberry",
-                "Spinach",
-                "Basil",
-                "Spider plant"
+                "Spinach"
         };
 
         @Override
