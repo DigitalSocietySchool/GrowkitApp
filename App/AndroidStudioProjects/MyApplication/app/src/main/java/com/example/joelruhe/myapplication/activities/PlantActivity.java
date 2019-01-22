@@ -175,11 +175,7 @@ public class PlantActivity extends AppCompatActivity {
 
         if (water > 50) {
             final Tooltip tooltip = new Tooltip.Builder(tv)
-<<<<<<< HEAD
-                    .setText("The water level of "+ getIntent().getStringExtra("plantNameNoCapital") + " is" +
-=======
                     .setText("The water level of "+ getIntent().getStringExtra("DESCRIPTION") +" is" +
->>>>>>> b5d6568e80dccd014773dff0cb10d8039258e4f3
                             " " + getPlantData(id)[1] + "%. This is a healthy percentage for your plant!")
                     .setTypeface(myCustomFont2)
                     .setTextColor(getResources().getColor(R.color.colorBlue))
