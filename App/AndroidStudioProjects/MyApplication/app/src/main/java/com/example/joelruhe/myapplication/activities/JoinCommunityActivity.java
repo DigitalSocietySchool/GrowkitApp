@@ -37,8 +37,7 @@ public class JoinCommunityActivity extends AppCompatActivity{
         cancelIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(JoinCommunityActivity.this, MainActivity.class));
-                finish();
+                onBackPressed();
             }
         });
 
@@ -81,12 +80,5 @@ public class JoinCommunityActivity extends AppCompatActivity{
                 startActivity(new Intent(JoinCommunityActivity.this, FireBaseAccLoginActivity.class));
             }
         });
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent i= new Intent(JoinCommunityActivity.this,MainActivity.class);
-        startActivity(i);
-        finish();
     }
 }

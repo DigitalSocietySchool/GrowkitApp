@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".authentication.firebase.FireBaseLoginActivity"
+    tools:context=".authentication.firebase.FireBaseAccLoginActivity"
     tools:layout_editor_absoluteY="25dp"
     android:background="@drawable/sign_up_network">
 

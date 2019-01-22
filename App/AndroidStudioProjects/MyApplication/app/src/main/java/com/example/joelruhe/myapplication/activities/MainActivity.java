@@ -163,7 +163,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         MenuItem target = menu.findItem(R.id.add_plant_button);
         target.setVisible(false);
+    }
 
+    public void onBackPressed() {
+        finish();
     }
 
     private void applyFontToMenuItem(MenuItem mi) {
@@ -212,7 +215,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else if (id == R.id.nav_my_network){
             Intent i = new Intent(MainActivity.this, JoinCommunityActivity.class);
             startActivity(i);
-            finish();
         }
         else if (id == R.id.nav_settings){
 

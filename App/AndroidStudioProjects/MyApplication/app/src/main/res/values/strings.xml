@@ -55,5 +55,10 @@
     <string name="health_high">Overall Health: High</string>
     <string name="harvest_left">left until harvest!</string>
     <string name="average_harvest">Average Harvest Time:</string>
+    <string name="my_garden">My Garden</string>
+    <string name="my_milestones">My Milestones</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

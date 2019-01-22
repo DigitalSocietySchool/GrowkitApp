@@ -5,8 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:fullBackupContent="true"
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -16,28 +16,35 @@
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MainActivity"
-            android:theme="@style/Toolbar"
-            />
-
+        <activity
+            android:name=".activities.MainActivity"
+            android:theme="@style/Toolbar" />
         <activity android:name=".activities.PlantActivity" />
         <activity android:name=".activities.AddPlantActivity" />
-        <activity android:name=".activities.AddPlantMenuActivity"
+        <activity
+            android:name=".activities.AddPlantMenuActivity"
             android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".activities.DatabaseActivity" />
-        <activity android:name=".authentication.LoginActivity" />
-        <activity android:name=".authentication.RegisterActivity" />
         <activity android:name=".activities.EnterPinActivity" />
-        <activity android:name=".activities.MyNetworkActivity"></activity>
+        <activity android:name=".activities.MyNetworkActivity" />
         <activity android:name=".activities.JoinCommunityActivity" />
         <activity android:name=".authentication.firebase.FireBaseSignUpActivity" />
         <activity android:name=".authentication.firebase.FireBaseAccLoginActivity" />
         <activity android:name=".authentication.firebase.FireBaseForgotPasswordActivity" />
 
-        <service android:name=".activities.BroadcastTimerService"></service>
+        <service android:name=".activities.BroadcastTimerService" />
+
+        <activity android:name=".activities.MyProfile" />
+        <activity android:name=".activities.MyProfileActivity" />
+        <activity android:name=".activities.FriendsActivity" />
+        <activity android:name=".activities.AddFriendsActivity" />
+        <activity android:name=".activities.AddFriendActivity" />
+        <activity android:name=".activities.MyFriendActivity" />
+        <activity android:name=".activities.ForumActivity"></activity>
     </application>
 
 </manifest>

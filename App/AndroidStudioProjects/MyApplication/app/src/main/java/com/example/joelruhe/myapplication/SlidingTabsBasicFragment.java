@@ -186,7 +186,6 @@ public class SlidingTabsBasicFragment extends Fragment {
                         intent.putExtra("plantImage", slide_images[position]);
                         intent.putExtra("plantNameNoCapital", "coriander");
                         startActivity(intent);
-
                     }
                     if (position == 1) {
                         Intent intent = new Intent(getActivity(), PlantActivity.class);

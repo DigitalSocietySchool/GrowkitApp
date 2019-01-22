@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/plantHealthToolbar"
-        layout="@layout/plant_screen_toolbar"
+        layout="@layout/back_screen_toolbar"
         app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +94,7 @@
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="159dp"
-                android:layout_height="105dp"
+                android:layout_height="123dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
@@ -103,7 +103,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/progressBar"
                 app:layout_constraintEnd_toEndOf="@+id/frameLayout"
                 app:layout_constraintStart_toEndOf="@+id/plant_circle_image"
-                app:layout_constraintTop_toTopOf="@+id/frameLayout">
+                app:layout_constraintTop_toTopOf="@+id/frameLayout"
+                app:layout_constraintVertical_bias="0.2">
 
                 <TextView
                     android:id="@+id/text_plant_data"
@@ -219,7 +220,6 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
                 app:layout_constraintEnd_toEndOf="@+id/frameLayout"
