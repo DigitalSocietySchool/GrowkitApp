@@ -14,5 +14,6 @@
     <color name="colorYellow">#F7C600</color>
     <color name="colorYellowOpacity">#1ef7c600</color>
     <color name="colorRed">#FA5B62</color>
+    <color name="colorDarkRed">#7f1a1e</color>
     <color name="colorRedOpacity">#1efa5b62</color>
 </resources>

@@ -22,7 +22,7 @@
             app:srcCompat="@drawable/ic_back" />
 
         <TextView
-            android:id="@+id/text_plant_data_toolbar"
+            android:id="@+id/text_toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"

@@ -43,7 +43,7 @@ public class PlantActivity extends AppCompatActivity {
     ImageView alertTemp;
     @BindView(R.id.text_plant_data)
     TextView txtPlantData;
-    @BindView(R.id.text_plant_data_toolbar)
+    @BindView(R.id.text_toolbar)
     TextView txtPlantDataToolbar;
     @BindView(R.id.text_plant_health)
     TextView txtPlantHealth;
@@ -95,8 +95,12 @@ public class PlantActivity extends AppCompatActivity {
         txtPlantData.setText(getIntent().getStringExtra("DESCRIPTION"));
         txtPlantDataToolbar.setText(getIntent().getStringExtra("DESCRIPTION"));
         final Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_bold.ttf");
+        final Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
         txtPlantData.setTypeface(myCustomFont);
         txtPlantDataToolbar.setTypeface(myCustomFont);
+
+        txtPlantHarvestTimeStart.setTypeface(myCustomFont2);
+        txtPlantHarvestTimeLeft.setTypeface(myCustomFont2);
 
         plantToolbar = findViewById(R.id.plantHealthToolbar);
         cancelIcon = plantToolbar.findViewById(R.id.btn_cancel);
@@ -119,6 +123,11 @@ public class PlantActivity extends AppCompatActivity {
         Intent serviceIntent = new Intent(PlantActivity.this, BroadcastTimerService.class);
         serviceIntent.putExtra("Id", id);
         startService(serviceIntent);
+
+        txtPlantHarvestTimeStart.setText("Tap on start to see how much time your " +
+                getIntent().getStringExtra("DESCRIPTION") + " needs to harvest");
+        txtPlantHarvestTimeStart.setTypeface(myCustomFont2);
+        txtPlantHarvestTimeLeft.setTypeface(myCustomFont2);
 
         imgBtnStartHarvest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -557,35 +566,54 @@ public class PlantActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             //This is the part where I get the timer value from the service and I update it every second, because I send the data from the service every second.
-            //txtPlantHarvestTimeLeft.setText(intent.getExtras().getString("countdown"));
             int id2 = intent.getIntExtra("id", 0);
-            int id3 = intent.getIntExtra("id", 0);
 
-            int hideReset = intent.getIntExtra("hideReset", 0);
             int showReset = intent.getIntExtra("showReset", 0);
+            int hideReset = intent.getIntExtra("hideReset", 0);
+
+            final Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
 
             txtPlantHarvestTimeLeft.setId(id2);
+            txtPlantHarvestTimeStart.setId(id2);
+            progressBar.setId(id2);
+            //imgBtnResetHarvest.setId(id2);
+            imgBtnStartHarvest.setId(id2);
 
-            if (id == txtPlantHarvestTimeLeft.getId()) {
+            if (id == txtPlantHarvestTimeLeft.getId() && id == txtPlantHarvestTimeStart.getId()
+                    && id == progressBar.getId()  /*&& id == imgBtnResetHarvest.getId()*/  && id == imgBtnStartHarvest.getId()) {
                 String s = intent.getExtras().getString("countdown");
-                txtPlantHarvestTimeLeft.setText(s + " days until harvest!" + id2 + id3);
+                String s2 = intent.getExtras().getString("harvestStarted");
+                int progress = intent.getIntExtra("progress", 0);
+
+                txtPlantHarvestTimeStart.setText(s2);
+                txtPlantHarvestTimeLeft.setText(s);
+
+                txtPlantHarvestTimeStart.setTypeface(myCustomFont2);
+                txtPlantHarvestTimeLeft.setTypeface(myCustomFont2);
+
+                progressBar.setProgress(progress);
+
+                if (showReset == 2) {
+                    imgBtnResetHarvest.setVisibility(View.VISIBLE);
+
+                    imgBtnResetHarvest.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            stopService(new Intent(PlantActivity.this, BroadcastTimerService.class));
+                            finish();
+                            startActivity(getIntent());
+                        }
+                    });
+
+                    imgBtnStartHarvest.setVisibility(View.GONE);
+                }
+
                 if (hideReset == 1) {
                     imgBtnResetHarvest.setVisibility(View.GONE);
                     imgBtnStartHarvest.setVisibility(View.VISIBLE);
                 }
 
-                if (showReset == 2) {
-                    imgBtnResetHarvest.setVisibility(View.VISIBLE);
-                    imgBtnResetHarvest.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            stopService(new Intent(PlantActivity.this, BroadcastTimerService.class));
-                        }
-                    });
-                    imgBtnStartHarvest.setVisibility(View.GONE);
-                }
             }
         }
     };
-
 }
