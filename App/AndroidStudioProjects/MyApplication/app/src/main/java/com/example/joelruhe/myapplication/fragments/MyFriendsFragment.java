@@ -21,6 +21,7 @@ public class MyFriendsFragment extends Fragment {
 
     @BindView(R.id.fab)
     FloatingActionButton btn;
+    Intent intent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,17 @@ public class MyFriendsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_my_garden, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_friends, container, false);
         ButterKnife.bind(this, view);
+
+        intent = new Intent(getActivity(), AddFriendsActivity.class);
+        btn  = (FloatingActionButton) view.findViewById(R.id.fab);
+        btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 
@@ -39,9 +49,13 @@ public class MyFriendsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
     }
 
+<<<<<<< HEAD
     @OnClick(R.id.fab)
     public void setBtn(View view){
         Intent i = new Intent(getActivity(), AddFriendsActivity.class) {}
         
     }
+=======
+
+>>>>>>> 2b2d9cc71081acd0968627db07d3018c3a936856
 }

@@ -77,7 +77,8 @@ public class MyNetworkActivity extends AppCompatActivity {
 
     @OnClick(R.id.forum)
     public void setForum() {
-
+        Intent i= new Intent(MyNetworkActivity.this, ForumActivity.class);
+        startActivity(i);
     }
 
     @OnClick(R.id.friends)

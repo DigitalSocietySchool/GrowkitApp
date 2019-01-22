@@ -177,11 +177,16 @@ public class PlantActivity extends AppCompatActivity {
             final Tooltip tooltip = new Tooltip.Builder(tv)
                     .setText("The water level of "+ getIntent().getStringExtra("DESCRIPTION") +" is" +
                             " " + getPlantData(id)[1] + "%. This is a healthy percentage for your plant!")
+                    .setArrowWidth(100f)
+                    .setMargin(50f)
+                    .setLineSpacing(15f,1f)
                     .setTypeface(myCustomFont2)
                     .setTextColor(getResources().getColor(R.color.colorBlue))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorBlueOpacity))
-                    .setCornerRadius(20f)
+                    .setCornerRadius(50f)
+                    .setPadding(50f)
+                    //.setGravity(Gravity.CENTER)
                     .setDismissOnClick(true)
                     .show();
             tooltip.setOnDismissListener(new OnDismissListener() {
@@ -197,11 +202,16 @@ public class PlantActivity extends AppCompatActivity {
                     .setText("The water level is " + getPlantData(id)[1] + "% which is still high enough" +
                             "You will need to water your" +
                             getIntent().getStringExtra("DESCRIPTION")  + " again in about 1 day.")
+                    .setArrowWidth(100f)
+                    .setMargin(50f)
+                    .setLineSpacing(15f,1f)
                     .setTypeface(myCustomFont2)
                     .setTextColor(getResources().getColor(R.color.colorBlue))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorBlueOpacity))
-                    .setCornerRadius(20f)
+                    .setCornerRadius(50f)
+                    .setPadding(50f)
+                    //.setGravity(Gravity.CENTER)
                     .setDismissOnClick(true)
                     .show();
             tooltip.setOnDismissListener(new OnDismissListener() {
@@ -248,11 +258,16 @@ public class PlantActivity extends AppCompatActivity {
             final Tooltip tooltip = new Tooltip.Builder(tv)
                     .setText("Your " + getIntent().getStringExtra("DESCRIPTION")  +  " plant it's " +
                             "light level is " + getPlantData(id)[2] +  "%. This is healthy for the plant, keep it up!")
+                    .setArrowWidth(100f)
+                    .setMargin(50f)
+                    .setLineSpacing(15f,1f)
                     .setTypeface(myCustomFont2)
                     .setTextColor(getResources().getColor(R.color.colorYellow))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorYellowOpacity))
-                    .setCornerRadius(10f)
+                    .setCornerRadius(50f)
+                    .setPadding(50f)
+                    //.setGravity(Gravity.CENTER)
                     .setDismissOnClick(true)
                     .show();
             tooltip.setOnDismissListener(new OnDismissListener() {
@@ -267,11 +282,16 @@ public class PlantActivity extends AppCompatActivity {
             final Tooltip tooltip = new Tooltip.Builder(tv)
                     .setText("Your " + getIntent().getStringExtra("DESCRIPTION")  +  " plant it's " +
                             "light level is " + getPlantData(id)[2] +  "%. The plant will survive, but it is not the optimal condition.")
+                    .setArrowWidth(100f)
+                    .setMargin(50f)
+                    .setLineSpacing(15f,1f)
                     .setTypeface(myCustomFont2)
                     .setTextColor(getResources().getColor(R.color.colorYellow))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorYellowOpacity))
-                    .setCornerRadius(10f)
+                    .setCornerRadius(50f)
+                    .setPadding(50f)
+                    //.setGravity(Gravity.CENTER)
                     .setDismissOnClick(true)
                     .show();
             tooltip.setOnDismissListener(new OnDismissListener() {
@@ -287,11 +307,16 @@ public class PlantActivity extends AppCompatActivity {
                     .setText("Your " + getIntent().getStringExtra("DESCRIPTION")  +  " is " +
                             "receiving " + getPlantData(id)[2] +  "% light right now. This not enough!" +
                             " Try to put it in a sunny place, or if not possible under a lamp.")
+                    .setArrowWidth(100f)
+                    .setMargin(50f)
+                    .setLineSpacing(15f,1f)
                     .setTypeface(myCustomFont2)
                     .setTextColor(getResources().getColor(R.color.colorYellow))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorYellowOpacity))
-                    .setCornerRadius(10f)
+                    .setCornerRadius(50f)
+                    .setPadding(50f)
+                    //.setGravity(Gravity.CENTER)
                     .setDismissOnClick(true)
                     .show();
 
@@ -314,11 +339,16 @@ public class PlantActivity extends AppCompatActivity {
                     .setText("The current temperature" +
                             " around your " + getIntent().getStringExtra("DESCRIPTION")  + " is " + getPlantData(id)[3] + ". " +
                             "Perfect!")
+                    .setArrowWidth(100f)
+                    .setMargin(50f)
+                    .setLineSpacing(15f,1f)
                     .setTypeface(myCustomFont2)
                     .setTextColor(getResources().getColor(R.color.colorRed))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorRedOpacity))
-                    .setCornerRadius(10f)
+                    .setCornerRadius(50f)
+                    .setPadding(50f)
+                    //.setGravity(Gravity.CENTER)
                     .setDismissOnClick(true)
                     .show();
 
@@ -335,11 +365,16 @@ public class PlantActivity extends AppCompatActivity {
                     .setText("The current temperature" +
                             " around your " + getIntent().getStringExtra("DESCRIPTION") + " is " + getPlantData(id)[3] + " degrees Celsius, which is not good. " +
                             "Try to get the efficient temperature for your plant.")
+                    .setArrowWidth(100f)
+                    .setMargin(50f)
+                    .setLineSpacing(15f,1f)
                     .setTypeface(myCustomFont2)
                     .setTextColor(getResources().getColor(R.color.colorRed))
                     .setGravity(gravity)
                     .setBackgroundColor(getResources().getColor(R.color.colorRedOpacity))
-                    .setCornerRadius(10f)
+                    .setCornerRadius(50f)
+                    .setPadding(50f)
+                    //.setGravity(Gravity.CENTER)
                     .setDismissOnClick(true)
                     .show();
 
