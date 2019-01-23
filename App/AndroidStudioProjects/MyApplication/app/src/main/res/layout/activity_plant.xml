@@ -168,10 +168,9 @@
             android:progressDrawable="@drawable/custom_progressbar"
             app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
             app:layout_constraintEnd_toEndOf="@+id/frameLayout"
-            app:layout_constraintHorizontal_bias="0.43"
             app:layout_constraintStart_toStartOf="@+id/frameLayout"
             app:layout_constraintTop_toTopOf="@+id/frameLayout"
-            app:layout_constraintVertical_bias="0.92"
+            app:layout_constraintVertical_bias="0.927"
             tools:ignore="MissingConstraints" />
 
         <FrameLayout
@@ -192,8 +191,8 @@
 
         <ImageButton
             android:id="@+id/img_btn_start_harvest"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/img_btn_reset_harvest"
             android:layout_marginBottom="8dp"
@@ -210,8 +209,8 @@
 
         <ImageButton
             android:id="@+id/img_btn_reset_harvest"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
@@ -397,22 +396,6 @@
             app:layout_constraintStart_toStartOf="@+id/frameLayout"
             app:layout_constraintTop_toTopOf="@+id/frameLayout"
             app:layout_constraintVertical_bias="1.0" />
-
-        <TextView
-            android:id="@+id/textView20"
-            android:layout_width="210dp"
-            android:layout_height="23dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/rounded_edit_text"
-            app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.47"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/frameLayout"
-            app:layout_constraintVertical_bias="0.913" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
