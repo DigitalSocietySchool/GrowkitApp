@@ -1,12 +1,18 @@
 package com.example.joelruhe.myapplication.fragments;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joelruhe.myapplication.R;
@@ -20,6 +26,8 @@ public class MyMilestonesFragment extends Fragment {
     TextView title;
     @BindView(R.id.post_date)
     TextView date;
+    Dialog myDialog;
+    FloatingActionButton btn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,8 +41,30 @@ public class MyMilestonesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         Typeface myCustomFont2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_regular.ttf");
 
+        myDialog = new Dialog(getActivity());
+
         title.setTypeface(myCustomFont2);
         date.setTypeface(myCustomFont2);
 
+        btn  = (FloatingActionButton) view.findViewById(R.id.fab2);
+        btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ShowPopUp();
+            }
+        });
+    }
+
+    public void ShowPopUp() {
+        ImageView txtClose;
+        myDialog.setContentView(R.layout.add_milestone_pop_up);
+        txtClose = myDialog.findViewById(R.id.imageView4);
+        txtClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
 }

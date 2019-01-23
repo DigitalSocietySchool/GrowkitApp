@@ -12,12 +12,13 @@ import android.widget.TextView;
 import com.example.joelruhe.myapplication.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class AddFriendActivity extends AppCompatActivity {
 
     @BindView(R.id.username)
     TextView username;
-    @BindView(R.id.user_description)
+    @BindView(R.id.experience)
     TextView userDescription;
     @BindView(R.id.text_friend_add)
     TextView textFriendAdd;
@@ -31,6 +32,7 @@ public class AddFriendActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
+        ButterKnife.bind(AddFriendActivity.this);
 
         username.setText("Yasmin Gail");
         userDescription.setText("Experience: 1 year");
@@ -45,7 +47,7 @@ public class AddFriendActivity extends AppCompatActivity {
         textFriendAdd.setTypeface(myCustomFont2);
         getTextFriendAdd.setTypeface(myCustomFont);
 
-        addFriendToolbar = findViewById(R.id.profileToolbar);
+        addFriendToolbar = findViewById(R.id.addFriendToolbar);
         cancelIcon = addFriendToolbar.findViewById(R.id.btn_cancel);
         cancelIcon.setOnClickListener(new View.OnClickListener() {
             @Override

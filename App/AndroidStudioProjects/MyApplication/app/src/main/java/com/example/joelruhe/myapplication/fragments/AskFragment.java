@@ -1,14 +1,33 @@
 package com.example.joelruhe.myapplication.fragments;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.joelruhe.myapplication.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class AskFragment extends Fragment {
+
+    @BindView(R.id.post_title)
+    TextView title;
+    @BindView(R.id.post_date)
+    TextView date;
+    Dialog myDialog;
+    FloatingActionButton btn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -19,6 +38,38 @@ public class AskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ask, container, false);
+        View view = inflater.inflate(R.layout.fragment_ask, container, false);
+        ButterKnife.bind(this, view);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        Typeface myCustomFont2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_regular.ttf");
+
+        myDialog = new Dialog(getActivity());
+        title.setTypeface(myCustomFont2);
+        date.setTypeface(myCustomFont2);
+
+        btn  = (FloatingActionButton) view.findViewById(R.id.fab2);
+        btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ShowPopUp();
+            }
+        });
+    }
+
+    public void ShowPopUp() {
+        ImageView txtClose;
+        myDialog.setContentView(R.layout.ask_question_pop_up);
+        txtClose = myDialog.findViewById(R.id.imageView4);
+        txtClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
 }

@@ -1,423 +1,316 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.MyMilestonesFragment">
 
-    <LinearLayout
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_add_white_24dp"
+        app:backgroundTint="@color/colorPrimary"
+        app:fabCustomSize="74dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.972"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.89" />
+
+    <ScrollView
+        android:id="@+id/scrollView4"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="330dp">
+            android:layout_height="300dp"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/post_title"
-                android:layout_width="262dp"
-                android:layout_height="31dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:text="Finally harvested my coriander"
-                android:textSize="@dimen/normal_text_size"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.801"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.107"
-                tools:ignore="DuplicateIds" />
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="330dp">
 
-            <TextView
-                android:id="@+id/post_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:text="December 20th, 2018"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.364"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.2"
-                tools:ignore="DuplicateIds" />
+                <TextView
+                    android:id="@+id/post_title"
+                    android:layout_width="262dp"
+                    android:layout_height="31dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:text="Finally harvested my coriander"
+                    android:textSize="@dimen/normal_text_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.611"
+                    app:layout_constraintStart_toEndOf="@+id/plant_circle_image6"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.103"
+                    tools:ignore="DuplicateIds" />
 
-            <ImageView
-                android:id="@+id/imageViewPlant2"
-                android:layout_width="54dp"
-                android:layout_height="66dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/plant_circle_image6"
-                app:layout_constraintEnd_toEndOf="@+id/plant_circle_image6"
-                app:layout_constraintStart_toStartOf="@+id/plant_circle_image6"
-                app:layout_constraintTop_toTopOf="@+id/plant_circle_image6"
-                app:srcCompat="@drawable/flowerpot"
-                tools:ignore="DuplicateIds" />
+                <TextView
+                    android:id="@+id/post_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:text="December 20th, 2018"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.134"
+                    app:layout_constraintStart_toEndOf="@+id/plant_circle_image6"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.201"
+                    tools:ignore="DuplicateIds" />
 
-            <TextView
-                android:id="@+id/plant_circle_image6"
-                android:layout_width="78dp"
-                android:layout_height="80dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/green_circle"
-                android:text=""
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.006"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.059"
-                tools:ignore="DuplicateIds" />
+                <ImageView
+                    android:id="@+id/imageViewPlant2"
+                    android:layout_width="54dp"
+                    android:layout_height="66dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/plant_circle_image6"
+                    app:layout_constraintEnd_toEndOf="@+id/plant_circle_image6"
+                    app:layout_constraintStart_toStartOf="@+id/plant_circle_image6"
+                    app:layout_constraintTop_toTopOf="@+id/plant_circle_image6"
+                    app:srcCompat="@drawable/flowerpot"
+                    tools:ignore="DuplicateIds" />
 
-            <ImageView
-                android:id="@+id/imageView10"
-                android:layout_width="348dp"
-                android:layout_height="188dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/coriander_background_milestones"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/post_date"
-                tools:ignore="DuplicateIds" />
+                <TextView
+                    android:id="@+id/plant_circle_image6"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/green_circle"
+                    android:text=""
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.063"
+                    tools:ignore="DuplicateIds" />
 
-            <TextView
-                android:id="@+id/likes2"
-                android:layout_width="93dp"
-                android:layout_height="45dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="276dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/rounded_text_view_opacity_red"
-                android:paddingLeft="50dp"
-                android:textAlignment="textStart"
-                android:textColor="@color/colorDarkRed"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0"
-                tools:ignore="DuplicateIds" />
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="348dp"
+                    android:layout_height="188dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/coriander_background_milestones"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/post_date"
+                    tools:ignore="DuplicateIds" />
 
-            <ImageView
-                android:id="@+id/like_icon2"
-                android:layout_width="29dp"
-                android:layout_height="29dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/ic_favorite_black_24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/likes2"
-                app:layout_constraintEnd_toEndOf="@+id/likes2"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/likes2"
-                app:layout_constraintTop_toTopOf="@+id/likes2"
-                app:layout_constraintVertical_bias="1.0"
-                tools:ignore="DuplicateIds" />
+                <TextView
+                    android:id="@+id/likes2"
+                    android:layout_width="93dp"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/rounded_text_view_opacity_red"
+                    android:paddingLeft="50dp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorDarkRed"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView10"
+                    app:layout_constraintHorizontal_bias="0.952"
+                    app:layout_constraintStart_toStartOf="@+id/imageView10"
+                    app:layout_constraintTop_toTopOf="@+id/imageView10"
+                    app:layout_constraintVertical_bias="0.951"
+                    tools:ignore="DuplicateIds" />
 
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="48dp"
-                android:layout_height="29dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="15"
-                android:textColor="@color/colorDarkRed"
-                android:gravity="center"
-                app:layout_constraintBottom_toBottomOf="@+id/likes2"
-                app:layout_constraintEnd_toEndOf="@+id/likes2"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/likes2"
-                app:layout_constraintTop_toTopOf="@+id/likes2"
-                app:layout_constraintVertical_bias="1.0" />
+                <ImageView
+                    android:id="@+id/like_icon2"
+                    android:layout_width="29dp"
+                    android:layout_height="29dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_favorite_black_24dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/likes2"
+                    app:layout_constraintEnd_toEndOf="@+id/likes2"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/likes2"
+                    app:layout_constraintTop_toTopOf="@+id/likes2"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:ignore="DuplicateIds" />
 
-        </android.support.constraint.ConstraintLayout>
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="48dp"
+                    android:layout_height="29dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center"
+                    android:text="15"
+                    android:textColor="@color/colorDarkRed"
+                    app:layout_constraintBottom_toBottomOf="@+id/likes2"
+                    app:layout_constraintEnd_toEndOf="@+id/likes2"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/likes2"
+                    app:layout_constraintTop_toTopOf="@+id/likes2"
+                    app:layout_constraintVertical_bias="1.0" />
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="330dp">
+            </android.support.constraint.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/post_title"
-                android:layout_width="272dp"
-                android:layout_height="36dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:text="My strawberries started sprouting"
-                android:textSize="@dimen/normal_text_size"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.885"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.087"
-                tools:ignore="DuplicateIds" />
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="330dp">
 
-            <TextView
-                android:id="@+id/post_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:text="November 27th, 2018"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.364"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.2"
-                tools:ignore="DuplicateIds" />
+                <TextView
+                    android:id="@+id/post_title"
+                    android:layout_width="262dp"
+                    android:layout_height="49dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:text="My strawberries started sprouting"
+                    android:textSize="@dimen/normal_text_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.611"
+                    app:layout_constraintStart_toEndOf="@+id/plant_circle_image6"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.043"
+                    tools:ignore="DuplicateIds" />
 
-            <ImageView
-                android:id="@+id/imageViewPlant"
-                android:layout_width="54dp"
-                android:layout_height="66dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/plant_circle_image5"
-                app:layout_constraintEnd_toEndOf="@+id/plant_circle_image5"
-                app:layout_constraintStart_toStartOf="@+id/plant_circle_image5"
-                app:layout_constraintTop_toTopOf="@+id/plant_circle_image5"
-                app:srcCompat="@drawable/flowerpot" />
+                <TextView
+                    android:id="@+id/post_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:text="November 27th, 2018"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.134"
+                    app:layout_constraintStart_toEndOf="@+id/plant_circle_image6"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.201"
+                    tools:ignore="DuplicateIds" />
 
-            <TextView
-                android:id="@+id/plant_circle_image5"
-                android:layout_width="78dp"
-                android:layout_height="80dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/green_circle"
-                android:text=""
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.006"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.059" />
+                <ImageView
+                    android:id="@+id/imageViewPlant2"
+                    android:layout_width="54dp"
+                    android:layout_height="66dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/plant_circle_image6"
+                    app:layout_constraintEnd_toEndOf="@+id/plant_circle_image6"
+                    app:layout_constraintStart_toStartOf="@+id/plant_circle_image6"
+                    app:layout_constraintTop_toTopOf="@+id/plant_circle_image6"
+                    app:srcCompat="@drawable/flowerpot"
+                    tools:ignore="DuplicateIds" />
 
-            <ImageView
-                android:id="@+id/imageView11"
-                android:layout_width="348dp"
-                android:layout_height="188dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/strawberry_background_milestones"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/post_date" />
+                <TextView
+                    android:id="@+id/plant_circle_image6"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/green_circle"
+                    android:text=""
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.063"
+                    tools:ignore="DuplicateIds" />
 
-            <TextView
-                android:id="@+id/likes3"
-                android:layout_width="93dp"
-                android:layout_height="45dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="276dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/rounded_text_view_opacity_red"
-                android:paddingLeft="50dp"
-                android:textAlignment="textStart"
-                android:textColor="@color/colorDarkRed"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="348dp"
+                    android:layout_height="188dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/coriander_background_milestones"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/post_date"
+                    tools:ignore="DuplicateIds" />
 
-            <ImageView
-                android:id="@+id/like_icon3"
-                android:layout_width="29dp"
-                android:layout_height="29dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/ic_favorite_black_24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/likes3"
-                app:layout_constraintEnd_toEndOf="@+id/likes3"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/likes3"
-                app:layout_constraintTop_toTopOf="@+id/likes3"
-                app:layout_constraintVertical_bias="1.0" />
+                <TextView
+                    android:id="@+id/likes2"
+                    android:layout_width="93dp"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/rounded_text_view_opacity_red"
+                    android:paddingLeft="50dp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorDarkRed"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView10"
+                    app:layout_constraintHorizontal_bias="0.952"
+                    app:layout_constraintStart_toStartOf="@+id/imageView10"
+                    app:layout_constraintTop_toTopOf="@+id/imageView10"
+                    app:layout_constraintVertical_bias="0.951"
+                    tools:ignore="DuplicateIds" />
 
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="48dp"
-                android:layout_height="29dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="20"
-                android:textColor="@color/colorDarkRed"
-                android:gravity="center"
-                app:layout_constraintBottom_toBottomOf="@+id/likes3"
-                app:layout_constraintEnd_toEndOf="@+id/likes3"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/likes3"
-                app:layout_constraintTop_toTopOf="@+id/likes3"
-                app:layout_constraintVertical_bias="1.0" />
+                <ImageView
+                    android:id="@+id/like_icon2"
+                    android:layout_width="29dp"
+                    android:layout_height="29dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_favorite_black_24dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/likes2"
+                    app:layout_constraintEnd_toEndOf="@+id/likes2"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/likes2"
+                    app:layout_constraintTop_toTopOf="@+id/likes2"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:ignore="DuplicateIds" />
 
-        </android.support.constraint.ConstraintLayout>
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="48dp"
+                    android:layout_height="29dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center"
+                    android:text="15"
+                    android:textColor="@color/colorDarkRed"
+                    app:layout_constraintBottom_toBottomOf="@+id/likes2"
+                    app:layout_constraintEnd_toEndOf="@+id/likes2"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/likes2"
+                    app:layout_constraintTop_toTopOf="@+id/likes2"
+                    app:layout_constraintVertical_bias="1.0" />
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="330dp">
+            </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/post_title"
-                android:layout_width="262dp"
-                android:layout_height="31dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:text="Finally harvested my coriander"
-                android:textSize="@dimen/normal_text_size"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.801"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.107"
-                tools:ignore="DuplicateIds" />
+    </ScrollView>
 
-            <TextView
-                android:id="@+id/post_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:text="December 20th, 2018"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.364"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.2"
-                tools:ignore="DuplicateIds" />
-
-            <ImageView
-                android:id="@+id/imageViewPlant"
-                android:layout_width="54dp"
-                android:layout_height="66dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/plant_circle_image5"
-                app:layout_constraintEnd_toEndOf="@+id/plant_circle_image5"
-                app:layout_constraintStart_toStartOf="@+id/plant_circle_image5"
-                app:layout_constraintTop_toTopOf="@+id/plant_circle_image5"
-                app:srcCompat="@drawable/flowerpot"
-                tools:ignore="DuplicateIds" />
-
-            <TextView
-                android:id="@+id/plant_circle_image5"
-                android:layout_width="78dp"
-                android:layout_height="80dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/green_circle"
-                android:text=""
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.006"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.059"
-                tools:ignore="DuplicateIds" />
-
-            <ImageView
-                android:id="@+id/imageView9"
-                android:layout_width="348dp"
-                android:layout_height="188dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/coriander_background_milestones"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/post_date" />
-
-            <TextView
-                android:id="@+id/likes"
-                android:layout_width="93dp"
-                android:layout_height="45dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="276dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/rounded_text_view_opacity_red"
-                android:paddingLeft="50dp"
-                android:textAlignment="textStart"
-                android:textColor="@color/colorDarkRed"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
-
-            <ImageView
-                android:id="@+id/like_icon"
-                android:layout_width="29dp"
-                android:layout_height="29dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/ic_favorite_black_24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/likes"
-                app:layout_constraintEnd_toEndOf="@+id/likes"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/likes"
-                app:layout_constraintTop_toTopOf="@+id/likes"
-                app:layout_constraintVertical_bias="1.0" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="48dp"
-                android:layout_height="29dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="15"
-                android:textColor="@color/colorDarkRed"
-                android:gravity="center"
-                app:layout_constraintBottom_toBottomOf="@+id/likes"
-                app:layout_constraintEnd_toEndOf="@+id/likes"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/likes"
-                app:layout_constraintTop_toTopOf="@+id/likes"
-                app:layout_constraintVertical_bias="1.0"
-                tools:ignore="DuplicateIds" />
-
-        </android.support.constraint.ConstraintLayout>
-
-    </LinearLayout>
-
-</ScrollView>
+</android.support.constraint.ConstraintLayout>

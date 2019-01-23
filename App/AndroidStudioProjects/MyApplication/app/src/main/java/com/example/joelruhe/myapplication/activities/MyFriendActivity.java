@@ -26,6 +26,8 @@ public class MyFriendActivity extends AppCompatActivity {
     TextView username;
     @BindView(R.id.experience)
     TextView experience;
+    @BindView(R.id.btn_add_friend_text)
+    TextView btnAddFriend;
     @BindView(R.id.text_toolbar)
     TextView txtPlantDataToolbar;
 
@@ -39,12 +41,6 @@ public class MyFriendActivity extends AppCompatActivity {
 
         ButterKnife.bind(MyFriendActivity.this);
 
-        TabLayout tabLayout = findViewById(R.id.id_tabs);
-        final CustomViewPager viewPager = findViewById(R.id.viewPagerMyProfile);
-
-        tabLayout.addTab(tabLayout.newTab().setText("Garden"));
-        tabLayout.addTab(tabLayout.newTab().setText("Milestones"));
-
         final Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_bold.ttf");
         final Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
 
@@ -53,7 +49,29 @@ public class MyFriendActivity extends AppCompatActivity {
         username.setTypeface(myCustomFont);
         experience.setTypeface(myCustomFont2);
 
-        txtPlantDataToolbar.setText("My Garden");
+        txtPlantDataToolbar.setText("My Friends");
+        txtPlantDataToolbar.setTypeface(myCustomFont);
+
+        plantToolbar = findViewById(R.id.profileToolbar);
+        cancelIcon = plantToolbar.findViewById(R.id.btn_cancel);
+        cancelIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
+        TabLayout tabLayout = findViewById(R.id.id_tabs);
+        final CustomViewPager viewPager = findViewById(R.id.viewPagerMyFriends);
+        tabLayout.addTab(tabLayout.newTab().setText("Garden"));
+        tabLayout.addTab(tabLayout.newTab().setText("Milestones"));
+
+        username.setTypeface(myCustomFont);
+        btnAddFriend.setTypeface(myCustomFont2);
+        experience.setTypeface(myCustomFont2);
+
+        txtPlantDataToolbar.setText("My Friends");
         txtPlantDataToolbar.setTypeface(myCustomFont);
 
         plantToolbar = findViewById(R.id.profileToolbar);

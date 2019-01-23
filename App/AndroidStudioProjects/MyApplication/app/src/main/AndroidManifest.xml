@@ -40,8 +40,10 @@
 
         <activity android:name=".activities.MyProfile" />
         <activity android:name=".activities.MyProfileActivity" />
-        <activity android:name=".activities.FriendsActivity" />
-        <activity android:name=".activities.AddFriendsActivity" />
+        <activity android:name=".activities.FriendsActivity"
+            android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".activities.AddFriendsActivity"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".activities.AddFriendActivity" />
         <activity android:name=".activities.MyFriendActivity" />
         <activity android:name=".activities.ForumActivity"></activity>

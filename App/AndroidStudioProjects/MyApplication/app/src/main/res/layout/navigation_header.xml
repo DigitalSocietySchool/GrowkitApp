@@ -14,7 +14,7 @@
         android:layout_height="77dp"
         android:layout_marginEnd="8dp"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/userpicture"
+        android:src="@drawable/faces_3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
