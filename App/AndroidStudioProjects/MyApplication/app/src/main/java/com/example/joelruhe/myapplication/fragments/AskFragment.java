@@ -45,7 +45,7 @@ public class AskFragment extends Fragment {
 
         myDialog = new Dialog(getActivity());
 
-        btn  = (FloatingActionButton) view.findViewById(R.id.fab2);
+        btn  = (FloatingActionButton) view.findViewById(R.id.fab_ask_forum);
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ShowPopUp();
