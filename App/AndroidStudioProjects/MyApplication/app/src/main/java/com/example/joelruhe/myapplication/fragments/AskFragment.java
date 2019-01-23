@@ -22,10 +22,6 @@ import butterknife.ButterKnife;
 
 public class AskFragment extends Fragment {
 
-    @BindView(R.id.post_title)
-    TextView title;
-    @BindView(R.id.post_date)
-    TextView date;
     Dialog myDialog;
     FloatingActionButton btn;
 
@@ -48,8 +44,6 @@ public class AskFragment extends Fragment {
         Typeface myCustomFont2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_regular.ttf");
 
         myDialog = new Dialog(getActivity());
-        title.setTypeface(myCustomFont2);
-        date.setTypeface(myCustomFont2);
 
         btn  = (FloatingActionButton) view.findViewById(R.id.fab2);
         btn.setOnClickListener(new View.OnClickListener() {
