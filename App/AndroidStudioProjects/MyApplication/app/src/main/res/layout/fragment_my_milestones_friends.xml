@@ -70,7 +70,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/plant_circle_image6"
                     app:layout_constraintStart_toStartOf="@+id/plant_circle_image6"
                     app:layout_constraintTop_toTopOf="@+id/plant_circle_image6"
-                    app:srcCompat="@drawable/flowerpot"
+                    app:srcCompat="@drawable/faces_1"
                     tools:ignore="DuplicateIds" />
 
                 <TextView
@@ -204,7 +204,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/plant_circle_image6"
                     app:layout_constraintStart_toStartOf="@+id/plant_circle_image6"
                     app:layout_constraintTop_toTopOf="@+id/plant_circle_image6"
-                    app:srcCompat="@drawable/flowerpot"
+                    app:srcCompat="@drawable/faces_2"
                     tools:ignore="DuplicateIds" />
 
                 <TextView
