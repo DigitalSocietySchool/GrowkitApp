@@ -21,6 +21,7 @@ import butterknife.OnClick;
 
 public class MyFriendsFragment extends Fragment {
 
+    @BindView(R.id.fab)
     FloatingActionButton btn;
     Intent intent;
 
@@ -70,6 +71,7 @@ public class MyFriendsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
     }
 
+<<<<<<< HEAD
     @OnClick({R.id.textView13, R.id.textView14, R.id.textView15, R.id.textView16, R.id.textView17})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -91,5 +93,15 @@ public class MyFriendsFragment extends Fragment {
             default:
         }
     }
+=======
+<<<<<<< HEAD
+    @OnClick(R.id.fab)
+    public void setBtn(View view){
+        Intent i = new Intent(getActivity(), AddFriendsActivity.class) {}
+        
+    }
+=======
+>>>>>>> b16ad065850bf61cde947e3d657aff6390a0346d
 
+>>>>>>> 2b2d9cc71081acd0968627db07d3018c3a936856
 }
