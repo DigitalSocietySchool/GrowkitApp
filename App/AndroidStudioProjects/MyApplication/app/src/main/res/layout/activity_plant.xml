@@ -94,7 +94,7 @@
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="159dp"
-                android:layout_height="123dp"
+                android:layout_height="100dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
@@ -163,8 +163,8 @@
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="222dp"
-                android:layout_height="36dp"
+                android:layout_width="206dp"
+                android:layout_height="21dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
@@ -172,9 +172,10 @@
                 android:progressDrawable="@drawable/custom_progressbar"
                 app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
                 app:layout_constraintEnd_toEndOf="@+id/frameLayout"
+                app:layout_constraintHorizontal_bias="0.43"
                 app:layout_constraintStart_toStartOf="@+id/frameLayout"
                 app:layout_constraintTop_toTopOf="@+id/frameLayout"
-                app:layout_constraintVertical_bias="0.926"
+                app:layout_constraintVertical_bias="0.92"
                 tools:ignore="MissingConstraints" />
 
     <FrameLayout
@@ -196,36 +197,37 @@
 
             <ImageButton
                 android:id="@+id/img_btn_start_harvest"
-                android:layout_width="43dp"
-                android:layout_height="39dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignTop="@+id/img_btn_reset_harvest"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:background="@color/transparent"
                 android:scaleType="fitXY"
-                app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
-                app:layout_constraintEnd_toStartOf="@+id/progressBar"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/frameLayout"
-                app:layout_constraintTop_toBottomOf="@+id/plant_circle_image5"
-                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintBottom_toBottomOf="@+id/textView19"
+                app:layout_constraintEnd_toEndOf="@+id/textView19"
+                app:layout_constraintStart_toStartOf="@+id/textView19"
+                app:layout_constraintTop_toTopOf="@+id/textView19"
                 app:srcCompat="@drawable/ic_play_circle_filled_black_24dp" />
 
             <ImageButton
                 android:id="@+id/img_btn_reset_harvest"
-                android:layout_width="43dp"
-                android:layout_height="39dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/transparent"
                 android:scaleType="fitXY"
-                app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
-                app:layout_constraintEnd_toEndOf="@+id/frameLayout"
-                app:layout_constraintStart_toEndOf="@+id/progressBar"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                app:layout_constraintBottom_toBottomOf="@+id/textView18"
+                app:layout_constraintEnd_toEndOf="@+id/textView18"
+                app:layout_constraintStart_toStartOf="@+id/textView18"
+                app:layout_constraintTop_toTopOf="@+id/textView18"
                 app:srcCompat="@drawable/ic_restore_black_24dp" />
 
             <ImageView
@@ -368,6 +370,54 @@
                 app:layout_constraintStart_toStartOf="@+id/temp_icon"
                 app:layout_constraintTop_toTopOf="@+id/temp_icon"
                 app:srcCompat="@drawable/temperature_icon" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_text_view_opacity"
+                app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.971"
+                app:layout_constraintStart_toStartOf="@+id/frameLayout"
+                app:layout_constraintTop_toTopOf="@+id/frameLayout"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_text_view_opacity"
+                app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/frameLayout"
+                app:layout_constraintTop_toTopOf="@+id/frameLayout"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="210dp"
+                android:layout_height="23dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_edit_text"
+                app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.47"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/frameLayout"
+                app:layout_constraintVertical_bias="0.913" />
 
         </android.support.constraint.ConstraintLayout>
     </RelativeLayout>
