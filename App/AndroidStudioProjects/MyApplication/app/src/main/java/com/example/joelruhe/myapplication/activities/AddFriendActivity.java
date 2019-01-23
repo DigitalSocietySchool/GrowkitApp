@@ -27,6 +27,7 @@ public class AddFriendActivity extends AppCompatActivity {
 
     Toolbar addFriendToolbar;
     ImageButton cancelIcon;
+    TextView textToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class AddFriendActivity extends AppCompatActivity {
         getTextFriendAdd.setTypeface(myCustomFont);
 
         addFriendToolbar = findViewById(R.id.addFriendToolbar);
+        textToolbar = addFriendToolbar.findViewById(R.id.text_toolbar);
         cancelIcon = addFriendToolbar.findViewById(R.id.btn_cancel);
         cancelIcon.setOnClickListener(new View.OnClickListener() {
             @Override
