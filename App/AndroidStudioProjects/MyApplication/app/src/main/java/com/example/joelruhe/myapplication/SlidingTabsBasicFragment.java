@@ -132,7 +132,7 @@ public class SlidingTabsBasicFragment extends Fragment {
         private String[] slide_headings = {
                 "Coriander",
                 "Strawberry",
-                "Spinach"
+                "   Spinach "
         };
 
         @Override

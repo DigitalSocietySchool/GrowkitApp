@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -35,6 +36,17 @@ public class MyFriendsFragment extends Fragment {
     TextView textView16;
     @BindView(R.id.textView17)
     TextView textView17;
+
+    @BindView(R.id.id1)
+    ConstraintLayout id1;
+    @BindView(R.id.id2)
+    ConstraintLayout id2;
+    @BindView(R.id.id3)
+    ConstraintLayout id3;
+    @BindView(R.id.id4)
+    ConstraintLayout id4;
+    @BindView(R.id.id5)
+    ConstraintLayout id5;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,22 +83,22 @@ public class MyFriendsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
     }
 
-    @OnClick({R.id.textView13, R.id.textView14, R.id.textView15, R.id.textView16, R.id.textView17})
+    @OnClick({R.id.id1, R.id.id2, R.id.id3, R.id.id4, R.id.id5})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.textView13:
+            case R.id.id1:
                 startActivity(new Intent(getActivity(), MyFriendActivity.class));
                 break;
-            case R.id.textView14:
+            case R.id.id2:
                 startActivity(new Intent(getActivity(), MyFriendActivity.class));
                 break;
-            case R.id.textView15:
+            case R.id.id3:
                 startActivity(new Intent(getActivity(), MyFriendActivity.class));
                 break;
-            case R.id.textView16:
+            case R.id.id4:
                 startActivity(new Intent(getActivity(), MyFriendActivity.class));
                 break;
-            case R.id.textView17:
+            case R.id.id5:
                 startActivity(new Intent(getActivity(), MyFriendActivity.class));
                 break;
             default:

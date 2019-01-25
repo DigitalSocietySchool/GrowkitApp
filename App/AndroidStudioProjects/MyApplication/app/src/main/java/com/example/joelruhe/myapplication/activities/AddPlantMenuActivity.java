@@ -41,7 +41,6 @@ public class AddPlantMenuActivity extends AppCompatActivity {
 
     Toolbar addPlantMenuToolbar;
 
-    int x;
     String value = "";
     int stickNumber;
 

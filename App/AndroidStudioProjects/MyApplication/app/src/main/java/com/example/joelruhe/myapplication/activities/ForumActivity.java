@@ -64,7 +64,7 @@ public class ForumActivity extends AppCompatActivity {
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        viewPager.setPagingEnabled(false);
+        viewPager.setPagingEnabled(true);
 
         PagerAdapter4 pagerAdapter = new PagerAdapter4(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);

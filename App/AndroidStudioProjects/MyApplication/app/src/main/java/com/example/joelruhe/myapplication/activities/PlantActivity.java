@@ -68,6 +68,11 @@ public class PlantActivity extends AppCompatActivity {
     @BindView(R.id.imageViewPlant)
     ImageView imgPlant;
 
+    @BindView(R.id.textView18)
+    TextView reset;
+    @BindView(R.id.textView19)
+    TextView play;
+
     ProgressBar progressBar;
     Toolbar plantToolbar;
     ImageButton cancelIcon;
@@ -89,6 +94,7 @@ public class PlantActivity extends AppCompatActivity {
         registerReceiver(uiUpdated, new IntentFilter("COUNTDOWN_UPDATED"));
 
         imgBtnResetHarvest.setVisibility(View.GONE);
+        reset.setVisibility(View.GONE);
 
         progressBar = findViewById(R.id.progressBar);
 
@@ -570,6 +576,7 @@ public class PlantActivity extends AppCompatActivity {
 
             int showReset = intent.getIntExtra("showReset", 0);
             int hideReset = intent.getIntExtra("hideReset", 0);
+            int hideResetView = intent.getIntExtra("hideResetView", 0);
 
             final Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
 
@@ -595,6 +602,7 @@ public class PlantActivity extends AppCompatActivity {
 
                 if (showReset == 2) {
                     imgBtnResetHarvest.setVisibility(View.VISIBLE);
+                    reset.setVisibility(View.VISIBLE);
 
                     imgBtnResetHarvest.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -606,11 +614,14 @@ public class PlantActivity extends AppCompatActivity {
                     });
 
                     imgBtnStartHarvest.setVisibility(View.GONE);
+                    play.setVisibility(View.GONE);
                 }
 
-                if (hideReset == 1) {
+                if (hideReset == 1 && hideResetView == 1) {
                     imgBtnResetHarvest.setVisibility(View.GONE);
+                    reset.setVisibility(View.GONE);
                     imgBtnStartHarvest.setVisibility(View.VISIBLE);
+                    play.setVisibility(View.VISIBLE);
                 }
 
             }

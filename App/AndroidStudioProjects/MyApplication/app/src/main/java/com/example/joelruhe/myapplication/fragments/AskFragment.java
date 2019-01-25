@@ -36,21 +36,24 @@ public class AskFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ask, container, false);
         ButterKnife.bind(this, view);
-        return view;
-    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         Typeface myCustomFont2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_regular.ttf");
 
         myDialog = new Dialog(getActivity());
 
-        btn  = (FloatingActionButton) view.findViewById(R.id.fab_ask_forum);
+        btn  = view.findViewById(R.id.fab_ask_forum);
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ShowPopUp();
             }
         });
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+
     }
 
     public void ShowPopUp() {

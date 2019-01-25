@@ -36,7 +36,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/userpicture"
+            android:src="@drawable/faces_3"
             app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
             app:layout_constraintEnd_toEndOf="@+id/frameLayout"
             app:layout_constraintHorizontal_bias="0.032"
@@ -104,7 +104,6 @@
         android:layout_width="match_parent"
         android:layout_height="193dp"
         android:layout_marginTop="64dp"
-        android:layout_marginBottom="8dp"
         android:background="@color/colorPrimaryOpacity"
         android:elevation="-1dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -133,6 +132,8 @@
         android:id="@+id/id_tabs"
         android:layout_width="match_parent"
         android:layout_height="51dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -142,28 +143,27 @@
 
     </android.support.design.widget.TabLayout>
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="2dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/border_navigation_bar_vertical"
-            app:layout_constraintBottom_toTopOf="@+id/viewPagerMyProfile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/id_tabs"
-            app:layout_constraintTop_toTopOf="@+id/id_tabs"
-            app:layout_constraintVertical_bias="0.0" />
+    <View
+        android:id="@+id/view"
+        android:layout_width="2dp"
+        android:layout_height="50dp"
+        android:background="@drawable/border_navigation_bar_vertical"
+        app:layout_constraintBottom_toTopOf="@+id/viewPagerMyProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/id_tabs"
+        app:layout_constraintTop_toTopOf="@+id/id_tabs"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.example.joelruhe.myapplication.CustomViewPager
         android:id="@+id/viewPagerMyProfile"
         android:layout_width="match_parent"
-        android:layout_height="356dp"
+        android:layout_height="258dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_tabs" />
+        app:layout_constraintTop_toBottomOf="@+id/id_tabs"
+        app:layout_constraintVertical_bias="1.0" />
 
         <!--<FrameLayout
                 android:id="@+id/fragment_container"

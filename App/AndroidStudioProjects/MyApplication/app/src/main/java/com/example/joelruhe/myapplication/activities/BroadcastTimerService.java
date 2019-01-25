@@ -101,6 +101,7 @@ public class BroadcastTimerService extends Service {
         //sendBroadcast(new Intent(USER_STOP_SERVICE_REQUEST));
         Intent i = new Intent("COUNTDOWN_UPDATED");
         i.putExtra("hideReset", 1);
+        i.putExtra("hideResetView", 1);
         sendBroadcast(i);
         if (Count != null)
         Count.cancel();

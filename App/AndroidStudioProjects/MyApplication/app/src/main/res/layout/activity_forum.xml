@@ -17,14 +17,12 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="8dp"
-        android:layout_marginBottom="492dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/toolbar_drop_shadow"
-        app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintBottom_toBottomOf="@+id/forumToolbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myFriendsToolbar"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/forumToolbar" />
 
             <View
                 android:id="@+id/view2"
@@ -55,25 +53,24 @@
         android:id="@+id/viewPagerForum"
         android:layout_width="match_parent"
         android:layout_height="444dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.926" />
 
-            <android.support.design.widget.TabLayout
-                android:id="@+id/id_tabs"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="64dp"
-                app:layout_constraintBottom_toTopOf="@+id/viewPagerMyFriends"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.115">
+    <android.support.design.widget.TabLayout
+        android:id="@+id/id_tabs"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintBottom_toTopOf="@+id/viewPagerMyFriends"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.115">
 
-            </android.support.design.widget.TabLayout>
+    </android.support.design.widget.TabLayout>
 </android.support.constraint.ConstraintLayout>
