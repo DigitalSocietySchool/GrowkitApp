@@ -42,12 +42,14 @@ public class MyProfileActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.id_tabs);
         final CustomViewPager viewPager = findViewById(R.id.viewPagerMyProfile);
 
+        // add the right tabs to the tabLayout
         tabLayout.addTab(tabLayout.newTab().setText("My Garden"));
         tabLayout.addTab(tabLayout.newTab().setText("My Milestones"));
 
         final Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_bold.ttf");
         final Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
 
+        // ste the user and user description
         username.setText("Jane Doodle");
         userDescription.setText("Balcony gardener, volunteer at community garden Anna's Tuin");
         experience.setText("Experience: 4 months");
@@ -55,6 +57,7 @@ public class MyProfileActivity extends AppCompatActivity {
         userDescription.setTypeface(myCustomFont2);
         experience.setTypeface(myCustomFont2);
 
+        // set text to toolbar and the right font
         txtPlantDataToolbar.setText("My Garden");
         txtPlantDataToolbar.setTypeface(myCustomFont);
 
@@ -67,6 +70,7 @@ public class MyProfileActivity extends AppCompatActivity {
             }
         });
 
+        // get the tabcount
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TextView tv = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab,null);
             tv.setTypeface(myCustomFont);
@@ -75,8 +79,10 @@ public class MyProfileActivity extends AppCompatActivity {
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
+        // disable sliding tabs
         viewPager.setPagingEnabled(false);
 
+        // get the pager adapter to set the right fragments under the tabLayout
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

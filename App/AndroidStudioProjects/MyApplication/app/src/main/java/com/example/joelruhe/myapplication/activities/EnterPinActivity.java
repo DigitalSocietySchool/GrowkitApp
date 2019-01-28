@@ -22,10 +22,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ValueEventListener;
 
-public class EnterPinActivity extends AppCompatActivity {
+import java.util.Objects;
 
-    private DatabaseReference mDatabase;
-    private FirebaseAuth auth;
+public class EnterPinActivity extends AppCompatActivity {
 
     public static final String MY_PREFS_NAME = "MyPrefs";
 
@@ -51,16 +50,16 @@ public class EnterPinActivity extends AppCompatActivity {
 
         if (restoredPin == null) {
             ImageButton nextButton = findViewById(R.id.buttonNext);
-            mDatabase = FirebaseDatabase.getInstance().getReference();
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
             final DatabaseReference plantmDatabase = mDatabase.child("Pins");
 
-            auth = FirebaseAuth.getInstance();
+            FirebaseAuth.getInstance();
 
             nextButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     pin = editTextpin.getText().toString();
                     final DatabaseReference refPin = plantmDatabase.child(pin);
-                    final DatabaseReference pinVerify = refPin.child("verified");
+                    refPin.child("verified");
 
                     plantmDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -70,19 +69,22 @@ public class EnterPinActivity extends AppCompatActivity {
                             } else if (!dataSnapshot.hasChild(pin)) {
                                 Toast.makeText(EnterPinActivity.this, "Pin does not exist", Toast.LENGTH_SHORT).show();
                             } else if (dataSnapshot.hasChild(pin)) {
-                                String pinValue = dataSnapshot.child(pin).child("verify").getValue().toString();
+                                // skip this activity when the pin value is the same as the pin value from the user
+                                String pinValue = Objects.requireNonNull(dataSnapshot.child(pin).child("verify").getValue()).toString();
                                 if (pinValue.equals("verified")) {
                                     Toast.makeText(EnterPinActivity.this, "Pin is already in use", Toast.LENGTH_SHORT).show();
                                 } else {
+                                    // store the pin number in the shared preferences
                                     SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                                     editor.putString("pin", pin);
                                     editor.apply();
 
+                                    // set the pin to verified when a user logs in
                                     refPin.child("verify").setValue("verified");
-                                    //refPin.child("Plants").setValue("0");
+
+                                    // finish the activity so you can't go back
                                     finish();
                                     startActivity(new Intent(EnterPinActivity.this, MainActivity.class));
-                                    //startActivity(new Intent(EnterPinActivity.this, MainActivity.class));
                                 }
                             }
                         }
@@ -95,15 +97,11 @@ public class EnterPinActivity extends AppCompatActivity {
             });
         }
         else {
+            // start the activity
             Intent i = new Intent(EnterPinActivity.this, MainActivity.class);
             startActivity(i,
                     ActivityOptions.makeSceneTransitionAnimation(EnterPinActivity.this).toBundle());
             finish();
-
-            /*Intent i = new Intent(EnterPinActivity.this, AddPlantMenuActivity.class);
-            startActivity(i,
-                    ActivityOptions.makeSceneTransitionAnimation(EnterPinActivity.this).toBundle());
-            finish();*/
         }
     }
 }

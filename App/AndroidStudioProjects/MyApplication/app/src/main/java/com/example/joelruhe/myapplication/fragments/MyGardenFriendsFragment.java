@@ -21,6 +21,7 @@ public class MyGardenFriendsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // add butter knife to this fragment
         View view = inflater.inflate(R.layout.fragment_my_garden_friends, container, false);
         ButterKnife.bind(this, view);
         return view;
@@ -28,6 +29,7 @@ public class MyGardenFriendsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        // get the custom fonts
         Typeface myCustomFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_bold.ttf");
         Typeface myCustomFont2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_regular.ttf");
     }

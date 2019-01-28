@@ -64,9 +64,11 @@ public class JoinCommunityActivity extends AppCompatActivity{
         btnSignUp = findViewById(R.id.btn_sign_up);
         btnLogin = findViewById(R.id.btn_login);
 
+        // set the custom font to the right text
         btnLogin.setTypeface(myCustomFont2);
         btnSignUp.setTypeface(myCustomFont2);
 
+        // set button for signing up
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +76,7 @@ public class JoinCommunityActivity extends AppCompatActivity{
             }
         });
 
+        // set button fo logging in
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

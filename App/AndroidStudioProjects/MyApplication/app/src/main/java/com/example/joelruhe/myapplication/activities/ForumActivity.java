@@ -56,6 +56,7 @@ public class ForumActivity extends AppCompatActivity {
             }
         });
 
+        // get the tabs to change the font on each tab
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TextView tv = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab,null);
             tv.setTypeface(myCustomFont);
@@ -64,8 +65,10 @@ public class ForumActivity extends AppCompatActivity {
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
+        // make sliding tabs
         viewPager.setPagingEnabled(true);
 
+        // get the pager adapter to call the fragments
         PagerAdapter4 pagerAdapter = new PagerAdapter4(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

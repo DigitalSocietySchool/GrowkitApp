@@ -44,6 +44,7 @@ public class MyFriendActivity extends AppCompatActivity {
         final Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_bold.ttf");
         final Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
 
+        // set the username with the user description
         username.setText("David Shzu");
         experience.setText("Experience: 9 months");
         username.setTypeface(myCustomFont);
@@ -64,6 +65,7 @@ public class MyFriendActivity extends AppCompatActivity {
 
         TabLayout tabLayout = findViewById(R.id.id_tabs);
         final CustomViewPager viewPager = findViewById(R.id.viewPagerMyFriends);
+
         tabLayout.addTab(tabLayout.newTab().setText("Garden"));
         tabLayout.addTab(tabLayout.newTab().setText("Milestones"));
 
@@ -83,6 +85,7 @@ public class MyFriendActivity extends AppCompatActivity {
             }
         });
 
+        // get the tabs to change the font on each tab
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TextView tv = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab,null);
             tv.setTypeface(myCustomFont);
@@ -91,8 +94,10 @@ public class MyFriendActivity extends AppCompatActivity {
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
+        // disable sliding
         viewPager.setPagingEnabled(false);
 
+        // get the pager adapter to call the fragments
         PagerAdapter3 pagerAdapter = new PagerAdapter3(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

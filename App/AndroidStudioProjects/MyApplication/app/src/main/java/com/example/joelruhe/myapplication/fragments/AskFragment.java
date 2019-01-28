@@ -39,6 +39,7 @@ public class AskFragment extends Fragment {
 
         Typeface myCustomFont2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_regular.ttf");
 
+        // declare the custom dialog
         myDialog = new Dialog(getActivity());
 
         btn  = view.findViewById(R.id.fab_ask_forum);
@@ -58,6 +59,7 @@ public class AskFragment extends Fragment {
 
     public void ShowPopUp() {
         ImageView txtClose;
+        // set the custom dialog to the view
         myDialog.setContentView(R.layout.ask_question_pop_up);
         txtClose = myDialog.findViewById(R.id.imageView4);
         txtClose.setOnClickListener(new View.OnClickListener() {

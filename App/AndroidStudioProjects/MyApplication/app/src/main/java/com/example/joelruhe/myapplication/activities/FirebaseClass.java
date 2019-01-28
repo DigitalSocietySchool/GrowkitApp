@@ -9,11 +9,7 @@ import com.google.firebase.database.ValueEventListener;
 public class FirebaseClass {
     private final String USERS = "Users";
 
-    /**
-     * Inserts new user into the realtime database
-     * @param pEmail
-     * @param pPassword
-     */
+    // Inserts new user into the realtime database
     public void insertNewUser(String pEmail, String pPassword){
         DatabaseReference rootRef, demoRef;
         rootRef = FirebaseDatabase.getInstance().getReference();
@@ -21,11 +17,7 @@ public class FirebaseClass {
         demoRef.child(getFirebaseEmail(pEmail)).setValue(pPassword);
     }
 
-    /**
-     * Updates the users email (key) in the realtime database
-     * @param pOldEmail
-     * @param pNewEmail
-     */
+    // Updates the users email (key) in the realtime database
     public void updateFirebaseEmail(final String pOldEmail, final String pNewEmail){
         final DatabaseReference rootRef, userRef;
         rootRef = FirebaseDatabase.getInstance().getReference();
@@ -47,11 +39,7 @@ public class FirebaseClass {
         });
     }
 
-    /**
-     * Insert updated password user in realtime database
-     * @param email
-     * @param password
-     */
+    // Insert updated password user in realtime database
     public void updateFirebasePassword(String email, String password){
         DatabaseReference rootRef, userRef;
         rootRef = FirebaseDatabase.getInstance().getReference();

@@ -76,6 +76,7 @@ public class FireBaseForgotPasswordActivity extends AppCompatActivity {
         resetPasswordBtn.setTypeface(myCustomFont2);
     }
 
+    // reset password function
     @OnClick(R.id.btn_reset_password)
     public void resetPassword() {
         String email = inputEmailEditText.getText().toString().trim();

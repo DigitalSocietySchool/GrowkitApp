@@ -24,7 +24,6 @@
             android:name=".activities.MainActivity"
             android:theme="@style/Toolbar" />
         <activity android:name=".activities.PlantActivity" />
-        <activity android:name=".activities.AddPlantActivity" />
         <activity
             android:name=".activities.AddPlantMenuActivity"
             android:windowSoftInputMode="adjustNothing" />

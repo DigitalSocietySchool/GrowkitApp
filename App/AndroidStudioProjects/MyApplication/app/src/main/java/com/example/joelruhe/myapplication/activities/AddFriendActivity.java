@@ -1,11 +1,11 @@
 package com.example.joelruhe.myapplication.activities;
 
+import android.annotation.SuppressLint;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 
 public class AddFriendActivity extends AppCompatActivity {
 
+    // Bind the views using butter knife
     @BindView(R.id.username)
     TextView username;
     @BindView(R.id.experience)
@@ -27,12 +28,14 @@ public class AddFriendActivity extends AppCompatActivity {
     ImageButton cancelIcon;
     TextView textToolbar;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
         ButterKnife.bind(AddFriendActivity.this);
 
+        // set the username with the user description
         username.setText("Yasmin Gail");
         userDescription.setText("Experience: 1 year");
         textFriendAdd.setText("You both live in the same area, and grow 4 common plants.");
@@ -55,7 +58,5 @@ public class AddFriendActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
     }
-
 }

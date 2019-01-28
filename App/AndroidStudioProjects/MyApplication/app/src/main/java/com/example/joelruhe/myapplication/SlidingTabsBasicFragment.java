@@ -74,11 +74,13 @@ public class SlidingTabsBasicFragment extends Fragment {
         mSlidingTabLayout = view.findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setViewPager(mViewPager);
 
+        // get the data from the fire base
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         final DatabaseReference userPinDatabase = mDatabase.child("Pins");
         SharedPreferences preferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         final String pinString = preferences.getString("pin", null);
 
+        // get the data from the plants in the fire base
         assert pinString != null;
         final DatabaseReference childUserPin = userPinDatabase.child(pinString);
         final DatabaseReference childUserPlants = childUserPin.child("Plants");
@@ -88,10 +90,7 @@ public class SlidingTabsBasicFragment extends Fragment {
         childUserPlants.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Map<String, Object> string = (Map<String, Object>) dataSnapshot.getValue();
-                //String string = dataSnapshot.getValue(String.class);
-                //arrayList.add(string);
-                //adapter.notifyDataSetChanged();
+                Map<String, Object> string = (Map<String, Object>) dataSnapshot.getValue();;
             }
 
             @Override
@@ -132,12 +131,11 @@ public class SlidingTabsBasicFragment extends Fragment {
         private String[] slide_headings = {
                 "Coriander",
                 "Strawberry",
-                "   Spinach "
+                "Spinach"
         };
 
         @Override
         public int getCount() {
-            //return slide_headings.size();
             return slide_headings.length;
         }
 
@@ -148,7 +146,6 @@ public class SlidingTabsBasicFragment extends Fragment {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            //return slide_headings.get(position);
             return slide_headings[position];
         }
 
@@ -156,9 +153,11 @@ public class SlidingTabsBasicFragment extends Fragment {
         @NonNull
         @Override
         public Object instantiateItem(@NonNull final ViewGroup container, final int position) {
+
             // Inflate a new layout from our resources
             View view = Objects.requireNonNull(getActivity()).getLayoutInflater().inflate(R.layout.pager_item,
                     container, false);
+
             // Add the newly created View to the ViewPager
             container.addView(view);
 

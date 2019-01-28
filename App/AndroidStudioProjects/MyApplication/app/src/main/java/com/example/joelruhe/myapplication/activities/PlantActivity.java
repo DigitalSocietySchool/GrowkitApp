@@ -98,6 +98,8 @@ public class PlantActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressBar);
 
+        // set the right text in the toolbar
+        // get the right plantname from the previous activity
         txtPlantData.setText(getIntent().getStringExtra("DESCRIPTION"));
         txtPlantDataToolbar.setText(getIntent().getStringExtra("DESCRIPTION"));
         final Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_bold.ttf");
@@ -123,12 +125,11 @@ public class PlantActivity extends AppCompatActivity {
             imgPlant.setImageResource(resId);
         }
 
+        // get the right plant id
         id = getIntent().getIntExtra("ID", 0);
 
+        // set the right id when this activity is started so the right plant data can be shown
         getPlantData(id);
-        Intent serviceIntent = new Intent(PlantActivity.this, BroadcastTimerService.class);
-        serviceIntent.putExtra("Id", id);
-        startService(serviceIntent);
 
         txtPlantHarvestTimeStart.setText("Tap on start to see how much time your " +
                 getIntent().getStringExtra("DESCRIPTION") + " needs to harvest");
@@ -149,20 +150,24 @@ public class PlantActivity extends AppCompatActivity {
 
     }
 
+    // show the tooltips based on which id is clicked
     @OnClick({R.id.water_icon, R.id.light_icon, R.id.temp_icon})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.water_icon:
+                // increase count
                 countClicked++;
                 if (countClicked < 2)
                     showTooltipWater(view, Gravity.BOTTOM, id, getPlantData(id));
                 break;
             case R.id.light_icon:
+                // increase count
                 countClicked++;
                 if (countClicked < 2)
                     showTooltipLight(view, Gravity.BOTTOM, id, getPlantData(id));
                 break;
             case R.id.temp_icon:
+                // increase count
                 countClicked++;
                 if (countClicked < 2)
                     showTooltipTemp(view, Gravity.BOTTOM, id, getPlantData(id));
@@ -195,6 +200,7 @@ public class PlantActivity extends AppCompatActivity {
                     //.setGravity(Gravity.CENTER)
                     .setDismissOnClick(true)
                     .show();
+            // decrease count when dismissed so the tooltip can be show again
             tooltip.setOnDismissListener(new OnDismissListener() {
                 @Override
                 public void onDismiss() {
@@ -217,9 +223,9 @@ public class PlantActivity extends AppCompatActivity {
                     .setBackgroundColor(getResources().getColor(R.color.colorBlueOpacity))
                     .setCornerRadius(50f)
                     .setPadding(50f)
-                    //.setGravity(Gravity.CENTER)
                     .setDismissOnClick(true)
                     .show();
+            // decrease count when dismissed so the tooltip can be show again
             tooltip.setOnDismissListener(new OnDismissListener() {
                 @Override
                 public void onDismiss() {
@@ -242,9 +248,9 @@ public class PlantActivity extends AppCompatActivity {
                     .setBackgroundColor(getResources().getColor(R.color.colorBlueOpacity))
                     .setCornerRadius(50f)
                     .setPadding(50f)
-                    //.setGravity(Gravity.CENTER)
                     .setDismissOnClick(true)
                     .show();
+            // decrease count when dismissed so the tooltip can be show again
             tooltip.setOnDismissListener(new OnDismissListener() {
                 @Override
                 public void onDismiss() {
@@ -273,9 +279,9 @@ public class PlantActivity extends AppCompatActivity {
                     .setBackgroundColor(getResources().getColor(R.color.colorYellowOpacity))
                     .setCornerRadius(50f)
                     .setPadding(50f)
-                    //.setGravity(Gravity.CENTER)
                     .setDismissOnClick(true)
                     .show();
+            // decrease count when dismissed so the tooltip can be show again
             tooltip.setOnDismissListener(new OnDismissListener() {
                 @Override
                 public void onDismiss() {
@@ -297,9 +303,9 @@ public class PlantActivity extends AppCompatActivity {
                     .setBackgroundColor(getResources().getColor(R.color.colorYellowOpacity))
                     .setCornerRadius(50f)
                     .setPadding(50f)
-                    //.setGravity(Gravity.CENTER)
                     .setDismissOnClick(true)
                     .show();
+            // decrease count when dismissed so the tooltip can be show again
             tooltip.setOnDismissListener(new OnDismissListener() {
                 @Override
                 public void onDismiss() {
@@ -322,10 +328,9 @@ public class PlantActivity extends AppCompatActivity {
                     .setBackgroundColor(getResources().getColor(R.color.colorYellowOpacity))
                     .setCornerRadius(50f)
                     .setPadding(50f)
-                    //.setGravity(Gravity.CENTER)
                     .setDismissOnClick(true)
                     .show();
-
+            // decrease count when dismissed so the tooltip can be show again
             tooltip.setOnDismissListener(new OnDismissListener() {
                 @Override
                 public void onDismiss() {
@@ -354,10 +359,9 @@ public class PlantActivity extends AppCompatActivity {
                     .setBackgroundColor(getResources().getColor(R.color.colorRedOpacity))
                     .setCornerRadius(50f)
                     .setPadding(50f)
-                    //.setGravity(Gravity.CENTER)
                     .setDismissOnClick(true)
                     .show();
-
+            // decrease count when dismissed so the tooltip can be show again
             tooltip.setOnDismissListener(new OnDismissListener() {
                 @Override
                 public void onDismiss() {
@@ -380,10 +384,9 @@ public class PlantActivity extends AppCompatActivity {
                     .setBackgroundColor(getResources().getColor(R.color.colorRedOpacity))
                     .setCornerRadius(50f)
                     .setPadding(50f)
-                    //.setGravity(Gravity.CENTER)
                     .setDismissOnClick(true)
                     .show();
-
+            // decrease count when dismissed so the tooltip can be show again
             tooltip.setOnDismissListener(new OnDismissListener() {
                 @Override
                 public void onDismiss() {
@@ -397,9 +400,11 @@ public class PlantActivity extends AppCompatActivity {
 
         int plantID = id + 1;
 
+        // get the right plant data based the pin and sticks
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         final DatabaseReference plantValues = mDatabase.child("Pins").child("4444").child("Plants").child("Stick"+plantID);
 
+        // calculate when to show the warning signs on each factor
         plantValues.child("Water").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -571,7 +576,7 @@ public class PlantActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            //This is the part where I get the timer value from the service and I update it every second, because I send the data from the service every second.
+            // get the timer value from the service and update it every second, because I send the data from the service every second.
             int id2 = intent.getIntExtra("id", 0);
 
             int showReset = intent.getIntExtra("showReset", 0);
@@ -583,11 +588,10 @@ public class PlantActivity extends AppCompatActivity {
             txtPlantHarvestTimeLeft.setId(id2);
             txtPlantHarvestTimeStart.setId(id2);
             progressBar.setId(id2);
-            //imgBtnResetHarvest.setId(id2);
             imgBtnStartHarvest.setId(id2);
 
             if (id == txtPlantHarvestTimeLeft.getId() && id == txtPlantHarvestTimeStart.getId()
-                    && id == progressBar.getId()  /*&& id == imgBtnResetHarvest.getId()*/  && id == imgBtnStartHarvest.getId()) {
+                    && id == progressBar.getId() && id == imgBtnStartHarvest.getId()) {
                 String s = intent.getExtras().getString("countdown");
                 String s2 = intent.getExtras().getString("harvestStarted");
                 int progress = intent.getIntExtra("progress", 0);

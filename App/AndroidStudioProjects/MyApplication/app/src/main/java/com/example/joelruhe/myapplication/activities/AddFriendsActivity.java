@@ -1,5 +1,6 @@
 package com.example.joelruhe.myapplication.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.constraint.ConstraintLayout;
@@ -55,6 +56,7 @@ public class AddFriendsActivity extends AppCompatActivity {
     @BindView(R.id.textView12)
     TextView textView12;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +93,7 @@ public class AddFriendsActivity extends AppCompatActivity {
         });
     }
 
+    // onClickListener that changes the activity started based on the id
     @OnClick({R.id.id1, R.id.id2, R.id.id3, R.id.id4, R.id.id5})
     public void onClick(View view) {
         switch (view.getId()) {

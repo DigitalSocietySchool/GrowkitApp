@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getWindow().setEnterTransition(new android.transition.Explode());
         setContentView(R.layout.activity_main);
 
-        //Menu icon for sidebar
+        // Menu icon for sidebar
         DrawerLayout mDrawerlayout = findViewById(R.id.drawer);
         mToggle = new ActionBarDrawerToggle(this, mDrawerlayout, R.string.open, R.string.close);
         mDrawerlayout.addDrawerListener(mToggle);
@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable
                 (new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
 
+        // show the menu bar and title when the actionbar is not null
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowCustomEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -69,25 +70,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             LayoutInflater inflater = LayoutInflater.from(this);
             @SuppressLint("InflateParams") View v = inflater.inflate(R.layout.titleview, null);
 
-            //if you need to customize anything else about the text, do it here.
-            //I'm using a custom TextView with a custom font in my layout xml so all I need to do is set title
+            // if you need to customize anything else about the text, do it here.
+            // I'm using a custom TextView with a custom font in my layout xml so all I need to do is set title
             ((TextView) v.findViewById(R.id.title)).getText();
             Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_bold.ttf");
             ((TextView) v.findViewById(R.id.title)).setTypeface(myCustomFont);
 
-            //assign the view to the actionbar
+            // assign the view to the actionbar
             this.getSupportActionBar().setCustomView(v);
         }
 
+        // get the string from the previous activity
         Intent intent = this.getIntent();
         String plant = intent.getStringExtra("plant");
         String plant_array[] = {plant};
 
+        // get the pins from fire base
         databaseReference = FirebaseDatabase.getInstance().getReference("Pins");
 
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         final String pinString = preferences.getString("pin", null);
 
+        // get the plants from the user pin
         assert pinString != null;
         DatabaseReference plantsPerPin = databaseReference.child(pinString).child("Plants");
 
@@ -95,26 +99,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot plantsPerPin : dataSnapshot.getChildren());
-                ///String plant = dataSnapshot.getValue(String.class);
-                //Toast.makeText(MainActivity.this, "retrieved data", LENGTH_LONG).show();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 
-        //Get firebase auth instance
+        // get fire base auth instance
         auth = FirebaseAuth.getInstance();
 
         int number = getIntent().getIntExtra("number", 0);
-
-        if (plant_array.length == 0 && number == 0) {
-           Intent startMain = new Intent(MainActivity.this, AddPlantActivity.class);
-           startActivity(startMain);
-           finish();
-       }
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -132,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navUsername = headerView.findViewById(R.id.username);
         Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_bold.ttf");
 
-        //Get Firebase auth instance
+        // get fire base auth instance
         auth = FirebaseAuth.getInstance();
 
         // get current user
@@ -154,13 +149,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navUsername.setTypeface(myCustomFont);
         }
 
+        // apply font to every menu item in the navigation view
         for (int i=0;i < menu.size();i++) {
             MenuItem mi = menu.getItem(i);
 
-            //the method we have create in activity
+            // the method we have create in activity
             applyFontToMenuItem(mi);
         }
 
+        // set the add plant button in the navigation view to invisible
         MenuItem target = menu.findItem(R.id.add_plant_button);
         target.setVisible(false);
     }
@@ -194,6 +191,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
 
+        // get the id of the items in the option menu
         int id = item.getItemId();
 
         if (id == R.id.add_plant_button) {
@@ -208,10 +206,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
+        // navigate to add plants
         if (id == R.id.nav_my_plants){
             Intent i = new Intent(MainActivity.this, AddPlantMenuActivity.class);
             startActivity(i);
         }
+
         else if (id == R.id.nav_my_network){
             Intent i = new Intent(MainActivity.this, JoinCommunityActivity.class);
             startActivity(i);

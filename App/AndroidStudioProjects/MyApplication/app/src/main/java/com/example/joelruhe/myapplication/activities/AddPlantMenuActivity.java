@@ -82,33 +82,33 @@ public class AddPlantMenuActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
-        // Create an ArrayAdapter from List
+        // create an ArrayAdapter from List
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
                 (this, R.layout.text_listview_left, arrayList) {
             @NonNull
             @Override
             public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-                // Get the Item from ListView
+                // get the Item from ListView
                 View view = super.getView(position, convertView, parent);
 
-                // Initialize a TextView for ListView each Item
+                // initialize a TextView for ListView each Item
                 TextView tv = view.findViewById(android.R.id.text1);
 
-                // Set the text color of TextView (ListView Item)
+                // set the text color of TextView (ListView Item)
                 tv.setTextColor(getResources().getColor(R.color.colorPrimary));
 
                 Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
                 tv.setTypeface(myCustomFont);
 
-                // Generate ListView Item using TextView
+                // generate ListView Item using TextView
                 return view;
             }
         };
 
-        // DataBind ListView with items from ArrayAdapter
+        // dataBind ListView with items from ArrayAdapter
         listView.setAdapter(arrayAdapter);
 
-        //SearchQuery for SearchView
+        // searchQuery for SearchView
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -122,11 +122,7 @@ public class AddPlantMenuActivity extends AppCompatActivity {
             }
         });
 
-
-
-        final ArrayList<String> allSticks = new ArrayList<String>();
-
-        //Go to next activity when item in ListView is pressed
+        // go to next activity when item in ListView is pressed
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -136,8 +132,8 @@ public class AddPlantMenuActivity extends AppCompatActivity {
                     allPlants.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            int x = (int) dataSnapshot.getChildrenCount();
-                            stickNumber = x;
+                            // get all the stick numbers using count
+                            stickNumber = (int) dataSnapshot.getChildrenCount();
                             allPlants.child("Stick"+stickNumber).child("Water").setValue("0");
                             allPlants.child("Stick"+stickNumber).child("Light").setValue("0");
                             allPlants.child("Stick"+stickNumber).child("Temperature").setValue("0");
@@ -151,6 +147,7 @@ public class AddPlantMenuActivity extends AppCompatActivity {
                         }
                     });
 
+                // give the value to the main activity to set the right plant names
                 Intent intent = new Intent(AddPlantMenuActivity.this, MainActivity.class);
                 intent.putExtra("plant", value);
                 finish();
@@ -162,6 +159,7 @@ public class AddPlantMenuActivity extends AppCompatActivity {
         plantmDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                // get the plant names and put them in a list view
                 String string = dataSnapshot.getValue(String.class);
                 arrayList.add(string);
                 adapter.notifyDataSetChanged();
@@ -174,6 +172,7 @@ public class AddPlantMenuActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                // remove the plant names in the list view when the plants are removed in the fire base
                 String string = dataSnapshot.getValue(String.class);
                 arrayList.remove(string);
                 adapter.notifyDataSetChanged();

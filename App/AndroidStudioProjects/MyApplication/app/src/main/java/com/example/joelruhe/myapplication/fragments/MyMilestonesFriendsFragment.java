@@ -33,6 +33,7 @@ public class MyMilestonesFriendsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         Typeface myCustomFont2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_regular.ttf");
 
+        // set font to textViews
         title.setTypeface(myCustomFont2);
         date.setTypeface(myCustomFont2);
 

@@ -20,6 +20,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // transition animation when activity is opened
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         getWindow().setEnterTransition(new android.transition.Explode());
 
@@ -31,6 +32,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         imageView.setBackgroundResource(R.drawable.splashscreen_animation);
         plantAnimation = (AnimationDrawable) imageView.getBackground();
 
+        // time when the next activity should be opened
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

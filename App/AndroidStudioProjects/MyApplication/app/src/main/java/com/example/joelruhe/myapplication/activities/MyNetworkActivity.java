@@ -59,9 +59,9 @@ public class MyNetworkActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
     }
 
+    // set buttons to the right activities
     @Override
     public void onBackPressed() {
         Intent i= new Intent(MyNetworkActivity.this,MainActivity.class);

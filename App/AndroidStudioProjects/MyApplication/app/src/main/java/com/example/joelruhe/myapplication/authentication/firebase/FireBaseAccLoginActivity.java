@@ -66,7 +66,7 @@ public class FireBaseAccLoginActivity extends Activity {
         setContentView(R.layout.activity_firebase_login);
         ButterKnife.bind(this);
 
-        //Get Firebase auth instance
+        // get fire base auth instance
         auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() != null) {
@@ -74,6 +74,7 @@ public class FireBaseAccLoginActivity extends Activity {
             finish();
         }
 
+        // set the cancel icon function
         authCommunityToolbarLogin = findViewById(R.id.authCommunityToolbarLogin);
         cancelIcon = authCommunityToolbarLogin.findViewById(R.id.btn_cancel2);
         cancelIcon.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +97,7 @@ public class FireBaseAccLoginActivity extends Activity {
 
     }
 
+    // set the right button to the activity
     @OnClick({R.id.btn_login, R.id.forgot_password})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -110,6 +112,7 @@ public class FireBaseAccLoginActivity extends Activity {
         }
     }
 
+    // get the email and password per user
     private void loginClick() {
         String email = emailEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
@@ -119,6 +122,7 @@ public class FireBaseAccLoginActivity extends Activity {
         }
     }
 
+    // check if the login is valid
     private boolean isLoginFormValid(final String pEmail, final String pPassword) {
         if (TextUtils.isEmpty(pEmail)) {
             emailEditText.setError(enterEmail);
@@ -134,7 +138,7 @@ public class FireBaseAccLoginActivity extends Activity {
     }
 
     private void authUser(final String pEmail, final String pPassword) {
-        //authenticate user
+        // authenticate user
         auth.signInWithEmailAndPassword(pEmail, pPassword)
                 .addOnCompleteListener(FireBaseAccLoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -156,6 +160,7 @@ public class FireBaseAccLoginActivity extends Activity {
                 });
     }
 
+    // replace the characters to let fire base save it
     private String getFirebaseEmail(String email) {
         email = email.replace("@", "-");
         email = email.replace(".", "_");

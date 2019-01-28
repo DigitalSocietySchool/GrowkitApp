@@ -56,6 +56,7 @@ public class MyMilestonesFragment extends Fragment {
 
     public void ShowPopUp() {
         ImageView txtClose;
+        // set the custom dialog to the view
         myDialog.setContentView(R.layout.add_milestone_pop_up);
         txtClose = myDialog.findViewById(R.id.imageView4);
         txtClose.setOnClickListener(new View.OnClickListener() {

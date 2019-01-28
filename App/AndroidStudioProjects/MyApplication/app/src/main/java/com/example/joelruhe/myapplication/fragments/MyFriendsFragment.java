@@ -70,6 +70,7 @@ public class MyFriendsFragment extends Fragment {
         Typeface myCustomFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_bold.ttf");
         Typeface myCustomFont2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_regular.ttf");
 
+        // set the right fonts to the textViews
         textView13.setTypeface(myCustomFont);
         textView14.setTypeface(myCustomFont);
         textView15.setTypeface(myCustomFont);
@@ -83,6 +84,7 @@ public class MyFriendsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
     }
 
+    // make the listView clickable to go to a different activity
     @OnClick({R.id.id1, R.id.id2, R.id.id3, R.id.id4, R.id.id5})
     public void onClick(View view) {
         switch (view.getId()) {

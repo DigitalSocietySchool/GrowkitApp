@@ -55,6 +55,7 @@ public class FriendsActivity extends AppCompatActivity {
             }
         });
 
+        // get the tabs to change the font on each tab
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TextView tv = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab,null);
             tv.setTypeface(myCustomFont);
@@ -64,6 +65,7 @@ public class FriendsActivity extends AppCompatActivity {
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
+        // get the pager adapter to call the fragments
         PagerAdapter2 pagerAdapter = new PagerAdapter2(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
