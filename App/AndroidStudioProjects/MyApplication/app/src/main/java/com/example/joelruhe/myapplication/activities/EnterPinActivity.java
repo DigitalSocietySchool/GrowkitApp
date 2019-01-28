@@ -79,7 +79,7 @@ public class EnterPinActivity extends AppCompatActivity {
                                     editor.apply();
 
                                     refPin.child("verify").setValue("verified");
-                                    refPin.child("Plants").setValue("0");
+                                    //refPin.child("Plants").setValue("0");
                                     finish();
                                     startActivity(new Intent(EnterPinActivity.this, MainActivity.class));
                                     //startActivity(new Intent(EnterPinActivity.this, MainActivity.class));
