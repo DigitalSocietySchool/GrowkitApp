@@ -54,7 +54,10 @@ import static android.content.Context.MODE_PRIVATE;
 public class SlidingTabsBasicFragment extends Fragment {
     protected SlidingTabLayout mSlidingTabLayout;
 
+    // put the strings in an array
     private ArrayList<String> arrayList = new ArrayList<>();
+
+    // use this adapter to store the strings in
     private ArrayAdapter<String> adapter;
 
     public static final String MY_PREFS_NAME = "MyPrefs";
@@ -68,10 +71,17 @@ public class SlidingTabsBasicFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         ViewPager mViewPager;
+
+        // find the viewpager
         mViewPager = view.findViewById(R.id.viewpager);
+
+        // set the custom made adapter tot hte viewpager in the layout
         mViewPager.setAdapter(new SamplePagerAdapter());
 
+        // find the tabs
         mSlidingTabLayout = view.findViewById(R.id.sliding_tabs);
+
+        // attach the tabs to our viewpager
         mSlidingTabLayout.setViewPager(mViewPager);
 
         // get the data from the fire base
@@ -80,7 +90,7 @@ public class SlidingTabsBasicFragment extends Fragment {
         SharedPreferences preferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         final String pinString = preferences.getString("pin", null);
 
-        // get the data from the plants in the fire base
+        // get the right user pin and the plants from the fire base
         assert pinString != null;
         final DatabaseReference childUserPin = userPinDatabase.child(pinString);
         final DatabaseReference childUserPlants = childUserPin.child("Plants");
@@ -90,7 +100,7 @@ public class SlidingTabsBasicFragment extends Fragment {
         childUserPlants.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Map<String, Object> string = (Map<String, Object>) dataSnapshot.getValue();;
+                Map<String, Object> string = (Map<String, Object>) dataSnapshot.getValue();
             }
 
             @Override
@@ -119,31 +129,33 @@ public class SlidingTabsBasicFragment extends Fragment {
 
     class SamplePagerAdapter extends PagerAdapter {
 
-        //private ArrayList<String> slide_headings = new ArrayList<>();
-        //private ArrayList<Integer> slide_images = new ArrayList<>();
-
+        // store the images in the array
         private int[] slide_images = {
                 R.drawable.coriander,
                 R.drawable.strawberry,
                 R.drawable.spinach
         };
 
+        // store the strings in the array
         private String[] slide_headings = {
                 "Coriander",
                 "Strawberry",
                 "Spinach"
         };
 
+        // count all the strings in the array to return the length
         @Override
         public int getCount() {
             return slide_headings.length;
         }
 
+        // return the object in the view
         @Override
         public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
             return o == view;
         }
 
+        // get each string from the array to put as the title for the plant page
         @Override
         public CharSequence getPageTitle(int position) {
             return slide_headings[position];
@@ -151,6 +163,7 @@ public class SlidingTabsBasicFragment extends Fragment {
 
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @NonNull
+        // instantiate new plant pages
         @Override
         public Object instantiateItem(@NonNull final ViewGroup container, final int position) {
 
@@ -161,16 +174,28 @@ public class SlidingTabsBasicFragment extends Fragment {
             // Add the newly created View to the ViewPager
             container.addView(view);
 
+            // find the image button to put the images from the array in the layout
             ImageButton btn = view.findViewById(R.id.slide_image);
+
+            // find the text view to put the strings from the array in the layout
             TextView slideHeading = view.findViewById(R.id.slide_heading);
 
+            // get the custom font from te assets
             Typeface myCustomFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_bold.ttf");
 
+            // put the images in the right array position to show in he layout
             btn.setImageResource(slide_images[position]);
+
+            // put the text in the right array position to show in he layout
             slideHeading.setText(slide_headings[position]);
+
+            // give the font to the text view
             slideHeading.setTypeface(myCustomFont);
+
+            // set the right color to the text
             slideHeading.setTextColor(getResources().getColor(R.color.colorPrimary));
 
+            // set an onClickListener to each position with the given plant id, image and description
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

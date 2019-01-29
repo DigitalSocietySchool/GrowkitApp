@@ -14,11 +14,13 @@ public class PagerAdapter4 extends FragmentPagerAdapter {
 
     public int mTabs;
 
+    // get the the tabs and the fragments to use in the adapter
     public PagerAdapter4(FragmentManager fm, int Tabs) {
         super(fm);
         this.mTabs = Tabs;
     }
 
+    // navigate to the right fragments based on the selected position in the tabLayout
     @Override
     public Fragment getItem(int position) {
         switch (position) {
@@ -33,6 +35,7 @@ public class PagerAdapter4 extends FragmentPagerAdapter {
         }
     }
 
+    // count all the tabs
     @Override
     public int getCount() {
         return mTabs;

@@ -52,8 +52,10 @@ public class FireBaseForgotPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_firebase_forgot_password);
         ButterKnife.bind(this);
 
+        // get the authenticated user from fire base
         auth = FirebaseAuth.getInstance();
 
+        // find the toolbar and then give the cancel button a function to go back
         authCommunityToolbar = findViewById(R.id.authCommunityToolbarPassword);
         cancelIcon = authCommunityToolbar.findViewById(R.id.btn_cancel3);
         cancelIcon.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +78,8 @@ public class FireBaseForgotPasswordActivity extends AppCompatActivity {
         resetPasswordBtn.setTypeface(myCustomFont2);
     }
 
-    // reset password function
+    // if the email is empty return an error message, return a message to let the
+    // user know if sending an email to the user went successful or not
     @OnClick(R.id.btn_reset_password)
     public void resetPassword() {
         String email = inputEmailEditText.getText().toString().trim();

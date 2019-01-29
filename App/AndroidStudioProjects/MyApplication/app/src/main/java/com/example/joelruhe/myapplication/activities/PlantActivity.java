@@ -176,11 +176,10 @@ public class PlantActivity extends AppCompatActivity {
         }
     }
 
+    // these tooltips methods handles the layout of the tooltip
     private void showTooltipWater(View v, int gravity, int id, int plantArray[]) {
         TextView tv = (TextView) v;
         Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
-
-
 
         int water = plantArray[1];
 
@@ -197,7 +196,6 @@ public class PlantActivity extends AppCompatActivity {
                     .setBackgroundColor(getResources().getColor(R.color.colorBlueOpacity))
                     .setCornerRadius(50f)
                     .setPadding(50f)
-                    //.setGravity(Gravity.CENTER)
                     .setDismissOnClick(true)
                     .show();
             // decrease count when dismissed so the tooltip can be show again
@@ -565,6 +563,7 @@ public class PlantActivity extends AppCompatActivity {
             }
         });
 
+        // get the values from the fire base and put it in an array
         int plantArray[][] = {
                 {durationValue, waterValue, lightValue, temperatureValue}
         };

@@ -45,6 +45,8 @@ public class EnterPinActivity extends AppCompatActivity {
         textHeaderPin.setTypeface(myCustomFont);
 
         editTextpin = findViewById(R.id.edittextPin);
+
+        // get the user pin to store in the shared{references so the app remembers it
         SharedPreferences pref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         String restoredPin = pref.getString("pin", null);
 

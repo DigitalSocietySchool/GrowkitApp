@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 public class SlidingTabLayout extends HorizontalScrollView {
 
+    // call the color needed to indicate which position of the tabs is selected and color for the dividers
     public interface TabColorizer {
 
         int getIndicatorColor(int position);
@@ -96,6 +97,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
         mTabViewTextViewId = textViewId;
     }
 
+    // set the viewPager to add the tabs to
     public void setViewPager(ViewPager viewPager) {
         mTabStrip.removeAllViews();
 
@@ -106,11 +108,13 @@ public class SlidingTabLayout extends HorizontalScrollView {
         }
     }
 
+    // set the position, text size and font of the text view in the tabs
     protected TextView createDefaultTabView(Context context) {
         TextView textView = new TextView(context);
+        Typeface myCustomFont = Typeface.createFromAsset(context.getAssets(), "fonts/open_sans_regular.ttf");
         textView.setGravity(Gravity.CENTER);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, TAB_VIEW_TEXT_SIZE_SP);
-        textView.setTypeface(Typeface.DEFAULT_BOLD);
+        textView.setTypeface(myCustomFont);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             // If we're running on Honeycomb or newer, then we can use the Theme's
@@ -132,6 +136,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
         return textView;
     }
 
+    // add the tab strip to the view and count the amount of tabs to st a title to to
     private void populateTabStrip() {
         final PagerAdapter adapter = mViewPager.getAdapter();
         final View.OnClickListener tabClickListener = new TabClickListener();
@@ -190,6 +195,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
         }
     }
 
+    // this class handles the scrolling and selecting to other viewPagers
     private class InternalViewPagerListener implements ViewPager.OnPageChangeListener {
         private int mScrollState;
 

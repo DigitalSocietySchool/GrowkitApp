@@ -32,6 +32,7 @@ public class MyMilestonesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_milestones, container, false);
         ButterKnife.bind(this, view);
         return view;
@@ -41,12 +42,14 @@ public class MyMilestonesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         Typeface myCustomFont2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_regular.ttf");
 
+        // initialize the custom dialog
         myDialog = new Dialog(getActivity());
 
         title.setTypeface(myCustomFont2);
         date.setTypeface(myCustomFont2);
 
-        btn  = (FloatingActionButton) view.findViewById(R.id.fab2);
+        btn  = view.findViewById(R.id.fab2);
+        // show the pop up window wgen clicking on the floatActionButton
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ShowPopUp();
@@ -54,9 +57,11 @@ public class MyMilestonesFragment extends Fragment {
         });
     }
 
+    // this method attaches our custom made layout to the view of a build in dialog from Android Studio
+    // it sets the background to transparent so only our custom made layout is seen and not the background of
+    // build in dialog
     public void ShowPopUp() {
         ImageView txtClose;
-        // set the custom dialog to the view
         myDialog.setContentView(R.layout.add_milestone_pop_up);
         txtClose = myDialog.findViewById(R.id.imageView4);
         txtClose.setOnClickListener(new View.OnClickListener() {

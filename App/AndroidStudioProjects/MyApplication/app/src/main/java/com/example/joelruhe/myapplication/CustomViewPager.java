@@ -7,6 +7,8 @@ import android.view.MotionEvent;
 
 public class CustomViewPager extends ViewPager {
 
+    // this is a custom viewPager class made to edit the sliding function
+    // It derives from a build in class from Android Studio
     private boolean enabled;
 
     public CustomViewPager(Context context, AttributeSet attrs) {
@@ -30,6 +32,7 @@ public class CustomViewPager extends ViewPager {
         return false;
     }
 
+    // handle the sliding function to disable or not
     public void setPagingEnabled(boolean enabled) {
         this.enabled = enabled;
     }

@@ -37,12 +37,11 @@ public class AskFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_ask, container, false);
         ButterKnife.bind(this, view);
 
-        Typeface myCustomFont2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_regular.ttf");
-
-        // declare the custom dialog
+        // initialize the custom dialog
         myDialog = new Dialog(getActivity());
 
         btn  = view.findViewById(R.id.fab_ask_forum);
+        // show the pop up window wgen clicking on the floatActionButton
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ShowPopUp();
@@ -57,9 +56,11 @@ public class AskFragment extends Fragment {
 
     }
 
+    // this method attaches our custom made layout to the view of a build in dialog from Android Studio
+    // it sets the background to transparent so only our custom made layout is seen and not the background of
+    // build in dialog
     public void ShowPopUp() {
         ImageView txtClose;
-        // set the custom dialog to the view
         myDialog.setContentView(R.layout.ask_question_pop_up);
         txtClose = myDialog.findViewById(R.id.imageView4);
         txtClose.setOnClickListener(new View.OnClickListener() {

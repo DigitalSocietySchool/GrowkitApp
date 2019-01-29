@@ -70,7 +70,7 @@ public class MyProfileActivity extends AppCompatActivity {
             }
         });
 
-        // get the tabcount
+        // get the tab count and set the right font to each text view
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TextView tv = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab,null);
             tv.setTypeface(myCustomFont);

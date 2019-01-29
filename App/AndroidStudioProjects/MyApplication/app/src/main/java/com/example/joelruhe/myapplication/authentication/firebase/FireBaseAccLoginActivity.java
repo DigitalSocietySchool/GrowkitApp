@@ -74,7 +74,7 @@ public class FireBaseAccLoginActivity extends Activity {
             finish();
         }
 
-        // set the cancel icon function
+        // find the toolbar and then give the cancel button a function to go back
         authCommunityToolbarLogin = findViewById(R.id.authCommunityToolbarLogin);
         cancelIcon = authCommunityToolbarLogin.findViewById(R.id.btn_cancel2);
         cancelIcon.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +122,7 @@ public class FireBaseAccLoginActivity extends Activity {
         }
     }
 
-    // check if the login is valid
+    // check if the login is valid , return false and set an error message if it is not valid otherwise return true
     private boolean isLoginFormValid(final String pEmail, final String pPassword) {
         if (TextUtils.isEmpty(pEmail)) {
             emailEditText.setError(enterEmail);

@@ -51,6 +51,7 @@ public class AddFriendActivity extends AppCompatActivity {
         textToolbar = addFriendToolbar.findViewById(R.id.text_toolbar);
         textToolbar.setText("Add New Friend");
         textToolbar.setTypeface(myCustomFont);
+
         cancelIcon = addFriendToolbar.findViewById(R.id.btn_cancel);
         cancelIcon.setOnClickListener(new View.OnClickListener() {
             @Override

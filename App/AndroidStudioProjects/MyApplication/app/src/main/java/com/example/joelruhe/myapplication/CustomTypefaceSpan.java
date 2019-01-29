@@ -6,6 +6,8 @@ import android.text.style.TypefaceSpan;
 
 public class CustomTypefaceSpan extends TypefaceSpan {
 
+    // this is a custom made typeFaceSpan to call in other classes
+    // It derives from a build in class from Android Studio
     private final Typeface newType;
 
     public CustomTypefaceSpan(String family, Typeface type) {

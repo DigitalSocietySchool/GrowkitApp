@@ -26,6 +26,7 @@ public class BroadcastTimerService extends Service {
         int clicked = intent.getIntExtra("clicked", 0);
 
         if (clicked == 2) {
+            // increase the timer so that it counts fom days instead of seconds
             Count = new CountDownTimer(TIME_LIMIT * 1000 * 60 * 60 * 24, 1000) {
                 String time2;
                 @SuppressLint("DefaultLocale")

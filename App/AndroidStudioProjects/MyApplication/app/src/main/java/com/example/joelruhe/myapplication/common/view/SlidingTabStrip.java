@@ -25,6 +25,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 
+// this class handles the tabs
 class SlidingTabStrip extends LinearLayout {
 
     private static final int DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS = 2;
@@ -54,6 +55,7 @@ class SlidingTabStrip extends LinearLayout {
         this(context, null);
     }
 
+    // handle the colors, height and width of the tabs
     SlidingTabStrip(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotDraw(false);
@@ -62,7 +64,6 @@ class SlidingTabStrip extends LinearLayout {
 
         TypedValue outValue = new TypedValue();
         context.getTheme().resolveAttribute(android.R.attr.colorBackground, outValue, true);
-        //final int themeForegroundColor =  outValue.data;
 
         int mDefaultBottomBorderColor = setColorAlpha(0xFF31D177,
                 DEFAULT_BOTTOM_BORDER_COLOR_ALPHA);

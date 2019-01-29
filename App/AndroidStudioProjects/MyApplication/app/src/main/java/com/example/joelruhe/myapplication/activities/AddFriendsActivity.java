@@ -68,6 +68,7 @@ public class AddFriendsActivity extends AppCompatActivity {
         final Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_bold.ttf");
         final Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/open_sans_regular.ttf");
 
+        // set the custom fonts to the text views
         txtPlant = plantToolbar.findViewById(R.id.text_toolbar);
         txtPlant.setText("Add New Friend");
         txtPlant.setTypeface(myCustomFont);

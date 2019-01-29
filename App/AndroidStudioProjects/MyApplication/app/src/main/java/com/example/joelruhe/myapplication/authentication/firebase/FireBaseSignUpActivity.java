@@ -89,6 +89,7 @@ public class FireBaseSignUpActivity extends AppCompatActivity {
 
     }
 
+    // get the email and password and check if the put in values are valid or not
     @OnClick(R.id.btn_sign_up)
     public void btnSignUp(View v) {
         final String email = inputEmailEditText.getText().toString().trim();

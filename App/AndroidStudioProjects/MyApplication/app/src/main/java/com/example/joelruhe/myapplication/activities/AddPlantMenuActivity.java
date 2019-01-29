@@ -51,6 +51,7 @@ public class AddPlantMenuActivity extends AppCompatActivity {
         searchView = findViewById(R.id.searchview);
         searchView.setQueryHint("Search your plant");
 
+        // handle the go back button by adding a function to the cancel icon in the layout
         addPlantMenuToolbar = findViewById(R.id.addPlantMenuToolbar);
         cancelIcon = addPlantMenuToolbar.findViewById(R.id.btn_cancel);
         cancelIcon.setOnClickListener(new View.OnClickListener() {
@@ -64,11 +65,13 @@ public class AddPlantMenuActivity extends AppCompatActivity {
         Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "fonts/open_sans_bold.ttf");
         addPlantsTitle.setTypeface(myCustomFont);
 
+        // initialize the database so we can get data from it
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         final DatabaseReference plantmDatabase = mDatabase.child("Plants");
 
         final DatabaseReference userPinDatabase = mDatabase.child("Pins");
 
+        // get the pin so it doest get saved in the app and recognizable by the app
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         final String pinString = preferences.getString("pin", null);
 

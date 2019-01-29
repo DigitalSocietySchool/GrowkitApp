@@ -61,6 +61,7 @@ public class MyFriendsFragment extends Fragment {
 
         intent = new Intent(getActivity(), AddFriendsActivity.class);
         btn  = view.findViewById(R.id.fab);
+        // navigate to the add friends page when clicking on the floatActionButton
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(intent);
@@ -68,7 +69,6 @@ public class MyFriendsFragment extends Fragment {
         });
 
         Typeface myCustomFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_bold.ttf");
-        Typeface myCustomFont2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/open_sans_regular.ttf");
 
         // set the right fonts to the textViews
         textView13.setTypeface(myCustomFont);
